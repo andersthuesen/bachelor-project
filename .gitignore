@@ -344,6 +344,5 @@ _~[0-9]_
 # Makeindex log files
 
 \*.lpz
-papers
 data
 .ipynb_checkpoints
