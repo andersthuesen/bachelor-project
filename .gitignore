@@ -346,3 +346,4 @@ _~[0-9]_
 \*.lpz
 data
 .ipynb_checkpoints
+.DS_Store
