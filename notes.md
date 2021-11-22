@@ -36,3 +36,17 @@ https://openreview.net/pdf?id=Hy8hkYeRb
 The derivative problem problematizes the need for the derivative of the activation function (ex. sigmoid or ReLU used in the forward pass) in order to back-propagate the error signal to the early layers of the network.
 The spiking problem as biological neurons communicate using sparse binary spikes as opposed to the dense real-valued signals used in artificial neural networks.
 The timing problem which also relates to the spiking problem, since biological neurons operate in time and might encode information in the temporality of the spikes. Artificial neural networks tend to ignore this.
+
+## Derivation of rate
+
+$$
+  V(t) = (V(0) - j)e^{-t/t_{RC}} + j \\
+  1 = - je^{-t/t_{RC}} + j \\
+  1 - j = - je^{-t/t_{RC}} \\
+  \frac{1 - j}{j} = - e^{-t/t_{RC}} \\
+  \frac{1}{j} - 1 = - e^{-t/t_{RC}} \\
+  1 -\frac{1}{j} = e^{-t/t_{RC}} \\
+  \log(1 -\frac{1}{j}) = \frac{-t}{t_{RC}} \\
+  t = -t_{RC}\log(1 -\frac{1}{j}) \\
+  r = \frac{1}{-t_{RC}\log(1 -\frac{1}{j})} \\
+$$
