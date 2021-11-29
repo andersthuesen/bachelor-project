@@ -50,3 +50,6 @@ $$
   t = -t_{RC}\log(1 -\frac{1}{j}) \\
   r = \frac{1}{-t_{RC}\log(1 -\frac{1}{j})} \\
 $$
+
+Interesting about spiking neural networks and feature binding.
+https://www.youtube.com/watch?v=aisgNLypUKs
