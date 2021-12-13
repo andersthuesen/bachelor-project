@@ -53,3 +53,6 @@ $$
 
 Interesting about spiking neural networks and feature binding.
 https://www.youtube.com/watch?v=aisgNLypUKs
+
+Fusing batch normalization and convolution in runtime
+https://nenadmarkus.com/p/fusing-batchnorm-and-conv/
