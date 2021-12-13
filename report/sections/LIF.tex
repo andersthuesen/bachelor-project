@@ -1,0 +1,29 @@
+Derivation of spiking rate as function of input current.
+\[
+  V(t) = (V(0) - j)e^{-t/t_{RC}} + j
+\]
+$$
+  1 = - je^{-t/t_{RC}} + j
+$$
+$$
+  1 - j = - je^{-t/t_{RC}}
+$$
+$$
+  \frac{1 - j}{j} = - e^{-t/t_{RC}}
+$$
+$$
+  \frac{1}{j} - 1 = - e^{-t/t_{RC}}
+$$
+$$
+  1 -\frac{1}{j} = e^{-t/t_{RC}}
+$$
+$$
+  \log(1 -\frac{1}{j}) = \frac{-t}{t_{RC}}
+$$
+$$
+  t = -t_{RC}\log(1 -\frac{1}{j})
+$$
+$$
+  r = \frac{1}{-t_{RC}\log(1 -\frac{1}{j})}
+$$
+\cite{hunsberger2015spiking}

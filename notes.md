@@ -56,3 +56,6 @@ https://www.youtube.com/watch?v=aisgNLypUKs
 
 Fusing batch normalization and convolution in runtime
 https://nenadmarkus.com/p/fusing-batchnorm-and-conv/
+
+Predictive Coding Models of Perception
+https://www.youtube.com/watch?v=P0yVuoATjzs

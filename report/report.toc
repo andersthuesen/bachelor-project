@@ -1,0 +1,7 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{}%
+\contentsline {section}{\numberline {2}Backpropagation}{3}{}%
+\contentsline {section}{\numberline {3}Biological constraints}{3}{}%
+\contentsline {section}{\numberline {4}LIF Neuron model}{3}{}%
+\contentsline {section}{\numberline {5}Stacked Autoencoders}{3}{}%
+\contentsline {section}{\numberline {6}Predictive Coding}{3}{}%
+\contentsline {section}{\numberline {7}Conclusion}{3}{}%
