@@ -59,3 +59,6 @@ https://nenadmarkus.com/p/fusing-batchnorm-and-conv/
 
 Predictive Coding Models of Perception
 https://www.youtube.com/watch?v=P0yVuoATjzs
+
+Lot's of papers regarding predictive coding
+https://github.com/BerenMillidge/Predictive_Coding_Papers
