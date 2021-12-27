@@ -17,4 +17,9 @@
    1. Hintons ambigious boat/house images (part-whole hierarchies).
 
 8. Predicting next frame
-   1. PredNet
+
+   - PredNet
+
+9. How can we compare gradients?
+   - How do they diverge over training steps? (Magnitude of angle between gradients)
+   -

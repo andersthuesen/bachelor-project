@@ -1,7 +1,11 @@
-\contentsline {section}{\numberline {1}Introduction}{3}{}%
-\contentsline {section}{\numberline {2}Backpropagation}{3}{}%
-\contentsline {section}{\numberline {3}Biological constraints}{3}{}%
-\contentsline {section}{\numberline {4}LIF Neuron model}{3}{}%
-\contentsline {section}{\numberline {5}Stacked Autoencoders}{3}{}%
-\contentsline {section}{\numberline {6}Predictive Coding}{3}{}%
-\contentsline {section}{\numberline {7}Conclusion}{3}{}%
+\contentsline {section}{\numberline {0.1}Introduction}{4}{}%
+\contentsline {subsection}{\numberline {0.1.1}Related work}{4}{}%
+\contentsline {section}{\numberline {0.2}Dataset}{4}{}%
+\contentsline {section}{\numberline {0.3}Feed Forward Neural Networks}{4}{}%
+\contentsline {section}{\numberline {0.4}Backpropagation}{4}{}%
+\contentsline {section}{\numberline {0.5}Biological constraints}{5}{}%
+\contentsline {section}{\numberline {0.6}LIF Neuron model}{5}{}%
+\contentsline {section}{\numberline {0.7}Predictive Coding}{6}{}%
+\contentsline {section}{\numberline {0.8}Variational Inference}{6}{}%
+\contentsline {section}{\numberline {0.9}Energy Based Models}{6}{}%
+\contentsline {section}{\numberline {0.10}Conclusion}{6}{}%
