@@ -1,11 +1,21 @@
-\contentsline {section}{\numberline {0.1}Introduction}{4}{}%
-\contentsline {subsection}{\numberline {0.1.1}Related work}{4}{}%
-\contentsline {section}{\numberline {0.2}Dataset}{4}{}%
-\contentsline {section}{\numberline {0.3}Feed Forward Neural Networks}{4}{}%
-\contentsline {section}{\numberline {0.4}Backpropagation}{4}{}%
-\contentsline {section}{\numberline {0.5}Biological constraints}{5}{}%
-\contentsline {section}{\numberline {0.6}LIF Neuron model}{5}{}%
-\contentsline {section}{\numberline {0.7}Predictive Coding}{6}{}%
-\contentsline {section}{\numberline {0.8}Variational Inference}{6}{}%
-\contentsline {section}{\numberline {0.9}Energy Based Models}{6}{}%
-\contentsline {section}{\numberline {0.10}Conclusion}{6}{}%
+\contentsline {section}{\numberline {1}Introduction}{3}{}%
+\contentsline {subsection}{\numberline {1.1}Motivation}{3}{}%
+\contentsline {subsection}{\numberline {1.2}Related work}{3}{}%
+\contentsline {subsection}{\numberline {1.3}Research questions}{3}{}%
+\contentsline {section}{\numberline {2}Classical deep learning}{4}{}%
+\contentsline {subsection}{\numberline {2.1}Dataset}{4}{}%
+\contentsline {subsection}{\numberline {2.2}Feedforward neural networks}{4}{}%
+\contentsline {subsection}{\numberline {2.3}Back-propagation}{5}{}%
+\contentsline {section}{\numberline {3}Biologically plausible deep learning}{5}{}%
+\contentsline {subsection}{\numberline {3.1}Biological constraints}{5}{}%
+\contentsline {subsection}{\numberline {3.2}Spiking Neural Networks}{5}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}LIF Neuron model}{5}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}ANN to SNN conversion}{5}{}%
+\contentsline {subsection}{\numberline {3.3}Predictive Coding and Z-IL}{6}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}Equivalence to back-prop}{6}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}Variational free energy}{6}{}%
+\contentsline {subsection}{\numberline {3.4}Variational Inference}{6}{}%
+\contentsline {subsection}{\numberline {3.5}Energy Based Models}{6}{}%
+\contentsline {section}{\numberline {4}Results}{6}{}%
+\contentsline {section}{\numberline {5}Discussion}{6}{}%
+\contentsline {section}{\numberline {6}Conclusion}{6}{}%
