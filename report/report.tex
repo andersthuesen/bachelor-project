@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
 \usepackage{graphicx}
+\usepackage{amsmath}
 
 \title{
   Predictive Coding and Biologically Plausible Neural Networks \\
@@ -60,18 +61,81 @@ We initialize the weight matrices using Kaiming He initialization, where the ent
 
 
 \subsection{Back-propagation}
-The working horse of allmost all modern deep learning models is the back-propagation (aka. backprop) algorithm first popularized for training neural networks by Rumelhart, Hinton \& Williams in 1986 \cite{rumelhart1986learning}. The algorithms solves what is referred to as the \textit{credit-assignment problem}. When learning the parameters of an artificial neural network we would like to know how changing a weight in the network contributes to the total loss, in order to change it in the direction that minimizes the loss. One naive way to do this would be simply to adjust a single random weight slightly, evaluate the new neural network on the dataset and observe the effect on the model loss. If the change leads to a decrease in loss, keep the change, otherwise repeat from the beginning. This would however be very computationally expensive, since the network would have to be evaluated on the entire dataset for each weight in the network. Fortunately, the backprop algorithm achieves this much more efficiently. \\
+% TODO STUFF HERE
+% Other alternatives to backpropagation 
+% Stochastic gradient descent
+% Nb. that we only do this on the weights for now. 
+% Consider what notation we should use
+% Write stuff about the hadamard product.
+% We see that we both need the weight matrix and the the derivative of the activation function for the error term. 
+% This is problematic, since we know that weights are only one way.
+% - How does predictive coding prevent this?
+% - 
+The working horse of allmost all modern deep learning models is the back-propagation (aka. backprop) algorithm first popularized for training neural networks by Rumelhart, Hinton \& Williams in 1986 \cite{rumelhart1986learning}. The algorithms solves what is referred to as the \textit{credit-assignment problem}. When learning the parameters of an artificial neural network we would like to know how changing a weight in the network contributes to the total loss, in order to change it in the direction that minimizes the loss. One naive way to do this would be simply to adjust a single random weight slightly, evaluate the new neural network on the dataset and observe the effect on the model loss. If the change leads to a decrease in loss, keep the change, otherwise repeat from the beginning. This would however be very computationally expensive, since the network would have to be evaluated on the entire dataset for each weight in the network. Fortunately, the backprop algorithm achieves this much more efficiently as we will see in the following section. \\
 \\*
-Back-propagation frames learning the parameters of the network or weights and biases as an optimization problem for some loss function, $\mathcal{L}(\hat{\mathbf{y}}, \mathbf{y})$, which measures the difference between the predicted output of the network, $\hat{\mathbf{y}}$, and the true output, $\mathbf{y}$. The weights and biases are then changed in order to minimize this difference. Examples of loss functions are squared error $\sum \frac{1}{2}(\hat{\mathbf{y}} - \mathbf{y})^2$, typically used for regression and categorical cross entropy $-\sum \mathbf{y} \cdot \log(\hat{\mathbf{y}})$ for classification. \\
-\\*
+Back-propagation is an efficient method for calculating the weight updates that minimizes some loss function, $\mathcal{L}(\hat{\mathbf{y}}_i, \mathbf{y}_i)$, which measures the difference between the predicted output of the network, $\hat{\mathbf{y}}_i$, and the true output, $\mathbf{y}_i$. Examples of loss functions are squared error $\sum{\frac{1}{2}(\hat{\mathbf{y}}_i - \mathbf{y}_i)^2}$, typically used for regression and categorical cross entropy $-\sum{\mathbf{y}_i \cdot \log(\hat{\mathbf{y}}_i)}$ for classification. At its core, the back-propagation algorithm is simply applying the chain rule on the partial derivate of the loss function with respect to the parameters and realizing that a lot of computation can be reused or "back propagated" in order to calculate the weight and bias updates for earlier layers. It is therefore necessary that the loss function is differentiable with respect to the prediction variable. Some alternatives to back-propagation exist such as Direct Feedback Alignment \cite{noekland2016direct}, but is not commonly used in practice.  
 
-
-\begin{equation}
-  \Delta W^{(L)} = -\alpha \frac{\partial \mathcal{L}}{\partial W^{(L)}}
+To demonstrate the efficiency of the back-propagation algorithm, one can consider the last and second to last layers of the network. Applying the chain rule on the partial derivative of the loss function wrt. $\mathbf{W}^{(L)}$ yields
+\begin{equation} \label{eq:dLdW1}
+  \frac{\partial \mathcal{L}}{\partial \mathbf{W}^{(L)}}  
+= \underbrace{
+    \frac{\partial \mathcal{L}}{\partial \mathbf{a}^{(L)}}
+    \frac{\partial \mathbf{a}^{(L)}}{\partial \mathbf{z}^{(L)}}
+  }_ {\delta^{(L)}}
+  \frac{\partial \mathbf{z}^{(L)}}{\partial \mathbf{W}^{(L)}}
+= \underbrace{
+    \mathcal{L}^\prime (\hat{\mathbf{y}}_i) \sigma^\prime(\mathbf{z}^{(L)})
+  }_{\delta^{(L)}}
+ \mathbf{a}^{(L-1)}
 \end{equation}
-%By first considering the output layer of the network, 
+whose factors can be divided into the error term, $\delta^{(L)}$, and activation in the previous layer, $\mathbf{a}^{(L-1)}$. Yet again applying the chain rule on the partial derivative of the loss function, but this time wrt. $\mathbf{W}^{(L-1)}$ hints a the source of efficiency:
+\begin{equation}
+\begin{split}
+    \frac{\partial \mathcal{L}}{\partial \mathbf{W}^{(L-1)}}
+  % &= \frac{\partial \mathcal{L}}{\partial \mathbf{a}^{(L)}}
+  %   \frac{\partial \mathbf{a}^{(L)}}{\partial \mathbf{a}^{(L-1)}}
+  %   \frac{\partial \mathbf{a}^{(L-1)}}{\partial \mathbf{z}^{(L-1)}}
+  %   \frac{\partial \mathbf{z}^{(L-1)}}{\partial \mathbf{W}^{(L-1)}}
+ &= \overbrace{
+   \frac{\partial \mathcal{L}}{\partial \mathbf{a}^{(L)}}
+   \frac{\partial \mathbf{a}^{(L)}}{\partial \mathbf{z}^{(L)}}
+ }^{\delta^{(L)}}
+   \frac{\partial \mathbf{z}^{(L)}}{\partial \mathbf{a}^{(L-1)}}
+   \frac{\partial \mathbf{a}^{(L-1)}}{\partial \mathbf{z}^{(L-1)}}
+   \frac{\partial \mathbf{z}^{(L-1)}}{\partial \mathbf{W}^{(L-1)}}
+  = \underbrace{
+    \delta^{(L)}
+    \mathbf{W}^{(L)}
+    \sigma^\prime(\mathbf{z}^{(L-1)})
+  }_{\delta^{(L-1)}}
+  \mathbf{a}^{(L-2)}
+\end{split}
+\end{equation}
+Though the equation above only considers $\mathbf{W}^{(L)}$ and $\mathbf{W}^{(L-1)}$ it can be shown in general that
+\begin{align}
+  \delta^{(L)} = \mathcal{L}^\prime (\hat{\mathbf{y}}_i) \sigma^\prime(\mathbf{z}^{(L)}), 
+  \hspace{10pt}
+  \delta^{(l)} =  \delta^{(l+1)}\mathbf{W}^{(l+1)}\sigma^\prime(\mathbf{z}^{(l)})
+\end{align}
+\begin{equation}
+  \mathbf{W}^{(l)} = \delta^{(l)} \mathbf{a}^{(l-1)}
+\end{equation}
+We can then update our parameters as such.
+\begin{equation}
+  \mathbf{W}^{(l)} = \mathbf{W}^{(l)} -\alpha \frac{\partial \mathcal{L}}{\partial \mathbf{W}^{(l)}}
+\end{equation}
+\begin{equation}
+  \mathbf{b}^{(l)} = \mathbf{b}^{(l)} -\alpha \frac{\partial \mathcal{L}}{\partial \mathbf{b}^{(l)}}
+\end{equation}
 
+% TODO: Fix transposes and stuffs in equations
+
+
+
+\newpage 
 \section{Biologically plausible deep learning}
+% TODO
+% Maybe something about alternatives to predictive coding that are also biologically plausible?
 \subsection{Biological constraints}
 Write something about biological constraints here.
 \subsection{Spiking Neural Networks}

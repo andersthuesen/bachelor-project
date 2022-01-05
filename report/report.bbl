@@ -22,6 +22,11 @@ Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
 \newblock Gradient-based learning applied to document recognition.
 \newblock {\em Proceedings of the IEEE}, 86(11):2278--2324, 1998.
 
+\bibitem{noekland2016direct}
+Arild Nøkland.
+\newblock Direct feedback alignment provides learning in deep neural networks,
+  2016.
+
 \bibitem{rumelhart1986learning}
 David~E Rumelhart, Geoffrey~E Hinton, and Ronald~J Williams.
 \newblock Learning representations by back-propagating errors.

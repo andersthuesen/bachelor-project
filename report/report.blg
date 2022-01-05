@@ -4,45 +4,45 @@ The top-level auxiliary file: report.aux
 The style file: plain.bst
 Database file #1: refs.bib
 Warning--empty journal in he2015delving
-You've used 5 entries,
+You've used 6 entries,
             2118 wiz_defined-function locations,
-            530 strings with 4830 characters,
-and the built_in function-call counts, 1731 in all, are:
-= -- 159
-> -- 115
+            534 strings with 4933 characters,
+and the built_in function-call counts, 1928 in all, are:
+= -- 176
+> -- 122
 < -- 0
-+ -- 45
-- -- 40
-* -- 138
-:= -- 316
-add.period$ -- 15
-call.type$ -- 5
-change.case$ -- 35
++ -- 48
+- -- 42
+* -- 144
+:= -- 348
+add.period$ -- 17
+call.type$ -- 6
+change.case$ -- 39
 chr.to.int$ -- 0
-cite$ -- 6
-duplicate$ -- 52
-empty$ -- 108
-format.name$ -- 40
-if$ -- 336
+cite$ -- 7
+duplicate$ -- 59
+empty$ -- 130
+format.name$ -- 42
+if$ -- 379
 int.to.chr$ -- 0
-int.to.str$ -- 5
+int.to.str$ -- 6
 missing$ -- 5
-newline$ -- 28
-num.names$ -- 10
-pop$ -- 29
+newline$ -- 32
+num.names$ -- 12
+pop$ -- 38
 preamble$ -- 1
-purify$ -- 30
+purify$ -- 33
 quote$ -- 0
-skip$ -- 37
+skip$ -- 45
 stack$ -- 0
-substring$ -- 77
-swap$ -- 4
+substring$ -- 82
+swap$ -- 5
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 20
+type$ -- 24
 warning$ -- 1
-while$ -- 13
-width$ -- 6
-write$ -- 55
+while$ -- 15
+width$ -- 7
+write$ -- 63
 (There was 1 warning)

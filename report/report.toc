@@ -6,16 +6,16 @@
 \contentsline {subsection}{\numberline {2.1}Dataset}{4}{}%
 \contentsline {subsection}{\numberline {2.2}Feedforward neural networks}{4}{}%
 \contentsline {subsection}{\numberline {2.3}Back-propagation}{5}{}%
-\contentsline {section}{\numberline {3}Biologically plausible deep learning}{5}{}%
-\contentsline {subsection}{\numberline {3.1}Biological constraints}{5}{}%
-\contentsline {subsection}{\numberline {3.2}Spiking Neural Networks}{5}{}%
-\contentsline {subsubsection}{\numberline {3.2.1}LIF Neuron model}{5}{}%
-\contentsline {subsubsection}{\numberline {3.2.2}ANN to SNN conversion}{5}{}%
-\contentsline {subsection}{\numberline {3.3}Predictive Coding and Z-IL}{6}{}%
-\contentsline {subsubsection}{\numberline {3.3.1}Equivalence to back-prop}{6}{}%
-\contentsline {subsubsection}{\numberline {3.3.2}Variational free energy}{6}{}%
-\contentsline {subsection}{\numberline {3.4}Variational Inference}{6}{}%
-\contentsline {subsection}{\numberline {3.5}Energy Based Models}{6}{}%
-\contentsline {section}{\numberline {4}Results}{6}{}%
-\contentsline {section}{\numberline {5}Discussion}{6}{}%
-\contentsline {section}{\numberline {6}Conclusion}{6}{}%
+\contentsline {section}{\numberline {3}Biologically plausible deep learning}{7}{}%
+\contentsline {subsection}{\numberline {3.1}Biological constraints}{7}{}%
+\contentsline {subsection}{\numberline {3.2}Spiking Neural Networks}{7}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}LIF Neuron model}{7}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}ANN to SNN conversion}{7}{}%
+\contentsline {subsection}{\numberline {3.3}Predictive Coding and Z-IL}{7}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}Equivalence to back-prop}{7}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}Variational free energy}{7}{}%
+\contentsline {subsection}{\numberline {3.4}Variational Inference}{7}{}%
+\contentsline {subsection}{\numberline {3.5}Energy Based Models}{7}{}%
+\contentsline {section}{\numberline {4}Results}{7}{}%
+\contentsline {section}{\numberline {5}Discussion}{7}{}%
+\contentsline {section}{\numberline {6}Conclusion}{7}{}%
