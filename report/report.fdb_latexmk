@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex report"] 1641378884 "report.aux" "report.bbl" "report" 1641378951
+["bibtex report"] 1641477493 "report.aux" "report.bbl" "report" 1641477588
   "/usr/local/texlive/2021basic/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "refs.bib" 1641375457 2512 b7922e968816499933cf2cd2a8575837 ""
-  "report.aux" 1641378951 2904 67cd303397087b960a36c0ad91b1a6c3 "pdflatex"
+  "refs.bib" 1641387473 2748 ab5148394ad1ab3472bc6ab9d11a8643 ""
+  "report.aux" 1641477494 3630 24a31628c788b9fdea0e3072c6f402f6 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1641378951 "/Users/anders/dtu/bachelor-project/report/report.tex" "report.pdf" "report" 1641378951
+["pdflatex"] 1641477493 "/Users/anders/dtu/bachelor-project/report/report.tex" "report.pdf" "report" 1641477588
   "/Users/anders/Library/texlive/2021basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1641203330 12644 c0b76b7902a6c1d8740d49fd2bf261e1 ""
-  "/Users/anders/dtu/bachelor-project/report/report.tex" 1641378950 13119 237dafe2a48ef73ec8d3af89ef50f22b ""
+  "/Users/anders/dtu/bachelor-project/report/report.tex" 1641477587 21730 9df46d46a4d86d131a50ce1e86649652 ""
   "/usr/local/texlive/2021basic/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -85,13 +85,14 @@
   "/usr/local/texlive/2021basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616691443 79187 72c3adcacc8085f6390cf80c64ac00e5 ""
   "/usr/local/texlive/2021basic/texmf-var/web2c/pdftex/pdflatex.fmt" 1636018914 2057446 541c90a4bb6e997a16b843f2256c826c ""
   "/usr/local/texlive/2021basic/texmf.cnf" 1616691442 628 e23d78b1be89c53495d66eec94d2300d ""
+  "graphics/lif-voltage.png" 1641465333 22685 78f19d8f64bb71856d0588dc529b0b8c ""
   "graphics/mnist.png" 1641202140 12284 eacfc861d33479dd33070bb6b885ca12 ""
-  "report.aux" 1641378951 2904 67cd303397087b960a36c0ad91b1a6c3 "pdflatex"
-  "report.bbl" 1641378884 1201 00d985cc0a9c26e7ba634d1fd73641e9 "bibtex report"
-  "report.tex" 1641378950 13119 237dafe2a48ef73ec8d3af89ef50f22b ""
-  "report.toc" 1641378951 1465 a2e030cebaeed403181e26ebf0d69403 "pdflatex"
+  "report.aux" 1641477494 3630 24a31628c788b9fdea0e3072c6f402f6 "pdflatex"
+  "report.bbl" 1641477493 1377 7b465b028d0e91623d520134441e7c58 "bibtex report"
+  "report.tex" 1641477587 21730 9df46d46a4d86d131a50ce1e86649652 ""
+  "report.toc" 1641477494 1632 6d77a8e8e9f209410290e3f2749a8beb "pdflatex"
   (generated)
-  "report.toc"
+  "report.aux"
   "report.log"
   "report.pdf"
-  "report.aux"
+  "report.toc"

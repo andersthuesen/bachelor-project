@@ -353,6 +353,11 @@ INPUT graphics/mnist.png
 INPUT ./graphics/mnist.png
 INPUT ./graphics/mnist.png
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT ./graphics/lif-voltage.png
+INPUT ./graphics/lif-voltage.png
+INPUT graphics/lif-voltage.png
+INPUT ./graphics/lif-voltage.png
+INPUT ./graphics/lif-voltage.png
 INPUT ./report.bbl
 INPUT report.bbl
 INPUT ./report.bbl

@@ -17,6 +17,12 @@ Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
   imagenet classification.
 \newblock 2015.
 
+\bibitem{Eric2018}
+{Hunsberger, Eric}.
+\newblock {\em Spiking Deep Neural Networks: Engineered and Biological
+  Approaches to Object Recognition}.
+\newblock PhD thesis, 2018.
+
 \bibitem{mnist}
 Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
 \newblock Gradient-based learning applied to document recognition.
