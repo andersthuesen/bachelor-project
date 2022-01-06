@@ -17,6 +17,11 @@ Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
   imagenet classification.
 \newblock 2015.
 
+\bibitem{hunsberger2015spiking}
+Eric Hunsberger and Chris Eliasmith.
+\newblock Spiking deep networks with lif neurons.
+\newblock 2015.
+
 \bibitem{Eric2018}
 {Hunsberger, Eric}.
 \newblock {\em Spiking Deep Neural Networks: Engineered and Biological
@@ -37,5 +42,13 @@ Arild Nøkland.
 David~E Rumelhart, Geoffrey~E Hinton, and Ronald~J Williams.
 \newblock Learning representations by back-propagating errors.
 \newblock {\em nature}, 323(6088):533--536, 1986.
+
+\bibitem{PredictiveCodingNetworks}
+Yuhang Song, Thomas Lukasiewicz, Zhenghua Xu, and Rafal Bogacz.
+\newblock Can the brain do backpropagation? --- exact implementation of
+  backpropagation in predictive coding networks.
+\newblock In H.~Larochelle, M.~Ranzato, R.~Hadsell, M.~F. Balcan, and H.~Lin,
+  editors, {\em Advances in Neural Information Processing Systems}, volume~33,
+  pages 22566--22579. Curran Associates, Inc., 2020.
 
 \end{thebibliography}

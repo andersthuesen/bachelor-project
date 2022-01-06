@@ -4,6 +4,7 @@
 \usepackage{amsfonts}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{hyperref}
 
 % Preamble
 \DeclareMathOperator{\Pois}{Pois}
@@ -129,15 +130,27 @@ The weight is updated in the opposite direction (hence the negation) of the grad
 % TODO
 % - Maybe write a little bit about what this section is about?
 % - Maybe something about alternatives to predictive coding that are also biologically plausible?
-The follow sections will describe alternative, more biologically plausible methods for training and evaluating artificial neural networks. It is the goal of these methods to satisfy the biological constraints put forward in section \ref{sec:biological-constraints}. These methods will primarily deal with the \textbf{the spiking problem} and \textbf{the weight transport problem}. 
+
+The following section will focus on biologically plausible deep learning and what that entails. There are many aspects of being biological plausible, however this project will only be considering those that are computationally relevant for deep learning. Initially to gain an understanding of biology a brief summary of the neuron is presented. From this biological constraints are defined and compared with current deep learning approaches. Subsequent sections will describe alternative, more biologically plausible methods for training and evaluating artificial neural networks. This project will primarily focus on methods presented in the two papers \textit{Spiking Deep Networks with LIF Neurons} by Eric Hunsberger et al. \cite{hunsberger2015spiking} and \textit{Can the Brain Do Backpropagation? - Exact Implementation of Backpropagation in Predictive Coding Networks} by Yuhang Song et al. \cite{PredictiveCodingNetworks}. The endgoal of this project is to compare these methods with a unification of the two on the supervised task of predicting the label of MNIST digits. 
 
 
-\subsection{Biological neurons}
-\label{sec:neurons}
+It is the goal of these methods to satisfy the biological constraints put forward in section \ref{sec:biological-constraints}. 
+
+\subsection{Biological neurons} \label{sec:neurons}
+A neuron is an electrically exitable cell capable of communicating with. 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=250pt]{graphics/bio-neuron.png}
+  \caption{Illustration of biological neuron by BruceBlaus - Own work, CC BY 3.0 \protect\footnotemark}
+  \label{fig:bio-neuron}
+\end{figure}
+\footnotetext{\href{https://commons.wikimedia.org/w/index.php?curid=28761830}{https://commons.wikimedia.org/w/index.php?curid=28761830}}
+
 
 \subsection{Biological constraints} \label{sec:biological-constraints}
-% TODO
-% - Actually write something about biological constraints.
+% Define constraints here.
+
+
 
 In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regarding the biologically plausibility of back-propagation which are nicely summarized and expanded upon in the PhD thesis by Hunsberger \cite{Eric2018} from which this project will use the same naming of the problems. To illustrate the problems more clearly in terms of dicussions in previous sections (\ref{sec:backprop}, \ref{sec:neurons}) the problems have been reformulated as follows.
 
@@ -158,7 +171,9 @@ In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regardin
 % Discuss how these methods aim to overcome the current biological constraints defined in section 3.2
 
 \subsubsection{Spiking neural networks}
-Spiking neural networks (SNNs) are a perticular type of network that uses spikes for inter-neuron communication. In that way they more closeley mimic biological neural networks, but share their structure and dense connectivity with feedforward neural networks. Spiking neurons are temporal in their dynamics in the sense that they are integrating input spikes over time. When the threshold membrane potential is exceeded a spike is sent to the connected neurons in the next layer. The implementation of SNNs requires a perticular neuron model of the action potential often modelled as a first order differential equation describing the exact dynamics. Several different neuron models exists ranging from simple and compute efficient models like the Integrate-and-Fire (IF) model that only captures the coarse dynamics of biological neurons to more nuanced models like the Hodgkin-Huxley model. We will be using a variation of the IF neuron model which leaks membrane potential over time, called the Leaky-Integrate-and-Fire model. This particular model has the advantage of being relatively biologically plausible yet still being very efficient to compute. 
+Spiking neural networks (SNNs) are a perticular type of network that uses spikes for inter-neuron communication. In that way they more closeley mimic biological neural networks, but share their structure and dense connectivity with feedforward neural networks. Spiking neurons are temporal in their dynamics in the sense that they are integrating input spikes over time. When the threshold membrane potential is exceeded a spike is sent to the connected neurons in the next layer. The implementation of SNNs requires a perticular neuron model of the action potential often modelled as a first order differential equation describing the exact dynamics. Several different neuron models exists ranging from simple and compute efficient models like the Integrate-and-Fire (IF) model that only captures the coarse dynamics of biological neurons to more nuanced models like the Hodgkin-Huxley model. We will be using a variation of the IF neuron model which leaks membrane potential over time, called the Leaky-Integrate-and-Fire model. This particular model has the advantage of being relatively biologically plausible yet still being very efficient to compute. \\
+\\*
+There are several approaches to training SNNs such as SpikeProp. Some methods directly uses the generated spikes to update the connection weights. 
 
 \subsubsection{Leaky-Integrate-and-Fire neurons}
 % Maybe a note about units?
@@ -166,33 +181,59 @@ Leaky-Integrate-and-Fire neurons were inspired by the fact that biological neuro
 \begin{equation}
   C \frac{d V}{dt}=J(t)-\frac{V}{R}
 \end{equation}
-where $V$ is the voltage across the membrane, $R$ the membrane resistance and $J(t)$ the input current to the neuron at time $t$. The neuron will fire when the membrane voltage reaches a threshold of $V_\text{th}$ and reset to $V_\text{rest}$ in a refractory period of $\tau_\text{ref} = 0.004$. If the applied input current is not large enough to make the neuron spike, the membrane voltage will naturally decay to $V_\text{rest}$. Hunsberger \cite{Eric2018} shows how the above can be rewritten in simpler terms as:
+where $V$ is the voltage across the membrane, $R$ the membrane resistance and $J(t)$ the input current to the neuron at time $t$. The neuron will fire when the membrane voltage reaches a threshold of $V_\text{th}$ and reset to $V_\text{rest}$ in a refractory period of $t_\text{ref} = 0.004$. If the applied input current is not large enough to make the neuron spike, the membrane voltage will naturally decay to $V_\text{rest}$. Hunsberger \cite{Eric2018} shows how the above can be rewritten in simpler terms as:
 \begin{equation}
   \tau_{RC} \frac{dv(t)}{dt} = j(t) - v(t) 
 \end{equation}
-where $\tau_{RC}$ is the membrane time constant and $v(t)$ and $j(t)$, resembling the membrane voltage and input current, are now unitless. Generally $\tau_{RC}$ is in the range in the tens of miliseconds for biological neurons. We use $\tau_{RC}=0.02$. The implication of this rewrite is that the neuron now spikes at $v(t) = v_\text{th} = 1$ before resetting to $v_\text{rest} = 0$ and entering the refractory period. Forcing the input current to be static by letting $j(t) = j$ and solving the differential equation allows us to describe the membrane voltage over time with constant input:
+where $\tau_{RC}$ is the membrane time constant and $v(t)$ and $j(t)$, resembling the membrane voltage and input current, are now unitless. Generally $\tau_{RC}$ is in the range in the tens of miliseconds for biological neurons. We use $\tau_{RC}=0.02$. The implication of this rewrite is that the neuron now spikes at $v(t) = v_\text{th} = 1$ before resetting to $v_\text{rest} = 0$ and entering the refractory period. Forcing the input current to be static by letting $j(t) = j$ and solving the differential equation allows us to describe the membrane voltage over time with constant input current:
 \begin{equation}
   v(t) = (v_0 - j) e^{-t/\tau_{RC}} + j
 \end{equation}
-where $v_0$ is the voltage at $t=0$ which most often is set $v_0 = V_\text{rest}$. Plotting $v(t)$ with different values of $j$ and $v_0$ can be seen in figure \ref{fig:lif-voltage}.
-\begin{figure} 
-  \centering
-  \includegraphics[width=350pt]{graphics/lif-voltage.png}
-  \caption{Voltage of LIF neuron over time for different values of $j$ and $v_0$.}
-  \label{fig:lif-voltage}
-\end{figure}
-It is possible to derive the spike rate when $j>V_\text{th}$ by setting $v(t) = V_\text{th}$ and solving for $r = t^{-1}$ to get.
+where $v_0$ is the voltage at $t=0$ which most often is set $v_0 = V_\text{rest}$. % Plotting $v(t)$ with different values of $j$ and $v_0$ can be seen in figure \ref{fig:lif-voltage}.
+% \begin{figure} 
+%   \centering
+%   \includegraphics[width=350pt]{graphics/lif-voltage.png}
+%   \caption{Voltage of LIF neuron over time for different values of $j$ and $v_0$.}
+%   \label{fig:lif-voltage}
+% \end{figure}
+It is now possible to derive the spike rate which for input current 
+when the input current exceed the threshold $j>V_\text{th}$ by setting $v(t) = V_\text{th}$ and solving for $r = t^{-1}$ to get.
 \begin{equation}
-  r = \left[\tau_\text{ref} - \tau_{RC} \log \left(1-\frac{V_{\text {th }}}{j}\right) \right]^{-1}
+  r(j) = \begin{cases} 
+      \left[t_\text{ref} - \tau_{RC} \log \left(1-\frac{V_{\text {th }}}{j}\right) \right]^{-1} & \text{if } j > V_\text{th} \\
+      0 & \text{otherwise}
+  \end{cases}
 \end{equation}
-Notice that $\tau_\text{ref}$ is added to the time-to-spike, to incorporate the effect of the refractory period. \\
-\\*
-It is possible to use the LIF model to construct a SNN whose weights can be learned through ordinary back-propagation after which it may be run by either simulating the LIF dynamics or tranferring the network to neuromorphic hardware for more efficiency. 
+Notice that $t_\text{ref}$ is added to the time-to-spike, to incorporate the effect of the refractory period. Using the rate function directly as activation function would lead to problems as its derivative goes to infinity when $j \to 0_{+}$. Hunsberger et al. therefore introduces a smoothed rate function using the softplus function $\rho(x) = \gamma \log(1 + \exp(x / \gamma))$ that works as a smooth $\max$ function and does in fact becomes equivilant when $\gamma \to 0$.
 
+\begin{equation}
+  r_\rho(j) = \left[t_\text{ref} - \tau_{RC} \log \left(1 + \frac{ V_{\text{th}} }{ \rho(j - V_\text{th})}\right) \right]^{-1}
+\end{equation}
+\begin{figure}
+  \centering
+  \includegraphics[width=200pt]{graphics/smooth-rate.png}
+  \caption{interleaved plot of rate functions $r_\rho(j)$ (blue) and $r(j)$ (orange).}
+\end{figure}
+
+%It is possible to use the LIF model to construct a SNN whose weights can be learned through ordinary back-propagation after which it may be run by either simulating the LIF dynamics or tranferring the network to neuromorphic hardware for more efficiency. 
 
 
 \subsubsection{Poisson rate coding}
-In order to input non-spiking variables into our SNN they should first be converted into spikes. This can be accomplished by poission rate coding. The generated spikes are sampled from a poission distribution  $X_i \sim \Pois(x_i)$.  
+In order to input continious variables, $x_i$, into our SNN a conversion to spikes is necessary. This can be accomplished with Possion rate coding. Spikes are generated by sampling from a Poission distribution
+\begin{equation}
+  s_i^{(t)} \sim \Pois \left( \gamma = \frac{x_i}{t_\text{ref}} dt \right)
+\end{equation}
+where $dt$ is the discrete timestep used for simulation. This formulation requires that input variables $x_i$ are normalized to values between 0 and 1. 
+
+
+\subsubsection{Low-pass alpha-filter}
+Axons are known from to act as a low-pass filters on the outgoing spikes. Hunsberger and Eliasmith \cite{hunsberger2015spiking} proposes an exponential $\alpha$-filter.
+\begin{equation}
+  \alpha(t)= \frac{t}{\tau_{s}} e^{-t / \tau_{a}}
+\end{equation}
+where $\tau_s$ is some time-constant 
+
+\newpage
 
 \subsubsection{ANN to SNN conversion}
 How do we convert an ANN to a SNN and run the stuff live?
