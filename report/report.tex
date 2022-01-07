@@ -131,16 +131,25 @@ The weight is updated in the opposite direction (hence the negation) of the grad
 % - Maybe write a little bit about what this section is about?
 % - Maybe something about alternatives to predictive coding that are also biologically plausible?
 
-The following section will focus on biologically plausible deep learning and what that entails. There are many aspects of being biological plausible, however this project will only be considering those that are computationally relevant for deep learning. Initially to gain an understanding of biology a brief summary of the neuron is presented. From this biological constraints are defined and compared with current deep learning approaches. Subsequent sections will describe alternative, more biologically plausible methods for training and evaluating artificial neural networks. This project will primarily focus on methods presented in the two papers \textit{Spiking Deep Networks with LIF Neurons} by Eric Hunsberger et al. \cite{hunsberger2015spiking} and \textit{Can the Brain Do Backpropagation? - Exact Implementation of Backpropagation in Predictive Coding Networks} by Yuhang Song et al. \cite{PredictiveCodingNetworks}. The endgoal of this project is to compare these methods with a unification of the two on the supervised task of predicting the label of MNIST digits. 
-
-
-It is the goal of these methods to satisfy the biological constraints put forward in section \ref{sec:biological-constraints}. 
+The following section will focus on biologically plausible deep learning and what that entails. There are many aspects of being biological plausible, however this project will only be considering those that are computationally relevant for deep learning. Initially to gain an understanding of biology a brief summary of the neuron is presented. From this biological constraints are defined and compared with current deep learning approaches. Subsequent sections will describe alternative, more biologically plausible methods for training and evaluating artificial neural networks. This project will primarily focus on methods presented in the two papers \textit{Spiking Deep Networks with LIF Neurons} by Eric Hunsberger et al. \cite{hunsberger2015spiking} and \textit{Can the Brain Do Backpropagation? - Exact Implementation of Backpropagation in Predictive Coding Networks} by Yuhang Song et al. \cite{PredictiveCodingNetworks}. The endgoal of this project is to compare these methods with a unification of the two on the supervised task of predicting the label of MNIST digits. Hopefully, the combination of these methods will shine some light on the intersection between artificial and biological neural networks and provide a foundation for further research.
 
 \subsection{Biological neurons} \label{sec:neurons}
-A neuron is an electrically exitable cell capable of communicating with. 
-\begin{figure}[ht]
+This section aims to briefly describe the biological neuron from a highlevel perspective to give an intuition of how processing is happening in the human brain. Hopefully this will lead to a better understanding of what biologically plausibility encapsulates. It is by no means fully comprehensive nor capturing all the nuanced details of the biological processes.\\
+\\*
+A neuron is an electrically excitable cell capable of communicating with other neurons by sending electrical signals called action potentials or spikes. Most often, multiple spikes are generated in sequence, called a spike train. When spikes are generated the neuron is said to be \textit{firing}. The neuron has a cell body called the soma which is the central element in processing. From the soma root like structures called dendrites extrude, which capture signals from other nearby neurons. Receiving spikes from other presynaptic neurons will lead to polerization of the cell and trigger the neuron to spike itself if the input spikes exceed a certain threshold. As the neuron spikes an action potential will travel from the soma, through the axon and to the synaptic terminal where it will cause the release of neurotransmitter molecules to the postsynaptic neurons dendrites. Neurons are usually in computational models described by their membrane potential or voltage which arises from the fact that neurons maintain a voltage across its membrane. It achieves this by actively regulating the intracellular concentration of charged potassium, sodium and calcium ions through ion pumps until a resting potential is reached (around -70mV). When neurotransmitter molecules bind to receptors on the dendrites, it will cause various types of ion channels to open. This will result in a change in the ionic concentration and thereby membrane potential of the neuron. Once the membrane voltage reaches a certain level called the threshold voltage (around -55mV) voltage-gated ion channels open and ions flood in to the cell, further increasing the membrane voltage to form a chain reaction. This reaction is what causes neurotransmitter to be released at the synaptic terminal. In other words, the neuron will spike. After spiking a phase of hyperpolerization called the refractory period might occur. In this phase, ion pumps decrease the membrane potential beyond the resting potential and prevents the neurons from spiking. \\
+\\*
+It is believed that the brain learns both by forming new connections between neurons and by varying the amount of neurotransmitter receptors resulting in strengthening or weakening of existing connections. In the book, The \textit{Organization of Behaviour} by Donald Hebb \cite{hebb1949}, he postulates that the pre- and postsynaptic activity drive this change, known as Hebb's postulate or Hebbian learning: 
+\begin{quotation}
+"When an axon of cell A is near enough to excite a cell B and repeatedly or persistently takes part in firing it, some growth process or metabolic change takes place in one or both cells such that A's efficiency, as one of the cells firing B, is increased."
+\end{quotation}
+This postulate is congruent with the learning mechanism of spike-timing dependent plasticity (STDP) where changes in synaptic strength depend on the relative timings of the pre- and postsynaptic spikes, which has been observed to happen in the brain\cite{Bi10464}.
+% Inhibitory
+
+% Note on the level of abstraction.
+
+\begin{figure}
   \centering
-  \includegraphics[width=250pt]{graphics/bio-neuron.png}
+  \includegraphics[width=220pt]{graphics/bio-neuron.png}
   \caption{Illustration of biological neuron by BruceBlaus - Own work, CC BY 3.0 \protect\footnotemark}
   \label{fig:bio-neuron}
 \end{figure}
@@ -148,11 +157,9 @@ A neuron is an electrically exitable cell capable of communicating with.
 
 
 \subsection{Biological constraints} \label{sec:biological-constraints}
-% Define constraints here.
-
-
-
-In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regarding the biologically plausibility of back-propagation which are nicely summarized and expanded upon in the PhD thesis by Hunsberger \cite{Eric2018} from which this project will use the same naming of the problems. To illustrate the problems more clearly in terms of dicussions in previous sections (\ref{sec:backprop}, \ref{sec:neurons}) the problems have been reformulated as follows.
+To understand how the biological neurons process information and give rise to the emergent phenomenon of intelligence it is of interest to study the natural biological and physical limitations that they exhibit. One interesting question is to whether the perticular biological implementation of the neural networks in the brain are fundamental for the existense of intelligence or if it is rather a single instance in the set of possible configurations. For now, the focus will be on defining the constraints of the only tried-and-testet implementation we know of; the biological neuron. Neurons communicate using spikes of roughly the same amplitude, not known to encode any information, but is able to dynamically modulate the rate and timings of spikes depending on the presynaptic stimulation. This leads to our first \textbf{constraint of spikes} for communication. Due to the anatomical structure of neurons communication is unidirectional in the direction from the cell body, along the axon and to the synaptic terminal. No spiking signal is known to travel in the reverse direction from post-synaptic dendrites to pre-synaptic terminal. Thus we introduce a \textbf{constraint of unidirectionality}. Neurons primarily communicate with nearby neurons. Efficiency wise, it makes sense for the brain to place functionally dependent regions nearby to save energy in signal transmission. This principle of locality is also found in Hebb's postulate and STDP. We therefore say that biological learning is \textbf{constrained by locality}. \\
+\\*
+In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regarding the biologically plausibility of back-propagation and artificial neural networks which are nicely summarized and expanded upon in the PhD thesis by Hunsberger \cite{Eric2018} from which this project will use the same naming of the problems. To illustrate the problems more clearly in terms of dicussions in previous sections (\ref{sec:backprop}, \ref{sec:neurons}) the problems have been reformulated as follows.
 
 \begin{enumerate}
   \item \textbf{Weight transport problem}: Back-propagation uses the same connection weights in both the forward pass for prediction and in the backwards pass when calculating the gradients as seen in equation \ref{eq:delta-terms}. A well established fact of biological neurons is that of spikes travilling unidirectionally from the soma, through the axons and across the synapses as neurotransmitter chemicals. Backprop does not seem to comply with this constraint. 
@@ -170,7 +177,7 @@ In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regardin
 
 % Discuss how these methods aim to overcome the current biological constraints defined in section 3.2
 
-\subsubsection{Spiking neural networks}
+\subsection{Spiking neural networks}
 Spiking neural networks (SNNs) are a perticular type of network that uses spikes for inter-neuron communication. In that way they more closeley mimic biological neural networks, but share their structure and dense connectivity with feedforward neural networks. Spiking neurons are temporal in their dynamics in the sense that they are integrating input spikes over time. When the threshold membrane potential is exceeded a spike is sent to the connected neurons in the next layer. The implementation of SNNs requires a perticular neuron model of the action potential often modelled as a first order differential equation describing the exact dynamics. Several different neuron models exists ranging from simple and compute efficient models like the Integrate-and-Fire (IF) model that only captures the coarse dynamics of biological neurons to more nuanced models like the Hodgkin-Huxley model. We will be using a variation of the IF neuron model which leaks membrane potential over time, called the Leaky-Integrate-and-Fire model. This particular model has the advantage of being relatively biologically plausible yet still being very efficient to compute. \\
 \\*
 There are several approaches to training SNNs such as SpikeProp. Some methods directly uses the generated spikes to update the connection weights. 
@@ -181,7 +188,7 @@ Leaky-Integrate-and-Fire neurons were inspired by the fact that biological neuro
 \begin{equation}
   C \frac{d V}{dt}=J(t)-\frac{V}{R}
 \end{equation}
-where $V$ is the voltage across the membrane, $R$ the membrane resistance and $J(t)$ the input current to the neuron at time $t$. The neuron will fire when the membrane voltage reaches a threshold of $V_\text{th}$ and reset to $V_\text{rest}$ in a refractory period of $t_\text{ref} = 0.004$. If the applied input current is not large enough to make the neuron spike, the membrane voltage will naturally decay to $V_\text{rest}$. Hunsberger \cite{Eric2018} shows how the above can be rewritten in simpler terms as:
+where $V$ is the voltage across the membrane, $R$ the membrane resistance and $J(t)$ the input current to the neuron at time $t$. The neuron will fire when the membrane voltage reaches a threshold of $V_\text{th}$ and reset to $V_\text{rest}$ in a refractory period of $t_\text{ref} = 0.004$. If the applied input current is not large enough to make the neuron spike, the membrane voltage will naturally decay to $V_\text{rest}$. Hunsberger \cite{Eric2018} shows how the above can be normalized and rewritten in simpler terms as:
 \begin{equation}
   \tau_{RC} \frac{dv(t)}{dt} = j(t) - v(t) 
 \end{equation}
@@ -196,6 +203,9 @@ where $v_0$ is the voltage at $t=0$ which most often is set $v_0 = V_\text{rest}
 %   \caption{Voltage of LIF neuron over time for different values of $j$ and $v_0$.}
 %   \label{fig:lif-voltage}
 % \end{figure}
+
+\subsection{LIF ate-based deep learning}
+
 It is now possible to derive the spike rate which for input current 
 when the input current exceed the threshold $j>V_\text{th}$ by setting $v(t) = V_\text{th}$ and solving for $r = t^{-1}$ to get.
 \begin{equation}

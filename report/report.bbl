@@ -1,9 +1,15 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{BengioLBL15}
 Yoshua Bengio, Dong{-}Hyun Lee, J{\"{o}}rg Bornschein, and Zhouhan Lin.
 \newblock Towards biologically plausible deep learning.
 \newblock {\em CoRR}, abs/1502.04156, 2015.
+
+\bibitem{Bi10464}
+Guo-qiang Bi and Mu-ming Poo.
+\newblock Synaptic modifications in cultured hippocampal neurons: Dependence on
+  spike timing, synaptic strength, and postsynaptic cell type.
+\newblock {\em Journal of Neuroscience}, 18(24):10464--10472, 1998.
 
 \bibitem{EqProp}
 Maxence Ernoult, Julie Grollier, Damien Querlioz, Yoshua Bengio, and Benjamin
@@ -17,6 +23,11 @@ Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
   imagenet classification.
 \newblock 2015.
 
+\bibitem{hebb1949}
+Donald~O. Hebb.
+\newblock {\em The Organization of Behaviour - A neuropsychological theory}.
+\newblock John Wiley \& Sons, Inc., 1949.
+
 \bibitem{hunsberger2015spiking}
 Eric Hunsberger and Chris Eliasmith.
 \newblock Spiking deep networks with lif neurons.
@@ -26,7 +37,7 @@ Eric Hunsberger and Chris Eliasmith.
 {Hunsberger, Eric}.
 \newblock {\em Spiking Deep Neural Networks: Engineered and Biological
   Approaches to Object Recognition}.
-\newblock PhD thesis, 2018.
+\newblock PhD thesis, University of Waterloo, 2018.
 
 \bibitem{mnist}
 Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.

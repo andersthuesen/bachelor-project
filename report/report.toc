@@ -8,17 +8,18 @@
 \contentsline {subsection}{\numberline {2.3}Back-propagation}{3}{subsection.2.3}%
 \contentsline {section}{\numberline {3}Biologically plausible deep learning}{4}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Biological neurons}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Biological constraints}{4}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Spiking neural networks}{6}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Leaky-Integrate-and-Fire neurons}{6}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Poisson rate coding}{7}{subsubsection.3.2.3}%
-\contentsline {subsubsection}{\numberline {3.2.4}Low-pass alpha-filter}{7}{subsubsection.3.2.4}%
-\contentsline {subsubsection}{\numberline {3.2.5}ANN to SNN conversion}{8}{subsubsection.3.2.5}%
-\contentsline {subsection}{\numberline {3.3}Predictive Coding and Z-IL}{8}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Equivalence to back-prop}{8}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Variational free energy}{8}{subsubsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.4}Variational Inference}{8}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Energy Based Models}{8}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Results}{8}{section.4}%
-\contentsline {section}{\numberline {5}Discussion}{8}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion}{8}{section.6}%
+\contentsline {subsection}{\numberline {3.2}Biological constraints}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Spiking neural networks}{7}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Leaky-Integrate-and-Fire neurons}{7}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.4}LIF ate-based deep learning}{8}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Poisson rate coding}{8}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Low-pass alpha-filter}{9}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}ANN to SNN conversion}{10}{subsubsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.5}Predictive Coding and Z-IL}{10}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Equivalence to back-prop}{10}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}Variational free energy}{10}{subsubsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.6}Variational Inference}{10}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Energy Based Models}{10}{subsection.3.7}%
+\contentsline {section}{\numberline {4}Results}{10}{section.4}%
+\contentsline {section}{\numberline {5}Discussion}{10}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion}{10}{section.6}%

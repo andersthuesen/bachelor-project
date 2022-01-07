@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.11.4)  6 JAN 2022 18:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.11.4)  7 JAN 2022 18:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -338,7 +338,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout4 = `report.toc'.
 
  [2]
-<graphics/mnist.png, id=143, 1414.28375pt x 553.06625pt>
+<graphics/mnist.png, id=148, 1414.28375pt x 553.06625pt>
 File: graphics/mnist.png Graphic file (type png)
 <use graphics/mnist.png>
 Package pdftex.def Info: graphics/mnist.png  used on input line 53.
@@ -351,35 +351,35 @@ l.57
 <to be read again> 
                    \relax 
 l.69 
-      [2 <./graphics/mnist.png>] [3]
-<graphics/bio-neuron.png, id=184, 2509.375pt x 1618.045pt>
+      [2 <./graphics/mnist.png>] [3] [4]
+<graphics/bio-neuron.png, id=198, 2509.375pt x 1618.045pt>
 File: graphics/bio-neuron.png Graphic file (type png)
 <use graphics/bio-neuron.png>
-Package pdftex.def Info: graphics/bio-neuron.png  used on input line 143.
-(pdftex.def)             Requested size: 250.0pt x 161.19675pt.
- [4] [5 <./graphics/bio-neuron.png>] [6]
-<graphics/smooth-rate.png, id=225, 387.4475pt x 266.9975pt>
+Package pdftex.def Info: graphics/bio-neuron.png  used on input line 152.
+(pdftex.def)             Requested size: 220.0pt x 141.84029pt.
+ [5 <./graphics/bio-neuron.png>] [6] [7]
+<graphics/smooth-rate.png, id=236, 387.4475pt x 266.9975pt>
 File: graphics/smooth-rate.png Graphic file (type png)
 <use graphics/smooth-rate.png>
-Package pdftex.def Info: graphics/smooth-rate.png  used on input line 214.
+Package pdftex.def Info: graphics/smooth-rate.png  used on input line 224.
 (pdftex.def)             Requested size: 200.0pt x 137.82504pt.
- [7 <./graphics/smooth-rate.png>] [8] (./report.bbl) [9] (./report.aux)
+ [8 <./graphics/smooth-rate.png>] [9] [10] (./report.bbl) [11] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: C21F3198B81DACEAFD3D8B9F7B5E7000;3744.
+(rerunfilecheck)             Checksum: CBA76EF9085069E270BC8F0EA2FC319F;3936.
  ) 
 Here is how much of TeX's memory you used:
- 9094 strings out of 480445
- 133848 string characters out of 5892391
- 444962 words of memory out of 5000000
- 26165 multiletter control sequences out of 15000+600000
+ 9102 strings out of 480445
+ 133926 string characters out of 5892391
+ 445026 words of memory out of 5000000
+ 26168 multiletter control sequences out of 15000+600000
  415257 words of font info for 71 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 71i,23n,74p,1386b,418s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,23n,74p,2103b,420s stack positions out of 5000i,500n,10000p,200000b,80000s
  </Users/anders/Library/texlive/2021basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on report.pdf (11 pages, 1446833 bytes).
+Output written on report.pdf (13 pages, 1453773 bytes).
 PDF statistics:
- 322 PDF objects out of 1000 (max. 8388607)
- 283 compressed objects within 3 object streams
- 67 named destinations out of 1000 (max. 500000)
- 208 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 339 PDF objects out of 1000 (max. 8388607)
+ 298 compressed objects within 3 object streams
+ 72 named destinations out of 1000 (max. 500000)
+ 216 words of extra memory for PDF output out of 10000 (max. 10000000)
 
