@@ -5,6 +5,8 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
 
 % Preamble
 \DeclareMathOperator{\Pois}{Pois}
@@ -157,8 +159,9 @@ This postulate is congruent with the learning mechanism of spike-timing dependen
 
 
 \subsection{Biological constraints} \label{sec:biological-constraints}
-To understand how the biological neurons process information and give rise to the emergent phenomenon of intelligence it is of interest to study the natural biological and physical limitations that they exhibit. One interesting question is to whether the perticular biological implementation of the neural networks in the brain are fundamental for the existense of intelligence or if it is rather a single instance in the set of possible configurations. For now, the focus will be on defining the constraints of the only tried-and-testet implementation we know of; the biological neuron. Neurons communicate using spikes of roughly the same amplitude, not known to encode any information, but is able to dynamically modulate the rate and timings of spikes depending on the presynaptic stimulation. This leads to our first \textbf{constraint of spikes} for communication. Due to the anatomical structure of neurons communication is unidirectional in the direction from the cell body, along the axon and to the synaptic terminal. No spiking signal is known to travel in the reverse direction from post-synaptic dendrites to pre-synaptic terminal. Thus we introduce a \textbf{constraint of unidirectionality}. Neurons primarily communicate with nearby neurons. Efficiency wise, it makes sense for the brain to place functionally dependent regions nearby to save energy in signal transmission. This principle of locality is also found in Hebb's postulate and STDP. We therefore say that biological learning is \textbf{constrained by locality}. \\
-\\*
+To understand how the biological neurons process information and give rise to the emergent phenomenon of intelligence it is of interest to study the natural biological and physical limitations that they exhibit. One interesting question is to whether the perticular biological implementation of the neural networks in the brain are fundamental for the existense of intelligence or if it is rather a single instance in the set of possible configurations. For now, the focus will be on defining the constraints of the only tried-and-testet implementation we know of; the biological neuron. Neurons communicate using spikes of roughly the same amplitude, not known to encode any information, but is able to dynamically modulate the rate and timings of spikes depending on the presynaptic stimulation. This leads to our first \textbf{constraint of spikes} for communication. Due to the anatomical structure of neurons communication is unidirectional in the direction from the cell body, along the axon and to the synaptic terminal. No spiking signal is known to travel in the reverse direction from post-synaptic dendrites to pre-synaptic terminal. Thus we introduce a \textbf{constraint of unidirectionality}. Neurons primarily communicate with nearby neurons. Efficiency wise, it makes sense for the brain to place functionally dependent regions nearby to save energy in signal transmission. This principle of locality is also found in Hebb's postulate and STDP. We therefore say that biological learning is \textbf{constrained by locality}.
+
+\subsubsection{Biological violations of backprop and deep learning}
 In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regarding the biologically plausibility of back-propagation and artificial neural networks which are nicely summarized and expanded upon in the PhD thesis by Hunsberger \cite{Eric2018} from which this project will use the same naming of the problems. To illustrate the problems more clearly in terms of dicussions in previous sections (\ref{sec:backprop}, \ref{sec:neurons}) the problems have been reformulated as follows.
 
 \begin{enumerate}
@@ -178,9 +181,10 @@ In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regardin
 % Discuss how these methods aim to overcome the current biological constraints defined in section 3.2
 
 \subsection{Spiking neural networks}
-Spiking neural networks (SNNs) are a perticular type of network that uses spikes for inter-neuron communication. In that way they more closeley mimic biological neural networks, but share their structure and dense connectivity with feedforward neural networks. Spiking neurons are temporal in their dynamics in the sense that they are integrating input spikes over time. When the threshold membrane potential is exceeded a spike is sent to the connected neurons in the next layer. The implementation of SNNs requires a perticular neuron model of the action potential often modelled as a first order differential equation describing the exact dynamics. Several different neuron models exists ranging from simple and compute efficient models like the Integrate-and-Fire (IF) model that only captures the coarse dynamics of biological neurons to more nuanced models like the Hodgkin-Huxley model. We will be using a variation of the IF neuron model which leaks membrane potential over time, called the Leaky-Integrate-and-Fire model. This particular model has the advantage of being relatively biologically plausible yet still being very efficient to compute. \\
-\\*
-There are several approaches to training SNNs such as SpikeProp. Some methods directly uses the generated spikes to update the connection weights. 
+Spiking neural networks (SNNs) are a perticular type of network that uses spikes for inter-neuron communication. In that way they more closeley mimic biological neural networks, but share their structure and dense connectivity with feedforward neural networks. Spiking neurons are temporal in their dynamics in the sense that they are integrating input spikes over time. When the threshold membrane potential is exceeded a spike is sent to the connected neurons in the next layer. The implementation of SNNs requires a perticular neuron model of the action potential often modelled as a first order differential equation describing the exact dynamics. Several different neuron models exists ranging from simple and compute efficient models like the Integrate-and-Fire (IF) model that only captures the coarse dynamics of biological neurons to more nuanced models like the Hodgkin-Huxley model. We will be using a variation of the IF neuron model which leaks membrane potential over time, called the Leaky-Integrate-and-Fire model. This particular model has the advantage of being relatively biologically plausible yet still being very efficient to compute. 
+
+\subsubsection{Training spiking neural networks}
+There exist several methods for training SNNs such SpikeProp \cite{Boht2000SpikePropBF} which uses an algorithm akin to backprop directly on the generated spikes using surrogate gradient functions or modelling approaches where the spiking dynamics of neurons is defined using recurrent networks and trained using backprop through time, like snnTorch \cite{eshraghian2021training}. This project will use a method of shadow training where a ``shadow'' ANN will be trained using spike-rate coding and later run as spiking neural network at inference time using the learned weights from the ANN. This has the advantage of leveraging existing deep learning infrastructure and optimization techniques while being deployable on low-powered or analog hardware. 
 
 \subsubsection{Leaky-Integrate-and-Fire neurons}
 % Maybe a note about units?
@@ -203,9 +207,6 @@ where $v_0$ is the voltage at $t=0$ which most often is set $v_0 = V_\text{rest}
 %   \caption{Voltage of LIF neuron over time for different values of $j$ and $v_0$.}
 %   \label{fig:lif-voltage}
 % \end{figure}
-
-\subsection{LIF rate-based deep learning}
-
 It is now possible to derive the spike rate which for input current 
 when the input current exceed the threshold $j>V_\text{th}$ by setting $v(t) = V_\text{th}$ and solving for $r = t^{-1}$ to get.
 \begin{equation}
@@ -219,21 +220,46 @@ Notice that $t_\text{ref}$ is added to the time-to-spike, to incorporate the eff
 \begin{equation}
   r_\rho(j) = \left[t_\text{ref} - \tau_{RC} \log \left(1 + \frac{ V_{\text{th}} }{ \rho(j - V_\text{th})}\right) \right]^{-1}
 \end{equation}
-\begin{figure}
-  \centering
-  \includegraphics[width=200pt]{graphics/smooth-rate.png}
-  \caption{interleaved plot of rate functions $r_\rho(j)$ (blue) and $r(j)$ (orange).}
+A plot of the original and smoothed rate functions can be seen in figure \ref{fig:rate-function}.
+
+\begin{figure}[ht]
+  \hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graphics/smooth-rate.png}
+    \caption{Interleaved plot of original rate function, $r(j)$ (orange), and smoothed version, $r_\rho(j)$ (blue).} 
+    \label{fig:rate-function}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graphics/poisson.png}
+    \caption{Theoretical (orange) and simulated spike rates (blue) as functions of input current.}
+    \label{fig:poisson-rate}
+  \end{subfigure}
+  \hfill
+  \caption{}
 \end{figure}
 
-%It is possible to use the LIF model to construct a SNN whose weights can be learned through ordinary back-propagation after which it may be run by either simulating the LIF dynamics or tranferring the network to neuromorphic hardware for more efficiency. 
 
 
 \subsubsection{Poisson rate coding}
-In order to input continious variables, $x_i$, into our SNN a conversion to spikes is necessary. This can be accomplished with Possion rate coding. Spikes are generated by sampling from a Poission distribution
+As SNNs operate on spiking inputs, continuous input variables have to be converted to stochastic spiking variables. Such can be accomplished with Possion rate coding where the value of the continuous variable is interpreted as the mean spike rate of the Poission distribution with the following parameters:
 \begin{equation}
   s_i^{(t)} \sim \Pois \left( \gamma = \frac{x_i}{t_\text{ref}} dt \right)
 \end{equation}
-where $dt$ is the discrete timestep used for simulation. This formulation requires that input variables $x_i$ are normalized to values between 0 and 1. 
+where $dt$ is the discrete timestep used for simulation. This formulation requires that input variables $x_i$ are normalized to values between 0 and 1 as division with $t_\text{ref}$ maps $1$'s to the maximum spike rate $r_\text{max} = 1 / t_\text{ref}$. Disadvantageously, poission rate coding causes the stochastic signal to contain a relativ large amount of noise in the signal as seen in figure \ref{fig:poisson-rate}.
+
+\subsection{Batch normalization and fusion}
+When training deep neural networks, it is often necessary to normalize the inputs to the network in obtain good results. By normalizing the input variables to the network the gradient of the loss function is more likely to point in the direction of the local minima resulting in more efficient and stable training. According to the authors \cite{ioffe2015batch}, batch normalization has the effect of reducing ``internal covariate shift'' of the networks intermediate representations. As the weights and biases of each layer in the network is updated, the distribution of the internal representations tends to change aswell. This has the effect of slowing down learning and decrease the chance of converging to a good local minima. By normalizing each mini-batch, batch normalization is able to accelerate deep learning by enabling higher learning rates and fewer training steps. Batch normalization work by using a combination of the mean and variance of the current mini-batch and a running mean and variance.
+\begin{equation}
+  123
+\end{equation}
+
+\begin{itemize}
+  \item Write something about batch normalization here and how to fuse it in the weight and bias layers after training. 
+\end{itemize}
+
 
 
 \subsubsection{Low-pass alpha-filter}
@@ -243,17 +269,25 @@ Axons are known from to act as a low-pass filters on the outgoing spikes. Hunsbe
 \end{equation}
 where $\tau_s$ is some time-constant 
 
-\newpage
-
 \subsubsection{ANN to SNN conversion}
 How do we convert an ANN to a SNN and run the stuff live?
 \subsection{Predictive Coding and Z-IL}
 What is predictive coding? Mention Rao and Ballard. How can they calculate gradients? 
 \subsubsection{Equivalence to back-prop}
+Quote paper on backprop. 
 
 \subsubsection{Variational free energy}
+Why is this relevant?
+
 \subsection{Variational Inference}
+Kriston paper about 
+
 \subsection{Energy Based Models}
+\begin{itemize}
+  \item What can they be used for in general?
+  \item Is predictive coding an instance of this?
+  \item How do they handle adverserial attacks?
+\end{itemize}
 
 \section{Results}
 

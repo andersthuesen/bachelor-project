@@ -11,11 +11,22 @@ Guo-qiang Bi and Mu-ming Poo.
   spike timing, synaptic strength, and postsynaptic cell type.
 \newblock {\em Journal of Neuroscience}, 18(24):10464--10472, 1998.
 
+\bibitem{Boht2000SpikePropBF}
+Sander~M. Boht{\'e}, Joost~N. Kok, and Han~La Poutr{\'e}.
+\newblock Spikeprop: backpropagation for networks of spiking neurons.
+\newblock In {\em ESANN}, 2000.
+
 \bibitem{EqProp}
 Maxence Ernoult, Julie Grollier, Damien Querlioz, Yoshua Bengio, and Benjamin
   Scellier.
 \newblock Equilibrium propagation with continual weight updates.
 \newblock {\em CoRR}, abs/2005.04168, 2020.
+
+\bibitem{eshraghian2021training}
+Jason~K Eshraghian, Max Ward, Emre Neftci, Xinxin Wang, Gregor Lenz, Girish
+  Dwivedi, Mohammed Bennamoun, Doo~Seok Jeong, and Wei~D Lu.
+\newblock Training spiking neural networks using lessons from deep learning.
+\newblock {\em arXiv preprint arXiv:2109.12894}, 2021.
 
 \bibitem{he2015delving}
 Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
@@ -38,6 +49,11 @@ Eric Hunsberger and Chris Eliasmith.
 \newblock {\em Spiking Deep Neural Networks: Engineered and Biological
   Approaches to Object Recognition}.
 \newblock PhD thesis, University of Waterloo, 2018.
+
+\bibitem{ioffe2015batch}
+Sergey Ioffe and Christian Szegedy.
+\newblock Batch normalization: Accelerating deep network training by reducing
+  internal covariate shift, 2015.
 
 \bibitem{mnist}
 Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
