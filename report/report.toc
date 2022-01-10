@@ -11,7 +11,7 @@
 \contentsline {subsection}{\numberline {3.2}Biological constraints}{6}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Spiking neural networks}{7}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}Leaky-Integrate-and-Fire neurons}{7}{subsubsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.4}LIF ate-based deep learning}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.4}LIF rate-based deep learning}{8}{subsection.3.4}%
 \contentsline {subsubsection}{\numberline {3.4.1}Poisson rate coding}{8}{subsubsection.3.4.1}%
 \contentsline {subsubsection}{\numberline {3.4.2}Low-pass alpha-filter}{9}{subsubsection.3.4.2}%
 \contentsline {subsubsection}{\numberline {3.4.3}ANN to SNN conversion}{10}{subsubsection.3.4.3}%
