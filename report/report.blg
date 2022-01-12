@@ -5,45 +5,45 @@ The style file: plain.bst
 Database file #1: refs.bib
 Warning--empty journal in he2015delving
 Warning--empty journal in hunsberger2015spiking
-You've used 14 entries,
+You've used 15 entries,
             2118 wiz_defined-function locations,
-            581 strings with 6497 characters,
-and the built_in function-call counts, 4640 in all, are:
-= -- 427
-> -- 281
+            588 strings with 6685 characters,
+and the built_in function-call counts, 4942 in all, are:
+= -- 457
+> -- 294
 < -- 2
-+ -- 110
-- -- 95
-* -- 325
-:= -- 809
-add.period$ -- 41
-call.type$ -- 14
-change.case$ -- 85
++ -- 115
+- -- 99
+* -- 347
+:= -- 861
+add.period$ -- 44
+call.type$ -- 15
+change.case$ -- 90
 chr.to.int$ -- 0
-cite$ -- 16
-duplicate$ -- 159
-empty$ -- 329
-format.name$ -- 95
-if$ -- 939
+cite$ -- 17
+duplicate$ -- 170
+empty$ -- 353
+format.name$ -- 99
+if$ -- 1002
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 12
-newline$ -- 71
-num.names$ -- 30
-pop$ -- 99
+int.to.str$ -- 15
+missing$ -- 13
+newline$ -- 76
+num.names$ -- 32
+pop$ -- 102
 preamble$ -- 1
-purify$ -- 73
+purify$ -- 77
 quote$ -- 0
-skip$ -- 121
+skip$ -- 129
 stack$ -- 0
-substring$ -- 208
-swap$ -- 28
+substring$ -- 228
+swap$ -- 29
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 54
+type$ -- 58
 warning$ -- 2
-while$ -- 37
-width$ -- 16
-write$ -- 145
+while$ -- 40
+width$ -- 17
+write$ -- 156
 (There were 2 warnings)

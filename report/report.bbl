@@ -65,6 +65,12 @@ Arild Nøkland.
 \newblock Direct feedback alignment provides learning in deep neural networks,
   2016.
 
+\bibitem{raoballard1999}
+Rajesh Rao and Dana Ballard.
+\newblock Predictive coding in the visual cortex: a functional interpretation
+  of some extra-classical receptive-field effects.
+\newblock {\em Nature neuroscience}, 2:79--87, 02 1999.
+
 \bibitem{rumelhart1986learning}
 David~E Rumelhart, Geoffrey~E Hinton, and Ronald~J Williams.
 \newblock Learning representations by back-propagating errors.

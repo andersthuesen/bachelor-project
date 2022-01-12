@@ -224,21 +224,27 @@ A plot of the original and smoothed rate functions can be seen in figure \ref{fi
 
 \begin{figure}[ht]
   \hfill
-  \begin{subfigure}[t]{0.45\textwidth}
+  \begin{subfigure}[t]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{graphics/smooth-rate.png}
     \caption{Interleaved plot of original rate function, $r(j)$ (orange), and smoothed version, $r_\rho(j)$ (blue).} 
     \label{fig:rate-function}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[t]{0.45\textwidth}
+  \begin{subfigure}[t]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{graphics/poisson.png}
     \caption{Theoretical (orange) and simulated spike rates (blue) as functions of input current.}
     \label{fig:poisson-rate}
   \end{subfigure}
   \hfill
-  \caption{}
+  \begin{subfigure}[t]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graphics/rate-scaling.png}
+    \caption{Scaling of the rate function in the interval $[0; 10]$ to mimic ReLU.}
+    \label{fig:rate-scaling}
+  \end{subfigure}
+  \caption{Plots of smoothed, poisson coded and ReLU-like rate functions, respectively.}
 \end{figure}
 
 
@@ -250,17 +256,6 @@ As SNNs operate on spiking inputs, continuous input variables have to be convert
 \end{equation}
 where $dt$ is the discrete timestep used for simulation. This formulation requires that input variables $x_i$ are normalized to values between 0 and 1 as division with $t_\text{ref}$ maps $1$'s to the maximum spike rate $r_\text{max} = 1 / t_\text{ref}$. Disadvantageously, poission rate coding causes the stochastic signal to contain a relativ large amount of noise in the signal as seen in figure \ref{fig:poisson-rate}.
 
-\subsection{Batch normalization and fusion}
-When training deep neural networks, it is often necessary to normalize the inputs to the network in obtain good results. By normalizing the input variables to the network the gradient of the loss function is more likely to point in the direction of the local minima resulting in more efficient and stable training. According to the authors \cite{ioffe2015batch}, batch normalization has the effect of reducing ``internal covariate shift'' of the networks intermediate representations. As the weights and biases of each layer in the network is updated, the distribution of the internal representations tends to change aswell. This has the effect of slowing down learning and decrease the chance of converging to a good local minima. By normalizing each mini-batch, batch normalization is able to accelerate deep learning by enabling higher learning rates and fewer training steps. Batch normalization work by using a combination of the mean and variance of the current mini-batch and a running mean and variance.
-\begin{equation}
-  123
-\end{equation}
-
-\begin{itemize}
-  \item Write something about batch normalization here and how to fuse it in the weight and bias layers after training. 
-\end{itemize}
-
-
 
 \subsubsection{Low-pass alpha-filter}
 Axons are known from to act as a low-pass filters on the outgoing spikes. Hunsberger and Eliasmith \cite{hunsberger2015spiking} proposes an exponential $\alpha$-filter.
@@ -269,10 +264,58 @@ Axons are known from to act as a low-pass filters on the outgoing spikes. Hunsbe
 \end{equation}
 where $\tau_s$ is some time-constant 
 
-\subsubsection{ANN to SNN conversion}
-How do we convert an ANN to a SNN and run the stuff live?
+\subsection{Batch normalization}
+When training deep neural networks, it is often necessary to normalize the inputs to the network in obtain good results. By normalizing the input variables to the network the gradient of the loss function is more likely to point in the direction of the local minima resulting in more efficient and stable training. According to the authors \cite{ioffe2015batch}, batch normalization has the effect of reducing ``internal covariate shift'' of the networks intermediate representations. As the weights and biases of each layer in the network is updated, the distribution of the internal representations tends to change aswell. This has the effect of slowing down learning and decrease the chance of converging to a good local minima. By normalizing each mini-batch, batch normalization is able to accelerate deep learning by enabling higher learning rates and fewer training steps. Batch normalization works by using a combination of the mean and variance of the current mini-batch and a running mean and variance. At training time, batch normalization standardizes the mini-batch according to
+\begin{equation}
+  \hat{\mathbf{x}}_{i}^{(l)} = \frac{\mathbf{x}^{(l)}_{i}-\mu^{(l)}_{B}}{\sqrt{{\sigma^{2}}^{(l)}_{B}+\epsilon}}
+\end{equation}
+where $\mu_{B}$ is the mean of the batch, $\sigma_{B}^{2}$ is the variance of the batch and $\epsilon$ is some small value for numerical stability (typically $10^{-5}$). Batch norm then outputs an affine transformation using learned parameters $\gamma$ and $\beta$
+\begin{equation}
+  \mathbf{y}_{i} = \gamma \hat{\mathbf{x}}_{i}+\beta \equiv \mathrm{BN}_{\gamma, \beta}\left(\mathbf{x}_{i}\right).
+\end{equation}
+During the training fase, the mean and variance of the dataset is estimated by the means of an exponential moving average
+\begin{equation}
+  \begin{split}
+    \mu_\text{mov} &\leftarrow \alpha \mu_\text{mov} + (1 - \alpha)\mu_{B} \\
+    \sigma^2_\text{mov} &\leftarrow \alpha \sigma^2_\text{mov} + (1 - \alpha)\sigma^2_{B} \\
+  \end{split}
+\end{equation}
+where $\alpha=0.1$ is the default value. At inference time, batch normalization uses the dataset mean and variance estimations and affine scaling and translation parameters to normalize the intermediate representations
+\begin{equation} \label{eq:batch-norm}
+  \mathbf{y}_i = \frac{\gamma}{\sqrt{\sigma^{2}_\text{mov} +\epsilon}} \cdot \mathbf{x}_i +\left(\beta - \frac{\gamma \mu_\text{mov}}{\sqrt{\sigma^{2}_\text{mov}+\epsilon}}\right).
+\end{equation}
+
+
+\subsection{Shadow training spiking neural networks}
+The method of shadow training spiking neural networks amounts to the task of training a standard neural network using back-propagation, incorporating the rate-function of the chosen dynamical neuron model as activation function, whereby a spiking neural network can be constructed with the learned weight and bias parameters. However, doing so is in some cases not always quite as trivial. This section will go into the details of shadow training feedforward neural networks and the tricks for successfully doing so. 
+
+\subsubsection{Activation scaling}
+When training neural networks using the analytical spiking rate as activation function, we found that down-scaling the activation function drastically improved the converge of the network. The reason for this result can be explained by the combination of the Kaiming He initialization of the weights which keeps the variance of the intermediate representations in the network close to $1$ when used in conjunction with ReLU activation. By scaling the rate function with a factor of $0.05$ the rate function and its derivative will more closely mimic that of the ReLU in the interval $[0; 10]$ as seen in figure \ref{fig:rate-scaling}. 
+
+\subsubsection{Rate estimation using alpha-filter}
+
+\subsubsection{Fusing batch normalization}
+In the process of converting shadow trained ANNs to the SNNs, custom modules such as batch normalization layers has to be converted to their spiking counterparts. Fortunately, if used in between the linear layer and activation, it is possible to ``fuse'' batch normalization into the weight and bias paramters of the predecessing linear layer. By replacing $\mathbf{x}_i$ in equation \ref{eq:batch-norm} with the transformation from our linear layer $\mathbf{z}_i^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)}_i  + \mathbf{b}^{(l)}$ 
+\begin{equation}
+    \mathbf{y}_i = \frac{\gamma}{\sqrt{\sigma^{2}_\text{mov} +\epsilon}} \cdot \left( 
+      \mathbf{W}^{(l)} \mathbf{a}^{(l-1)}_i  + \mathbf{b}^{(l)}
+    \right) + \left(\beta - \frac{\gamma \mu_\text{mov}}{\sqrt{\sigma^{2}_\text{mov}+\epsilon}}\right) \\
+\end{equation}
+it is possible to derive the ``fused'' weight and bias, parameters as follows:
+\begin{equation}
+    \overline{\mathbf{W}}^{(l)} = \operatorname{diag} \left( \frac{\gamma}{\sqrt{\sigma^{2}_\text{mov} +\epsilon}} \right) \mathbf{W}^{(l)}, \hspace{10pt} \overline{\mathbf{b}}^{(l)} =  \operatorname{diag} \left( \frac{\gamma}{\sqrt{\sigma^{2}_\text{mov} +\epsilon}} \right) \mathbf{b}^{(l)} + \left(\beta - \frac{\gamma \mu_\text{mov}}{\sqrt{\sigma^{2}_\text{mov}+\epsilon}}\right).
+\end{equation}
+
+
 \subsection{Predictive Coding and Z-IL}
-What is predictive coding? Mention Rao and Ballard. How can they calculate gradients? 
+Predictive coding is theory of perception in the brain where higher-level cortical areas ``explain away'' lower-level visual input and only discrepancies hereof or errors are propagated up. The theory sparked great interest in the neuroscientific community when Rao and Ballard published their seminal 1999 paper \cite{raoballard1999} showing how hierarchial predictive coding models were able explain neurological phenomenon like endstopping and other extra-classical receptive field effects where the surroundings modulate the response of a receptive field.
+
+
+\begin{itemize}
+  \item What is predictive coding? Mention Rao and Ballard. 
+  \item How can they calculate gradients? 
+\end{itemize}
+
 \subsubsection{Equivalence to back-prop}
 Quote paper on backprop. 
 

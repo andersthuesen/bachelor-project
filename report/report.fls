@@ -654,6 +654,11 @@ INPUT ./graphics/poisson.png
 INPUT graphics/poisson.png
 INPUT ./graphics/poisson.png
 INPUT ./graphics/poisson.png
+INPUT ./graphics/rate-scaling.png
+INPUT ./graphics/rate-scaling.png
+INPUT graphics/rate-scaling.png
+INPUT ./graphics/rate-scaling.png
+INPUT ./graphics/rate-scaling.png
 INPUT ./report.bbl
 INPUT report.bbl
 INPUT ./report.bbl

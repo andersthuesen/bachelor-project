@@ -58,24 +58,31 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Leaky-Integrate-and-Fire neurons}{7}{subsubsection.3.3.2}\protected@file@percent }
 \citation{Eric2018}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Poisson rate coding}{8}{subsubsection.3.3.3}\protected@file@percent }
-\citation{ioffe2015batch}
 \citation{hunsberger2015spiking}
+\citation{ioffe2015batch}
 \newlabel{fig:rate-function}{{3a}{9}{Interleaved plot of original rate function, $r(j)$ (orange), and smoothed version, $r_\rho (j)$ (blue).\relax }{figure.caption.5}{}}
 \newlabel{sub@fig:rate-function}{{a}{9}{Interleaved plot of original rate function, $r(j)$ (orange), and smoothed version, $r_\rho (j)$ (blue).\relax }{figure.caption.5}{}}
 \newlabel{fig:poisson-rate}{{3b}{9}{Theoretical (orange) and simulated spike rates (blue) as functions of input current.\relax }{figure.caption.5}{}}
 \newlabel{sub@fig:poisson-rate}{{b}{9}{Theoretical (orange) and simulated spike rates (blue) as functions of input current.\relax }{figure.caption.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \relax }}{9}{figure.caption.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Batch normalization and fusion}{9}{subsection.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Low-pass alpha-filter}{9}{subsubsection.3.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}ANN to SNN conversion}{9}{subsubsection.3.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Predictive Coding and Z-IL}{10}{subsection.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Equivalence to back-prop}{10}{subsubsection.3.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Variational free energy}{10}{subsubsection.3.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Variational Inference}{10}{subsection.3.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Energy Based Models}{10}{subsection.3.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{10}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{10}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{10}{section.6}\protected@file@percent }
+\newlabel{fig:rate-scaling}{{3c}{9}{Scaling of the rate function in the interval $[0; 10]$ to mimic ReLU.\relax }{figure.caption.5}{}}
+\newlabel{sub@fig:rate-scaling}{{c}{9}{Scaling of the rate function in the interval $[0; 10]$ to mimic ReLU.\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Plots of smoothed, poisson coded and ReLU-like rate functions, respectively.\relax }}{9}{figure.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Low-pass alpha-filter}{9}{subsubsection.3.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Batch normalization}{9}{subsection.3.4}\protected@file@percent }
+\citation{raoballard1999}
+\newlabel{eq:batch-norm}{{15}{10}{Batch normalization}{equation.3.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Shadow training spiking neural networks}{10}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Activation scaling}{10}{subsubsection.3.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Rate estimation using alpha-filter}{10}{subsubsection.3.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Fusing batch normalization}{10}{subsubsection.3.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Predictive Coding and Z-IL}{11}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.1}Equivalence to back-prop}{11}{subsubsection.3.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.2}Variational free energy}{11}{subsubsection.3.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Variational Inference}{11}{subsection.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Energy Based Models}{11}{subsection.3.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{11}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{11}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{11}{section.6}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{refs}
 \bibcite{BengioLBL15}{1}
@@ -90,6 +97,7 @@
 \bibcite{ioffe2015batch}{10}
 \bibcite{mnist}{11}
 \bibcite{noekland2016direct}{12}
-\bibcite{rumelhart1986learning}{13}
-\bibcite{PredictiveCodingNetworks}{14}
-\gdef \@abspage@last{13}
+\bibcite{raoballard1999}{13}
+\bibcite{rumelhart1986learning}{14}
+\bibcite{PredictiveCodingNetworks}{15}
+\gdef \@abspage@last{14}
