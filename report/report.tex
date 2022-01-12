@@ -307,16 +307,43 @@ it is possible to derive the ``fused'' weight and bias, parameters as follows:
 \end{equation}
 
 
-\subsection{Predictive Coding and Z-IL}
-Predictive coding is theory of perception in the brain where higher-level cortical areas ``explain away'' lower-level visual input and only discrepancies hereof or errors are propagated up. The theory sparked great interest in the neuroscientific community when Rao and Ballard published their seminal 1999 paper \cite{raoballard1999} showing how hierarchial predictive coding models were able explain neurological phenomenon like endstopping and other extra-classical receptive field effects where the surroundings modulate the response of a receptive field.
+\subsection{Predictive Coding}
+Predictive coding is hierarchial theory of perception in the brain where higher level cortical areas ``explain away'' lower-level visual input and only discrepancies hereof are propagated up for further processing. The theory sparked great interest in the neuroscientific community when Rao and Ballard published their seminal 1999 paper \cite{raoballard1999} showing how hierarchial predictive coding models were able explain neurological phenomenon like endstopping and other extra-classical receptive field effects where the surroundings modulate the response of a receptive field. In the predictive coding theory, the brain is seen as a generative model, able to restore the visual input of the retina by modelling the three dimensional structure of the world. This could also be formulated as inferring the underlaying hidden state of the world, $s_i$, causing the sensations, $o_i$, by modelling $p(o_i | s_i)$. Hence, predictive coding share core ideas with the bayesian brain theory. Though predictive coding was originally only ment to explain the perception, it has been suggested as unifying theory of the brain \cite{millidge2021predictive}. This section will focus on the correspondance between a special instance of predictive coding dubbed zero inference-learning (Z-IL) where the minimization of error units is equivalent to back-propagation as shown by Song et al \cite{PredictiveCodingNetworks}.
+
+\subsubsection{Predictive coding networks and inference learning}
+\begin{figure}
+  \centering
+  \includegraphics[width=300pt]{graphics/predictive-coding-network.pdf}
+  \caption{Predictive coding network with 2 input nodes, 3 hidden nodes and 2 output nodes.}
+  \label{fig:predictive-coding-network}
+\end{figure}
+Predictive coding networks are very similar to feedforward neural networks but include error nodes, $\epsilon_{i,t}^{(l)}$, between value nodes (as illustrated in figure \ref{fig:predictive-coding-network}) that encode the difference between the value node and its prediction, $u_i^{(l)}$:
+\begin{equation}
+  \mathbf{\epsilon}_t^{(l)} = \mathbf{x}_t^{(l)} - \mathbf{u}_t^{(l)},\hspace{10pt}  \mathbf{u}_t^{(l)} = \mathbf{W}^{(l)} \sigma(\mathbf{x}_t^{(l-1)}) + \mathbf{b}^{(l)}
+\end{equation}
+ Inference learning (IL) is a particular algorithm introduced by Song et al. \cite{PredictiveCodingNetworks} that is able to learn the parameters of predictive coding networks for both supervised and un-supervised learning tasks. The algorithm runs in two phases; an inference phase and a learning phase. To train the network supervised, the input and target nodes are clamped to the input and target variables that the network should learn a mapping between. Then in the inference phase, value nodes are inferred such that they minimize the total free energy of the network:
+\begin{equation}
+  F = \sum_{l=2}^{L}{
+    {\mathbf{\epsilon}^{(l)}}^T\mathbf{\epsilon}^{(l)}.
+  }
+\end{equation}
+To minimize the error nodes, the value nodes are updating according to the following rules;
+\begin{equation} \label{eq:update-value-nodes}
+  \Delta \mathbf{x}_t^{(l)} = \begin{cases}
+    0 & \text{if } l=1 \\
+    \gamma \cdot \left( -\mathbf{\epsilon}_t^{(l)} + \sigma^\prime(\mathbf{x}_t^{(l)}) \left( \mathbf{\epsilon}_t^{(l+1)} \mathbf{W}^{(l+1)} \right) \right) & \text{if } l = 2 \ldots L-1 \\
+    \gamma \cdot \left( - \mathbf{\epsilon}_t^{(l)} \right) & \text {if } l = L \text{ during prediction} \\
+    0 & \text {if } l = L \text{ during learning}
+  \end{cases}
+\end{equation}
+where $\gamma$ is the integration step size. Once value nodes have converged to an equilibrium at time $t=T$, the parameters are updated to yet again minimize the free energy:
+\begin{equation}
+  \Delta \mathbf{W}^{(l)} = -\alpha \epsilon_T^{(l+1)} \sigma(\mathbf{x}_T^{(l)})
+\end{equation}
+A possible source of confusion when coming from feedforward neural networks is that predictive coding networks do not propagate activity directly from value node to value node. Instead, value nodes should be considered free variables that are updated according to equation \ref{eq:update-value-nodes}.
 
 
-\begin{itemize}
-  \item What is predictive coding? Mention Rao and Ballard. 
-  \item How can they calculate gradients? 
-\end{itemize}
-
-\subsubsection{Equivalence to back-prop}
+\subsubsection{ Z-IL and equivalence to back-prop}
 Quote paper on backprop. 
 
 \subsubsection{Variational free energy}

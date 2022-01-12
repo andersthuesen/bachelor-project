@@ -659,6 +659,11 @@ INPUT ./graphics/rate-scaling.png
 INPUT graphics/rate-scaling.png
 INPUT ./graphics/rate-scaling.png
 INPUT ./graphics/rate-scaling.png
+INPUT ./graphics/predictive-coding-network.pdf
+INPUT ./graphics/predictive-coding-network.pdf
+INPUT graphics/predictive-coding-network.pdf
+INPUT ./graphics/predictive-coding-network.pdf
+INPUT ./graphics/predictive-coding-network.pdf
 INPUT ./report.bbl
 INPUT report.bbl
 INPUT ./report.bbl

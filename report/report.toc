@@ -20,11 +20,12 @@
 \contentsline {subsubsection}{\numberline {3.5.1}Activation scaling}{10}{subsubsection.3.5.1}%
 \contentsline {subsubsection}{\numberline {3.5.2}Rate estimation using alpha-filter}{10}{subsubsection.3.5.2}%
 \contentsline {subsubsection}{\numberline {3.5.3}Fusing batch normalization}{10}{subsubsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.6}Predictive Coding and Z-IL}{11}{subsection.3.6}%
-\contentsline {subsubsection}{\numberline {3.6.1}Equivalence to back-prop}{11}{subsubsection.3.6.1}%
-\contentsline {subsubsection}{\numberline {3.6.2}Variational free energy}{11}{subsubsection.3.6.2}%
-\contentsline {subsection}{\numberline {3.7}Variational Inference}{11}{subsection.3.7}%
-\contentsline {subsection}{\numberline {3.8}Energy Based Models}{11}{subsection.3.8}%
-\contentsline {section}{\numberline {4}Results}{11}{section.4}%
-\contentsline {section}{\numberline {5}Discussion}{11}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion}{11}{section.6}%
+\contentsline {subsection}{\numberline {3.6}Predictive Coding}{11}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Predictive coding networks and inference learning}{11}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2} Z-IL and equivalence to back-prop}{12}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Variational free energy}{12}{subsubsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.7}Variational Inference}{12}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Energy Based Models}{12}{subsection.3.8}%
+\contentsline {section}{\numberline {4}Results}{12}{section.4}%
+\contentsline {section}{\numberline {5}Discussion}{12}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion}{12}{section.6}%

@@ -60,6 +60,10 @@ Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
 \newblock Gradient-based learning applied to document recognition.
 \newblock {\em Proceedings of the IEEE}, 86(11):2278--2324, 1998.
 
+\bibitem{millidge2021predictive}
+Beren Millidge, Anil Seth, and Christopher~L Buckley.
+\newblock Predictive coding: a theoretical and experimental review, 2021.
+
 \bibitem{noekland2016direct}
 Arild Nøkland.
 \newblock Direct feedback alignment provides learning in deep neural networks,
