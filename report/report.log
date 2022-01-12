@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.11.4)  12 JAN 2022 17:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.11.4)  12 JAN 2022 22:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -360,7 +360,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout4 = `report.toc'.
 
  [2]
-<graphics/mnist.png, id=179, 1414.28375pt x 553.06625pt>
+<graphics/mnist.png, id=189, 1414.28375pt x 553.06625pt>
 File: graphics/mnist.png Graphic file (type png)
 <use graphics/mnist.png>
 Package pdftex.def Info: graphics/mnist.png  used on input line 55.
@@ -373,58 +373,58 @@ l.59
 <to be read again> 
                    \relax 
 l.71 
-      [2 <./graphics/mnist.png>] [3] [4]
-<graphics/bio-neuron.png, id=228, 2509.375pt x 1618.045pt>
+      [2 <./graphics/mnist.png>] [3] [4] [5]
+<graphics/bio-neuron.png, id=249, 2509.375pt x 1618.045pt>
 File: graphics/bio-neuron.png Graphic file (type png)
 <use graphics/bio-neuron.png>
-Package pdftex.def Info: graphics/bio-neuron.png  used on input line 154.
+Package pdftex.def Info: graphics/bio-neuron.png  used on input line 175.
 (pdftex.def)             Requested size: 220.0pt x 141.84029pt.
- [5 <./graphics/bio-neuron.png>] [6] [7]
-<graphics/smooth-rate.png, id=270, 387.4475pt x 266.9975pt>
+ [6 <./graphics/bio-neuron.png>] [7] [8]
+<graphics/smooth-rate.png, id=292, 387.4475pt x 266.9975pt>
 File: graphics/smooth-rate.png Graphic file (type png)
 <use graphics/smooth-rate.png>
-Package pdftex.def Info: graphics/smooth-rate.png  used on input line 229.
+Package pdftex.def Info: graphics/smooth-rate.png  used on input line 252.
 (pdftex.def)             Requested size: 138.76157pt x 95.62198pt.
-<graphics/poisson.png, id=271, 394.47375pt x 266.9975pt>
+<graphics/poisson.png, id=293, 394.47375pt x 266.9975pt>
 File: graphics/poisson.png Graphic file (type png)
 <use graphics/poisson.png>
-Package pdftex.def Info: graphics/poisson.png  used on input line 236.
+Package pdftex.def Info: graphics/poisson.png  used on input line 259.
 (pdftex.def)             Requested size: 138.76157pt x 93.91902pt.
 
-Underfull \hbox (badness 1817) in paragraph at lines 237--237
+Underfull \hbox (badness 1817) in paragraph at lines 260--260
 []\OT1/cmr/m/n/10 (b) |The-o-ret-i-cal (or-ange) and
  []
 
-<graphics/rate-scaling.png, id=272, 383.4325pt x 262.9825pt>
+<graphics/rate-scaling.png, id=294, 383.4325pt x 262.9825pt>
 File: graphics/rate-scaling.png Graphic file (type png)
 <use graphics/rate-scaling.png>
-Package pdftex.def Info: graphics/rate-scaling.png  used on input line 243.
+Package pdftex.def Info: graphics/rate-scaling.png  used on input line 266.
 (pdftex.def)             Requested size: 138.76157pt x 95.1712pt.
-[8] [9 <./graphics/smooth-rate.png> <./graphics/poisson.png> <./graphics/rate-scaling.png>] [10]
+[9 <./graphics/smooth-rate.png> <./graphics/poisson.png> <./graphics/rate-scaling.png>] [10]
 
 pdfTeX warning: pdflatex (file ./graphics/predictive-coding-network.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<graphics/predictive-coding-network.pdf, id=313, 391.4625pt x 171.64125pt>
+<graphics/predictive-coding-network.pdf, id=323, 391.4625pt x 171.64125pt>
 File: graphics/predictive-coding-network.pdf Graphic file (type pdf)
 <use graphics/predictive-coding-network.pdf>
-Package pdftex.def Info: graphics/predictive-coding-network.pdf  used on input line 316.
+Package pdftex.def Info: graphics/predictive-coding-network.pdf  used on input line 322.
 (pdftex.def)             Requested size: 300.0pt x 131.54605pt.
-[11 <./graphics/predictive-coding-network.pdf>] [12] (./report.bbl [13]) [14] (./report.aux)
+[11] [12 <./graphics/predictive-coding-network.pdf>] [13] (./report.bbl [14]) [15] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 04E0E075D17574C5ACAA99024CCD5E9B;5499.
+(rerunfilecheck)             Checksum: 1D02423FADEC5D4F1192EC0579110126;5917.
  ) 
 Here is how much of TeX's memory you used:
- 10446 strings out of 480445
- 160138 string characters out of 5892391
- 469778 words of memory out of 5000000
- 27475 multiletter control sequences out of 15000+600000
+ 10452 strings out of 480445
+ 160242 string characters out of 5892391
+ 469825 words of memory out of 5000000
+ 27478 multiletter control sequences out of 15000+600000
  416929 words of font info for 78 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  71i,23n,74p,2103b,515s stack positions out of 5000i,500n,10000p,200000b,80000s
  </Users/anders/Library/texlive/2021basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on report.pdf (16 pages, 1744983 bytes).
+Output written on report.pdf (17 pages, 1747351 bytes).
 PDF statistics:
- 534 PDF objects out of 1000 (max. 8388607)
- 429 compressed objects within 5 object streams
- 97 named destinations out of 1000 (max. 500000)
- 279 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 549 PDF objects out of 1000 (max. 8388607)
+ 443 compressed objects within 5 object streams
+ 100 named destinations out of 1000 (max. 500000)
+ 295 words of extra memory for PDF output out of 10000 (max. 10000000)
 

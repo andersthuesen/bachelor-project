@@ -6,26 +6,28 @@
 \contentsline {subsection}{\numberline {2.1}Dataset}{2}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Feedforward neural networks}{2}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Back-propagation}{3}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Biologically plausible deep learning}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Biological neurons}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {2.4}Batch normalization}{4}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Biologically plausible deep learning}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Biological neurons}{5}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Biological constraints}{6}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Biological violations of backprop and deep learning}{6}{subsubsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.3}Spiking neural networks}{7}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Training spiking neural networks}{7}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Leaky-Integrate-and-Fire neurons}{7}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Poisson rate coding}{8}{subsubsection.3.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.4}Low-pass alpha-filter}{9}{subsubsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.4}Batch normalization}{9}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Shadow training spiking neural networks}{10}{subsection.3.5}%
-\contentsline {subsubsection}{\numberline {3.5.1}Activation scaling}{10}{subsubsection.3.5.1}%
-\contentsline {subsubsection}{\numberline {3.5.2}Rate estimation using alpha-filter}{10}{subsubsection.3.5.2}%
-\contentsline {subsubsection}{\numberline {3.5.3}Fusing batch normalization}{10}{subsubsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.6}Predictive Coding}{11}{subsection.3.6}%
-\contentsline {subsubsection}{\numberline {3.6.1}Predictive coding networks and inference learning}{11}{subsubsection.3.6.1}%
-\contentsline {subsubsection}{\numberline {3.6.2} Z-IL and equivalence to back-prop}{12}{subsubsection.3.6.2}%
-\contentsline {subsubsection}{\numberline {3.6.3}Variational free energy}{12}{subsubsection.3.6.3}%
-\contentsline {subsection}{\numberline {3.7}Variational Inference}{12}{subsection.3.7}%
-\contentsline {subsection}{\numberline {3.8}Energy Based Models}{12}{subsection.3.8}%
-\contentsline {section}{\numberline {4}Results}{12}{section.4}%
-\contentsline {section}{\numberline {5}Discussion}{12}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion}{12}{section.6}%
+\contentsline {subsubsection}{\numberline {3.2.1}Biological violations of backprop and deep learning}{7}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.3}Spiking neural networks}{8}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Training spiking neural networks}{8}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Leaky-Integrate-and-Fire neurons}{8}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Poisson rate coding}{9}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Low-pass alpha-filter}{10}{subsubsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.4}Shadow training spiking neural networks}{10}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Activation scaling}{10}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Rate estimation using alpha-filter}{10}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Fusing batch normalization}{10}{subsubsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.4}Testing spiking neural networks}{11}{subsubsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.5}Predictive Coding}{11}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Predictive coding networks and inference learning}{11}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2} Z-IL and equivalence to back-prop}{13}{subsubsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.3}Biological plausability}{13}{subsubsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.4}Variational free energy}{13}{subsubsection.3.5.4}%
+\contentsline {subsection}{\numberline {3.6}Variational Inference}{13}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Energy Based Models}{13}{subsection.3.7}%
+\contentsline {section}{\numberline {4}Results}{13}{section.4}%
+\contentsline {section}{\numberline {5}Discussion}{13}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion}{13}{section.6}%
