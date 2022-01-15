@@ -117,11 +117,11 @@ whose factors can be divided into the error term, $\delta^{(L)}$, and activation
 \end{split}
 \end{equation}
 Though the derivation above only considers $\mathbf{W}^{(L)}$ and $\mathbf{W}^{(L-1)}$ it is the general case that
-\begin{align} \label{eq:delta-terms}
+\begin{equation} \label{eq:delta-terms}
   \delta^{(L)} = \mathcal{L}^\prime (\hat{\mathbf{y}}_i) \sigma^\prime(\mathbf{z}^{(L)}), 
   \hspace{10pt}
   \delta^{(l)} =  \delta^{(l+1)}\mathbf{W}^{(l+1)}\sigma^\prime(\mathbf{z}^{(l)})
-\end{align}
+\end{equation}
 which can be computed using a dynamic programming approach to update the weight parameters using gradient descent with learning rate $\alpha$:
 \begin{equation} \label{eq:weight-update}
   \mathbf{W}^{(l)} = \mathbf{W}^{(l)} -\alpha \delta^{(l)} \mathbf{a}^{(l-1)}.
@@ -335,24 +335,30 @@ Predictive coding networks are very similar to feedforward neural networks but i
 \end{equation}
 To minimize the error nodes, the value nodes are updating according to the following rules;
 \begin{equation} \label{eq:update-value-nodes}
-  \Delta \mathbf{x}_t^{(l)} = \begin{cases}
+  \dot{\mathbf{x}}_t^{(l)} = \begin{cases}
     0 & \text{if } l=1 \\
-    \gamma \cdot \left( -\mathbf{\epsilon}_t^{(l)} + \sigma^\prime(\mathbf{x}_t^{(l)}) \left( \mathbf{\epsilon}_t^{(l+1)} \mathbf{W}^{(l+1)} \right) \right) & \text{if } l = 2 \ldots L-1 \\
-    \gamma \cdot \left( - \mathbf{\epsilon}_t^{(l)} \right) & \text {if } l = L \text{ during prediction} \\
+     -\mathbf{\epsilon}_t^{(l)} + \sigma^\prime(\mathbf{x}_t^{(l)}) ( \mathbf{\epsilon}_t^{(l+1)} \mathbf{W}^{(l+1)} )  & \text{if } l = 2 \ldots L-1 \\
+    - \mathbf{\epsilon}_t^{(l)} & \text {if } l = L \text{ during prediction} \\
     0 & \text {if } l = L \text{ during learning}
   \end{cases}
 \end{equation}
-where $\gamma$ is the integration step size. Once value nodes have converged to an equilibrium at time $t=T$, the parameters are updated to yet again minimize the free energy:
-\begin{equation}
+using Eulers method such that $\mathbf{x}_{t+1}^{(l)} = \mathbf{x}_{t}^{(l)} + \gamma \dot{\mathbf{x}}_t^{(l)}$ where $\gamma$ is the integration step size. Once value nodes have converged to an equilibrium at time $t=T$, the parameters are updated to yet again minimize the free energy:
+\begin{equation} \label{eq:il-weight-update}
   \Delta \mathbf{W}^{(l)} = -\alpha \epsilon_T^{(l+1)} \sigma(\mathbf{x}_T^{(l)})
 \end{equation}
-A possible source of confusion when coming from feedforward neural networks is that predictive coding networks do not propagate activity directly from value node to value node. Instead, value nodes should be considered free variables that are updated according to equation \ref{eq:update-value-nodes}.
+where $\alpha$ is the learning rate. A possible source of confusion when coming from feedforward neural networks is that predictive coding networks do not propagate activity directly from value node to value node. Instead, value nodes should be considered free variables that are updated according to equation \ref{eq:update-value-nodes}. Interestingly, after the inference phase comes to an equilibrium where $\dot{\mathbf{x}}_T^{(l)} = 0$ and all error nodes become zero, the value nodes will correspond to the activity of the neurons in forward prediction of an classic ANN; $0 = \epsilon_{T}^{(l)}=\mathbf{x}_{T}^{(l)}-\mathbf{u}_{T}^{(l)}  \Rightarrow \mathbf{x}_{T}^{(l)} = \mathbf{u}_{T}^{(l)}$, if only the input node is clamped. Even more intriguing is the fact that the error nodes will become approximately equal to the error terms in the back-propagation algorithm (equation \ref{eq:delta-terms}) when both input and output nodes are clamped 
+\begin{equation}
+    \mathbf{\epsilon}_T^{(L-1)} = \sigma^{\prime}(\mathbf{x}_{T}^{(L-1)})\left(\mathbf{x}_{T}^{(L)} - \mathbf{u}_T^{(L)} \right), \hspace{10pt} \mathbf{\epsilon}_T^{(l)} = \sigma^{\prime}(\mathbf{x}_{T}^{(l)})\left(\epsilon_{T}^{(l+1)} \mathbf{W}^{(l+1)}\right).
+\end{equation}
+Here, $\mathbf{x}_{T}^{(L)} - \mathbf{u}_T^{(L)}$ is the derivative of the squared loss $\mathcal{L}(y, \hat{y}) = \frac{1}{2}\left( y - \hat{y}  \right)^2$. 
 
-\newpage
+\subsubsection{Z-IL and equivalence to back-propagation}
+Song et al. takes this a step further by showing that a special variant of inference learning, zero-divergence inference learning (Z-IL) gives rise to the exact same weight updates as the back-propagation algorithm \cite{PredictiveCodingNetworks}. They show this by first assuming that every value node, $x_{i,t}^{(l)}$ and prediction $u_{i,t}^{(l)}$ is equal to the corresponding forward activity of the equivalent ANN, after which the integration step size $\gamma$ is set to 1 and weights are scheduled to be updated according to equation \ref{eq:il-weight-update} at time $t=l$. 
 
-
-\subsubsection{ Z-IL and equivalence to back-prop}
-Quote paper on backprop. 
+\begin{itemize}
+  \item Talk about how predictive coding takes the total network error into account when updating the weights. 
+  \item Backprop does not but is probably more efficient to compute. Is there any examples of weights that can be learned by predictive coding, but not backprop? Maybe backprop will be able to learn those, but with a much smaller learning rate since predictive coding takes this into account in the inference phase. 
+\end{itemize}
 
 \subsubsection{Biological plausability}
 \begin{itemize}
