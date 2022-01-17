@@ -28,6 +28,12 @@ Jason~K Eshraghian, Max Ward, Emre Neftci, Xinxin Wang, Gregor Lenz, Girish
 \newblock Training spiking neural networks using lessons from deep learning.
 \newblock {\em arXiv preprint arXiv:2109.12894}, 2021.
 
+\bibitem{Goodfellow-et-al-2016}
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
+\newblock {\em Deep Learning}.
+\newblock MIT Press, 2016.
+\newblock \url{http://www.deeplearningbook.org}.
+
 \bibitem{he2015delving}
 Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
 \newblock Delving deep into rectifiers: Surpassing human-level performance on

@@ -668,6 +668,7 @@ INPUT ./report.bbl
 INPUT report.bbl
 INPUT ./report.bbl
 INPUT report.bbl
+INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT report.aux
 INPUT ./report.out
 INPUT ./report.out
@@ -689,4 +690,5 @@ INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
+INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

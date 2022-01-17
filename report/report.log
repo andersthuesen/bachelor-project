@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.11.4)  13 JAN 2022 17:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.11.4)  17 JAN 2022 17:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -255,24 +255,24 @@ File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
 ) (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -327,7 +327,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2021basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 21.
+Package hyperref Info: Link coloring OFF on input line 22.
  (/usr/local/texlive/2021basic/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/local/texlive/2021basic/texmf-dist/tex/latex/refcount/refcount.sty
@@ -337,20 +337,20 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count289
 )
-LaTeX Info: Redefining \ref on input line 21.
-LaTeX Info: Redefining \pageref on input line 21.
-LaTeX Info: Redefining \nameref on input line 21.
+LaTeX Info: Redefining \ref on input line 22.
+LaTeX Info: Redefining \pageref on input line 22.
+LaTeX Info: Redefining \nameref on input line 22.
  (./report.out) (./report.out)
 \@outlinefile=\write3
 \openout3 = `report.out'.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 23.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 24.
  (/usr/local/texlive/2021basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 23.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 24.
  (/usr/local/texlive/2021basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -359,72 +359,72 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write4
 \openout4 = `report.toc'.
 
- [2]
-<graphics/mnist.png, id=189, 1414.28375pt x 553.06625pt>
+ [2]pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.67 \begin{equation}
+                      [1]
+<graphics/mnist.png, id=231, 1414.28375pt x 553.06625pt>
 File: graphics/mnist.png Graphic file (type png)
 <use graphics/mnist.png>
-Package pdftex.def Info: graphics/mnist.png  used on input line 55.
+Package pdftex.def Info: graphics/mnist.png  used on input line 96.
 (pdftex.def)             Requested size: 280.0pt x 109.49733pt.
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.59 
-      [1]pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.71 
-      [2 <./graphics/mnist.png>] [3] [4] [5]
-<graphics/bio-neuron.png, id=249, 2509.375pt x 1618.045pt>
+l.100 
+       [2] [3 <./graphics/mnist.png>] [4] [5] [6]
+<graphics/bio-neuron.png, id=297, 2509.375pt x 1618.045pt>
 File: graphics/bio-neuron.png Graphic file (type png)
 <use graphics/bio-neuron.png>
-Package pdftex.def Info: graphics/bio-neuron.png  used on input line 175.
+Package pdftex.def Info: graphics/bio-neuron.png  used on input line 251.
 (pdftex.def)             Requested size: 220.0pt x 141.84029pt.
- [6 <./graphics/bio-neuron.png>] [7] [8]
-<graphics/smooth-rate.png, id=292, 387.4475pt x 266.9975pt>
+ [7] [8 <./graphics/bio-neuron.png>] [9] [10]
+<graphics/smooth-rate.png, id=345, 387.4475pt x 266.9975pt>
 File: graphics/smooth-rate.png Graphic file (type png)
 <use graphics/smooth-rate.png>
-Package pdftex.def Info: graphics/smooth-rate.png  used on input line 252.
+Package pdftex.def Info: graphics/smooth-rate.png  used on input line 328.
 (pdftex.def)             Requested size: 138.76157pt x 95.62198pt.
-<graphics/poisson.png, id=293, 394.47375pt x 266.9975pt>
+<graphics/poisson.png, id=346, 394.47375pt x 266.9975pt>
 File: graphics/poisson.png Graphic file (type png)
 <use graphics/poisson.png>
-Package pdftex.def Info: graphics/poisson.png  used on input line 259.
+Package pdftex.def Info: graphics/poisson.png  used on input line 335.
 (pdftex.def)             Requested size: 138.76157pt x 93.91902pt.
 
-Underfull \hbox (badness 1817) in paragraph at lines 260--260
+Underfull \hbox (badness 1817) in paragraph at lines 336--336
 []\OT1/cmr/m/n/10 (b) |The-o-ret-i-cal (or-ange) and
  []
 
-<graphics/rate-scaling.png, id=294, 383.4325pt x 262.9825pt>
+<graphics/rate-scaling.png, id=347, 383.4325pt x 262.9825pt>
 File: graphics/rate-scaling.png Graphic file (type png)
 <use graphics/rate-scaling.png>
-Package pdftex.def Info: graphics/rate-scaling.png  used on input line 266.
+Package pdftex.def Info: graphics/rate-scaling.png  used on input line 342.
 (pdftex.def)             Requested size: 138.76157pt x 95.1712pt.
-[9 <./graphics/smooth-rate.png> <./graphics/poisson.png> <./graphics/rate-scaling.png>] [10]
+[11 <./graphics/smooth-rate.png> <./graphics/poisson.png> <./graphics/rate-scaling.png>] [12]
 
 pdfTeX warning: pdflatex (file ./graphics/predictive-coding-network.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<graphics/predictive-coding-network.pdf, id=323, 391.4625pt x 171.64125pt>
+<graphics/predictive-coding-network.pdf, id=376, 391.4625pt x 171.64125pt>
 File: graphics/predictive-coding-network.pdf Graphic file (type pdf)
 <use graphics/predictive-coding-network.pdf>
-Package pdftex.def Info: graphics/predictive-coding-network.pdf  used on input line 322.
+Package pdftex.def Info: graphics/predictive-coding-network.pdf  used on input line 398.
 (pdftex.def)             Requested size: 300.0pt x 131.54605pt.
-[11] [12 <./graphics/predictive-coding-network.pdf>] [13] (./report.bbl [14]) [15] (./report.aux)
+[13] [14 <./graphics/predictive-coding-network.pdf>] [15] (./report.bbl [16]) [17] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: A7E770D4E542AA4B641D0B8DBFECF9A5;5944.
+(rerunfilecheck)             Checksum: CBAC7F8DCBF9D25EA794627B1A22BA09;7464.
  ) 
 Here is how much of TeX's memory you used:
- 10454 strings out of 480445
- 160276 string characters out of 5892391
- 469903 words of memory out of 5000000
- 27479 multiletter control sequences out of 15000+600000
- 416929 words of font info for 78 fonts, out of 8000000 for 9000
+ 10483 strings out of 480445
+ 160717 string characters out of 5892391
+ 469975 words of memory out of 5000000
+ 27490 multiletter control sequences out of 15000+600000
+ 417097 words of font info for 79 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 71i,23n,74p,2103b,515s stack positions out of 5000i,500n,10000p,200000b,80000s
- </Users/anders/Library/texlive/2021basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on report.pdf (17 pages, 1750065 bytes).
+ 71i,23n,74p,2095b,515s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </Users/anders/Library/texlive/2021basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on report.pdf (19 pages, 1775271 bytes).
 PDF statistics:
- 553 PDF objects out of 1000 (max. 8388607)
- 447 compressed objects within 5 object streams
- 101 named destinations out of 1000 (max. 500000)
- 295 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 617 PDF objects out of 1000 (max. 8388607)
+ 507 compressed objects within 6 object streams
+ 118 named destinations out of 1000 (max. 500000)
+ 351 words of extra memory for PDF output out of 10000 (max. 10000000)
 
