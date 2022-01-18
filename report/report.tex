@@ -236,11 +236,11 @@ in order to finally reveal:
 \begin{equation}
   \frac{\partial s_i}{\partial z_j} = s_i \cdot \left( 1\{ i = j \} - s_j \right).
 \end{equation}
-If one now considers the partial derivative of the cross-entropy function:
+We will now consider the partial derivative of the cross-entropy function:
 \begin{equation}
   \frac{\partial}{\partial z_j} H(p, q) = - \sum_{i=1}^{K} y_{i} \cdot \frac{\partial}{\partial z_j} \log s_i
 \end{equation}
-and substitutes in $\frac{\partial}{\partial z_j} \log s_i$ from equation \ref{eq:partial-log-softmax} to get:
+and substitute in $\frac{\partial}{\partial z_j} \log s_i$ from equation \ref{eq:partial-log-softmax} to get:
 \begin{equation}
   = - \sum_{i=1}^{K} y_{i} \cdot \left( 1\{ i = j \} - s_j \right)
 \end{equation}
@@ -256,7 +256,7 @@ and as $s_j$ does not depend on $i$, it can be pulled out of the sum:
 \begin{equation}
   = s_j \sum_{i=1}^{K}{ y_{i} } - y_{j}.
 \end{equation}
-Finally, since $y_i$ sums to 1, the partial derivative becomes:
+Finally, since $y_i$ sums to 1, the partial derivative of the cross-entropy wrt. $z_j$ becomes:
 \begin{equation}
   \frac{\partial}{\partial z_j} H(p, q) = s_j - y_j.
 \end{equation}
