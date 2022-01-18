@@ -2,8 +2,8 @@
 \usepackage[a4paper, total={6in, 9in}]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
-\usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -76,16 +76,18 @@ where the goal is to find the optimal set of model parameters (maximum likelihoo
   \mathcal{L}_\theta(\mathbf{Y} \mid \mathbf{X}) = \prod_{i=1}^{N}{P_\theta(y_i \mid x_i)}
 \end{equation}
 where $\mathbf{Y} = (y_i, \ldots, y_N)$. The MLE task is then to find $\theta^\star = \argmax_{\theta} \hspace{5pt} \mathcal{L}_\theta(\mathbf{Y} | \mathbf{X})$. Often, it is easier to instead minimize the negative log-probability as taking the logarithm of a product yields a sum of logs:
-\begin{equation}
+\begin{equation} \label{eq:negative-log-likelihood}
   -\log \mathcal{L}_{\theta}(\mathbf{Y} \mid \mathbf{X}) = -\sum_{i=1}^{N} \log P_{\theta}\left(y_{i} \mid x_{i}\right).
 \end{equation}
 As the logarithm is a monotonic increasing function, minimizing the log-probability is essentially the same as maximizing the probability itself. By assuming that $\mathbf{Y}$ follows a Gaussian distribution $P_{\theta}(\mathbf{Y} \mid \mathbf{X}) = \mathcal{N}(\hat{\mathbf{Y}}(\mathbf{X}), \sigma)$ with a mean of $\hat{\mathbf{Y}}$ and a fixed variance of $\sigma^2$ the log likelihood function can be written as:
 \begin{equation}
-  -\log \mathcal{L}_{\theta}(\mathbf{Y} \mid \mathbf{X})= -\sum_{i=1}^{N} \log \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(y_i - \hat{y}_i)^{2}}{2 \sigma^{2}}} = \sum_{i=1}^{N} \frac{1}{2}(y_i - \hat{y}_i)^2 \frac{1}{\sigma^2} + \log\left( \sigma \sqrt{2\pi} \right).
+  \begin{split}
+  -\log \mathcal{L}_{\theta}(\mathbf{Y} \mid \mathbf{X}) & = -\sum_{i=1}^{N} \log \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(y_i - \hat{y}_i)^{2}}{2 \sigma^{2}}} \\ 
+  & = \sum_{i=1}^{N} \frac{1}{2}(y_i - \hat{y}_i)^2 \frac{1}{\sigma^2} + \log\left( \sigma \sqrt{2\pi} \right).
+  \end{split}
 \end{equation}
-If all constant terms are dropped it becomes apparent that minimizing the mean squared error, $\frac{1}{N}\sum_{i=1}^{N} (y_i - \hat{y}_i)^2$, performs maximum likelihood estimation.
-
-% Talk about distribution assumpts (normal disitrbution), negative log likelihood and loss functions.
+If all constant terms are dropped it becomes apparent that minimizing the mean squared error, $\frac{1}{N}\sum_{i=1}^{N} (y_i - \hat{y}_i)^2$, performs maximum likelihood estimation under the assumption that the data is normally distributed.
+% Maybe talk about regression here?
 
 \subsection{Dataset}
 % TODO:
@@ -183,26 +185,83 @@ The weight is updated in the opposite direction (hence the negation) of the grad
 \subsection{Classification with softmax and cross entropy}
 % Write derivation of softmax.
 It is often of interest in computer vision to classify images into several categories. Examples hereof could be monitoring for explicit content on social media platforms, making images accessible for visually impaired by detecting and reading aloud the image contents or detecting pedestrians in self-driving cars. Although the last two examples are more advanced usecases of computer vision, namely scene recognition and image segmentation, they all rely on the ability to classify images or objects therein. \\
-It is possible to use artificial neural networks in classification tasks by transforming the output \textit{logits} into a discrete probability using a softmax vector function
-\begin{equation}
-  \text{softmax}(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{K}{e^{z_j}}} \hspace{10pt} \text{for } i = 1,\ldots,K \text{ and } \mathbf{z} = (z_1, \ldots z_K) \in \mathbb{R}^K
+It is possible to use artificial neural networks in classification tasks by transforming the output logits, $\mathbf{z} = (z_1, \ldots z_K) \in \mathbb{R}^K$, into a discrete probability distribution using the softmax vector function:
+\begin{equation} \label{eq:softmax}
+  \text{softmax}(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{K}{e^{z_j}}} \hspace{10pt} \text{for } i = 1,\ldots,K 
 \end{equation}
-that scales every $z_i$ to lie in the range from 0 to 1 and makes the sum of all output probabilities equal to 1. The softmax function thereby satisfies the formal definition of probability mass functions. An important property of the softmax function is that the ordering of logits and there respective output probabilities stays the same. Eg. the largest value element of $\mathbf{z}$ also has the largest output probability. \\
-By assuming that the output of the neural network is a categorical emperical distribution with density
+The softmax function scales every $z_i$ to lie in the range from 0 to 1 and makes the sum of all output probabilities equal to 1. It thereby satisfies the formal definition of probability mass functions. An important property of the softmax function is that the ordering of logits and their respective output probabilities stays the same. Eg. the largest value element of $\mathbf{z}$ also has the largest output probability. \\
+If the label is one-hot encoded, meaning that the element in the vector with index corresponding to the correct class set to one and the rest to zero, $\mathbf{Y}$ would have distribution:
 \begin{equation}
-  123
+  p(y_i \mid x_i)_k = \begin{cases}
+    1 & \text{if } c_{i} = k \\
+    0 & \text{otherwise}
+  \end{cases} \hspace{5pt} \text{for } k = 1, \ldots, K
+\end{equation}
+where $c_i$ is the correct class for label $x_i$. Neural networks with softmax activation in the last layer can be trained by minimizing the cross-entropy between the one-hot encoded label, $p$, and the output distribution of the network, $q$, given by:
+\begin{equation}
+  H(p, q) = - \sum_{i=1}^N \sum_{k=1}^K p(y_i \mid x_i)_k \log q(y_i \mid x_i)_k.
+\end{equation}
+Since $p(y_i \mid x_i)_k$ is only 1 when $k=c_i$, the inner summation over $k$ can be compressed to:
+\begin{equation}
+  H(p, q) = - \sum_{i=1}^N \log q(y_{i,c_i} \mid x_i).
+\end{equation}
+By comparison with equation \ref{eq:negative-log-likelihood}, minimizing the cross-entropy can be seen as performing maximum likelihood estimation. To actually minimize the cross-entropy using gradient based methods such as back-propagation, both functions have to be differentiable. The Jacobian of the softmax function is a $K$ by $K$ matrix:
+\begin{equation}
+  \mathbf{J} = \left( 
+    \begin{matrix}
+      \frac{\partial s_1}{\partial z_1} & \cdots & \frac{\partial s_1}{\partial z_K}\\
+      \vdots & \ddots & \vdots \\
+      \frac{\partial s_K}{\partial z_1} & \cdots & \frac{\partial s_K}{\partial z_K}
+    \end{matrix} 
+  \right)
+\end{equation}
+where each $s_i$ is is the $i$'th entry of the softmax output. As each entry is positive, the partial derivative of the logarithm of $s_i$ wrt. $z_i$ can be written as:
+\begin{equation} \label{eq:softmax-derivative}
+  \frac{\partial}{\partial z_j} \log s_i = \frac{1}{s_i} \frac{\partial s_i}{\partial z_j}
+  \Rightarrow \frac{\partial s_i}{\partial z_j} = s_i \cdot \frac{\partial}{\partial z_j} \log s_i.
+\end{equation}
+From the softmax function definition in \ref{eq:softmax} it follows that:
+\begin{equation}
+  \log s_i = \log \left( \frac{e^{z_i}}{\sum_{l=1}^{K}{e^{z_l}}}  \right) = z_i - \log  \sum_{l=1}^{K}{e^{z_l}}
+\end{equation}
+such that the partial derivative of the above becomes:
+\begin{equation}
+  \frac{\partial}{\partial z_j} \log s_i = \frac{\partial z_i}{\partial z_j} - \frac{1}{\sum_{l=1}^{K}{e^{z_l}}} \cdot \frac{\partial}{\partial z_j} \sum_{l=1}^{K}{ e^{z_l}}.
+\end{equation}
+Here, $\frac{\partial z_i}{\partial z_j}$ will be equal to 1 if $i=j$ and otherwise 0, which can be denoted by $1\{i = j\}$. Because $e^{z_l}$ in the sum only depends on $z_l$, the partial derivative of terms where $l\neq j$ is 0. The above can now be rewritten as:
+\begin{equation} \label{eq:partial-log-softmax}
+  \frac{\partial}{\partial z_j} \log s_i = 1\{ i = j \} - \frac{e^{z_j}}{\sum_{l=1}^{K}{ e^{z_l}}} = 1\{ i = j \} - s_j
+\end{equation}
+in order to finally reveal:
+\begin{equation}
+  \frac{\partial s_i}{\partial z_j} = s_i \cdot \left( 1\{ i = j \} - s_j \right).
+\end{equation}
+If one now considers the partial derivative of the cross-entropy function:
+\begin{equation}
+  \frac{\partial}{\partial z_j} H(p, q) = - \sum_{i=1}^{K} y_{i} \cdot \frac{\partial}{\partial z_j} \log s_i
+\end{equation}
+and substitutes in $\frac{\partial}{\partial z_j} \log s_i$ from equation \ref{eq:partial-log-softmax} to get:
+\begin{equation}
+  = - \sum_{i=1}^{K} y_{i} \cdot \left( 1\{ i = j \} - s_j \right)
+\end{equation}
+which can be split into the two sums:
+\begin{equation}
+  = \sum_{i=1}^{K}{y_{i} \cdot s_j} - \sum_{i=1}^{K}{y_{i} \cdot 1\{ i = j \}}.
+\end{equation}
+As the indicator function $1\{i=j\}$ is only 1 when $i=j$ the above can be simplified as:
+\begin{equation}
+  = \sum_{i=1}^{K}{\left( y_{i} \cdot s_j \right)} - y_{j}
+\end{equation}
+and as $s_j$ does not depend on $i$, it can be pulled out of the sum:
+\begin{equation}
+  = s_j \sum_{i=1}^{K}{ y_{i} } - y_{j}.
+\end{equation}
+Finally, since $y_i$ sums to 1, the partial derivative becomes:
+\begin{equation}
+  \frac{\partial}{\partial z_j} H(p, q) = s_j - y_j.
 \end{equation}
 
-% Softmax function -> Turns output logits into a distribution (sums to 1)
-% Maximum likelihood estimation by optimization and loss functions
-% - What is the problem with using squared loss?
-% Cross-entropy
-% One hot encoding
-
-
-
-
-
+% TODO: Maybe write a little bit about why this is relevant?
 
 \subsection{Batch normalization}
 When training deep neural networks, it is often necessary to normalize the inputs to the network in obtain good results. By normalizing the input variables to the network the gradient of the loss function is more likely to point in the direction of the local minima resulting in more efficient and stable training. According to the authors \cite{ioffe2015batch}, batch normalization has the effect of reducing ``internal covariate shift'' of the networks intermediate representations. As the weights and biases of each layer in the network is updated, the distribution of the internal representations tends to change aswell. This has the effect of slowing down learning and decrease the chance of converging to a good local minima. By normalizing each mini-batch, batch normalization is able to accelerate deep learning by enabling higher learning rates and fewer training steps. Batch normalization works by using a combination of the mean and variance of the current mini-batch and a running mean and variance. At training time, batch normalization standardizes the mini-batch according to
@@ -269,9 +328,6 @@ In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regardin
   \item \textbf{The timing problem}: In the back-propagation algorithm, forwards and backwards passes are run alternatingly and sequantially, which is not known to be happening in the human brain. In constrast, neurons function asynchrously when activated by their inputs and spikes travel between neurons with some propagation delay, making it difficult for biological neurons to implement backprop as activations and their derivates should stay constant when performing weight updates. 
   \item \textbf{The target problem}: It is unclear how labels such as those in the MNIST dataset could be present in the brain. The brain seems to make sense of the world by itself without needing constant supervision. Humans generally only need a few examples in order to identify different objects. Though supervised learning has shown the most impressive results thus far, recent focus on unsupervised or self-supervised learning has startet to show its promise, which might better explain how the brain learns. 
 \end{enumerate}
-
-\newpage
-
 
 % From a highlevel perspective 
 

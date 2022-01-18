@@ -11,30 +11,30 @@
 \contentsline {subsection}{\numberline {2.4}Weight initialization}{4}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Back-propagation}{4}{subsection.2.5}%
 \contentsline {subsection}{\numberline {2.6}Classification with softmax and cross entropy}{5}{subsection.2.6}%
-\contentsline {subsection}{\numberline {2.7}Batch normalization}{5}{subsection.2.7}%
-\contentsline {section}{\numberline {3}Biologically plausible deep learning}{6}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Biological neurons}{6}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Biological constraints}{7}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Biological violations of backprop and deep learning}{8}{subsubsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.3}Spiking neural networks}{10}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Training spiking neural networks}{10}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Leaky-Integrate-and-Fire neurons}{10}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Poisson rate coding}{11}{subsubsection.3.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.4}Low-pass alpha-filter}{12}{subsubsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.4}Shadow training spiking neural networks}{12}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}Activation scaling}{12}{subsubsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {3.4.2}Rate estimation using alpha-filter}{12}{subsubsection.3.4.2}%
-\contentsline {subsubsection}{\numberline {3.4.3}Fusing batch normalization}{12}{subsubsection.3.4.3}%
-\contentsline {subsubsection}{\numberline {3.4.4}Testing spiking neural networks}{13}{subsubsection.3.4.4}%
-\contentsline {subsection}{\numberline {3.5}Predictive Coding}{13}{subsection.3.5}%
-\contentsline {subsubsection}{\numberline {3.5.1}Predictive coding networks and inference learning}{13}{subsubsection.3.5.1}%
-\contentsline {subsubsection}{\numberline {3.5.2}Softmax and cross-entropy loss in inference learning}{15}{subsubsection.3.5.2}%
-\contentsline {subsubsection}{\numberline {3.5.3}Z-IL and equivalence to back-propagation}{15}{subsubsection.3.5.3}%
-\contentsline {subsubsection}{\numberline {3.5.4}Predictive coding networks for classification}{15}{subsubsection.3.5.4}%
-\contentsline {subsubsection}{\numberline {3.5.5}Biological plausability}{15}{subsubsection.3.5.5}%
-\contentsline {subsubsection}{\numberline {3.5.6}Variational free energy}{15}{subsubsection.3.5.6}%
-\contentsline {subsection}{\numberline {3.6}Variational Inference}{15}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Energy Based Models}{15}{subsection.3.7}%
-\contentsline {section}{\numberline {4}Results}{15}{section.4}%
-\contentsline {section}{\numberline {5}Discussion}{15}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion}{15}{section.6}%
+\contentsline {subsection}{\numberline {2.7}Batch normalization}{7}{subsection.2.7}%
+\contentsline {section}{\numberline {3}Biologically plausible deep learning}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Biological neurons}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Biological constraints}{9}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Biological violations of backprop and deep learning}{10}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.3}Spiking neural networks}{11}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Training spiking neural networks}{11}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Leaky-Integrate-and-Fire neurons}{11}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Poisson rate coding}{12}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Low-pass alpha-filter}{13}{subsubsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.4}Shadow training spiking neural networks}{13}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Activation scaling}{13}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Rate estimation using alpha-filter}{13}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Fusing batch normalization}{13}{subsubsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.4}Testing spiking neural networks}{14}{subsubsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.5}Predictive Coding}{14}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Predictive coding networks and inference learning}{14}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}Softmax and cross-entropy loss in inference learning}{16}{subsubsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.3}Z-IL and equivalence to back-propagation}{16}{subsubsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.4}Predictive coding networks for classification}{16}{subsubsection.3.5.4}%
+\contentsline {subsubsection}{\numberline {3.5.5}Biological plausability}{16}{subsubsection.3.5.5}%
+\contentsline {subsubsection}{\numberline {3.5.6}Variational free energy}{16}{subsubsection.3.5.6}%
+\contentsline {subsection}{\numberline {3.6}Variational Inference}{16}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Energy Based Models}{16}{subsection.3.7}%
+\contentsline {section}{\numberline {4}Results}{16}{section.4}%
+\contentsline {section}{\numberline {5}Discussion}{16}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion}{16}{section.6}%

@@ -26,6 +26,7 @@
 \citation{mnist}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Classical deep learning}{2}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Maximum Likelihood Estimation}{2}{subsection.2.1}\protected@file@percent }
+\newlabel{eq:negative-log-likelihood}{{4}{2}{Maximum Likelihood Estimation}{equation.2.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Dataset}{2}{subsection.2.2}\protected@file@percent }
 \citation{he2015delving}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces First 10 examples of the MNIST training dataset.\relax }}{3}{figure.caption.3}\protected@file@percent }
@@ -40,69 +41,72 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Back-propagation}{4}{subsection.2.5}\protected@file@percent }
 \newlabel{sec:backprop}{{2.5}{4}{Back-propagation}{subsection.2.5}{}}
 \newlabel{eq:dLdW1}{{6}{4}{Back-propagation}{equation.2.6}{}}
-\citation{ioffe2015batch}
 \newlabel{eq:delta-terms}{{8}{5}{Back-propagation}{equation.2.8}{}}
 \newlabel{eq:weight-update}{{9}{5}{Back-propagation}{equation.2.9}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Classification with softmax and cross entropy}{5}{subsection.2.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.7}Batch normalization}{5}{subsection.2.7}\protected@file@percent }
+\newlabel{eq:softmax}{{10}{5}{Classification with softmax and cross entropy}{equation.2.10}{}}
+\newlabel{eq:softmax-derivative}{{15}{6}{Classification with softmax and cross entropy}{equation.2.15}{}}
+\newlabel{eq:partial-log-softmax}{{18}{6}{Classification with softmax and cross entropy}{equation.2.18}{}}
+\citation{ioffe2015batch}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7}Batch normalization}{7}{subsection.2.7}\protected@file@percent }
 \citation{hunsberger2015spiking}
 \citation{PredictiveCodingNetworks}
 \citation{hebb1949}
-\newlabel{eq:batch-norm}{{15}{6}{Batch normalization}{equation.2.15}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Biologically plausible deep learning}{6}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Biological neurons}{6}{subsection.3.1}\protected@file@percent }
-\newlabel{sec:neurons}{{3.1}{6}{Biological neurons}{subsection.3.1}{}}
+\newlabel{eq:batch-norm}{{29}{8}{Batch normalization}{equation.2.29}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Biologically plausible deep learning}{8}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Biological neurons}{8}{subsection.3.1}\protected@file@percent }
+\newlabel{sec:neurons}{{3.1}{8}{Biological neurons}{subsection.3.1}{}}
 \citation{Bi10464}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Biological constraints}{7}{subsection.3.2}\protected@file@percent }
-\newlabel{sec:biological-constraints}{{3.2}{7}{Biological constraints}{subsection.3.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Illustration of biological neuron by BruceBlaus - Own work, CC BY 3.0 \footnotemark \relax }}{9}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:bio-neuron}{{2}{9}{Illustration of biological neuron by BruceBlaus - Own work, CC BY 3.0 \protect \footnotemark \relax }{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Biological constraints}{9}{subsection.3.2}\protected@file@percent }
+\newlabel{sec:biological-constraints}{{3.2}{9}{Biological constraints}{subsection.3.2}{}}
 \citation{BengioLBL15}
 \citation{Eric2018}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Illustration of biological neuron by BruceBlaus - Own work, CC BY 3.0 \footnotemark \relax }}{8}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:bio-neuron}{{2}{8}{Illustration of biological neuron by BruceBlaus - Own work, CC BY 3.0 \protect \footnotemark \relax }{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Biological violations of backprop and deep learning}{8}{subsubsection.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Biological violations of backprop and deep learning}{10}{subsubsection.3.2.1}\protected@file@percent }
 \citation{Boht2000SpikePropBF}
 \citation{eshraghian2021training}
 \citation{Eric2018}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Spiking neural networks}{10}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Training spiking neural networks}{10}{subsubsection.3.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Leaky-Integrate-and-Fire neurons}{10}{subsubsection.3.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Spiking neural networks}{11}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Training spiking neural networks}{11}{subsubsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Leaky-Integrate-and-Fire neurons}{11}{subsubsection.3.3.2}\protected@file@percent }
 \citation{hunsberger2015spiking}
-\newlabel{fig:rate-function}{{3a}{11}{Interleaved plot of original rate function, $r(j)$ (orange), and smoothed version, $r_\rho (j)$ (blue).\relax }{figure.caption.5}{}}
-\newlabel{sub@fig:rate-function}{{a}{11}{Interleaved plot of original rate function, $r(j)$ (orange), and smoothed version, $r_\rho (j)$ (blue).\relax }{figure.caption.5}{}}
-\newlabel{fig:poisson-rate}{{3b}{11}{Theoretical (orange) and simulated spike rates (blue) as functions of input current.\relax }{figure.caption.5}{}}
-\newlabel{sub@fig:poisson-rate}{{b}{11}{Theoretical (orange) and simulated spike rates (blue) as functions of input current.\relax }{figure.caption.5}{}}
-\newlabel{fig:rate-scaling}{{3c}{11}{Scaling of the rate function in the interval $[0; 10]$ to mimic ReLU.\relax }{figure.caption.5}{}}
-\newlabel{sub@fig:rate-scaling}{{c}{11}{Scaling of the rate function in the interval $[0; 10]$ to mimic ReLU.\relax }{figure.caption.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Plots of smoothed, poisson coded and ReLU-like rate functions, respectively.\relax }}{11}{figure.caption.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Poisson rate coding}{11}{subsubsection.3.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Low-pass alpha-filter}{12}{subsubsection.3.3.4}\protected@file@percent }
-\newlabel{eq:alpha-filter}{{22}{12}{Low-pass alpha-filter}{equation.3.22}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Shadow training spiking neural networks}{12}{subsection.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Activation scaling}{12}{subsubsection.3.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Rate estimation using alpha-filter}{12}{subsubsection.3.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3}Fusing batch normalization}{12}{subsubsection.3.4.3}\protected@file@percent }
+\newlabel{fig:rate-function}{{3a}{12}{Interleaved plot of original rate function, $r(j)$ (orange), and smoothed version, $r_\rho (j)$ (blue).\relax }{figure.caption.5}{}}
+\newlabel{sub@fig:rate-function}{{a}{12}{Interleaved plot of original rate function, $r(j)$ (orange), and smoothed version, $r_\rho (j)$ (blue).\relax }{figure.caption.5}{}}
+\newlabel{fig:poisson-rate}{{3b}{12}{Theoretical (orange) and simulated spike rates (blue) as functions of input current.\relax }{figure.caption.5}{}}
+\newlabel{sub@fig:poisson-rate}{{b}{12}{Theoretical (orange) and simulated spike rates (blue) as functions of input current.\relax }{figure.caption.5}{}}
+\newlabel{fig:rate-scaling}{{3c}{12}{Scaling of the rate function in the interval $[0; 10]$ to mimic ReLU.\relax }{figure.caption.5}{}}
+\newlabel{sub@fig:rate-scaling}{{c}{12}{Scaling of the rate function in the interval $[0; 10]$ to mimic ReLU.\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Plots of smoothed, poisson coded and ReLU-like rate functions, respectively.\relax }}{12}{figure.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Poisson rate coding}{12}{subsubsection.3.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Low-pass alpha-filter}{13}{subsubsection.3.3.4}\protected@file@percent }
+\newlabel{eq:alpha-filter}{{36}{13}{Low-pass alpha-filter}{equation.3.36}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Shadow training spiking neural networks}{13}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Activation scaling}{13}{subsubsection.3.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Rate estimation using alpha-filter}{13}{subsubsection.3.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3}Fusing batch normalization}{13}{subsubsection.3.4.3}\protected@file@percent }
 \citation{raoballard1999}
 \citation{millidge2021predictive}
 \citation{PredictiveCodingNetworks}
 \citation{PredictiveCodingNetworks}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4}Testing spiking neural networks}{13}{subsubsection.3.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Predictive Coding}{13}{subsection.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Predictive coding networks and inference learning}{13}{subsubsection.3.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Predictive coding network with 2 input nodes, 3 hidden nodes and 2 output nodes.\relax }}{14}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:predictive-coding-network}{{4}{14}{Predictive coding network with 2 input nodes, 3 hidden nodes and 2 output nodes.\relax }{figure.caption.6}{}}
-\newlabel{eq:update-value-nodes}{{27}{14}{Predictive coding networks and inference learning}{equation.3.27}{}}
-\newlabel{eq:il-weight-update}{{28}{14}{Predictive coding networks and inference learning}{equation.3.28}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4}Testing spiking neural networks}{14}{subsubsection.3.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Predictive Coding}{14}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Predictive coding networks and inference learning}{14}{subsubsection.3.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Predictive coding network with 2 input nodes, 3 hidden nodes and 2 output nodes.\relax }}{15}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:predictive-coding-network}{{4}{15}{Predictive coding network with 2 input nodes, 3 hidden nodes and 2 output nodes.\relax }{figure.caption.6}{}}
+\newlabel{eq:update-value-nodes}{{41}{15}{Predictive coding networks and inference learning}{equation.3.41}{}}
+\newlabel{eq:il-weight-update}{{42}{15}{Predictive coding networks and inference learning}{equation.3.42}{}}
 \citation{PredictiveCodingNetworks}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Softmax and cross-entropy loss in inference learning}{15}{subsubsection.3.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Z-IL and equivalence to back-propagation}{15}{subsubsection.3.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4}Predictive coding networks for classification}{15}{subsubsection.3.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.5}Biological plausability}{15}{subsubsection.3.5.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.6}Variational free energy}{15}{subsubsection.3.5.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Variational Inference}{15}{subsection.3.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Energy Based Models}{15}{subsection.3.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{15}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{15}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{15}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Softmax and cross-entropy loss in inference learning}{16}{subsubsection.3.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Z-IL and equivalence to back-propagation}{16}{subsubsection.3.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4}Predictive coding networks for classification}{16}{subsubsection.3.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.5}Biological plausability}{16}{subsubsection.3.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.6}Variational free energy}{16}{subsubsection.3.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Variational Inference}{16}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Energy Based Models}{16}{subsection.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{16}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{16}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{16}{section.6}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{refs}
 \bibcite{BengioLBL15}{1}
@@ -122,4 +126,4 @@
 \bibcite{raoballard1999}{15}
 \bibcite{rumelhart1986learning}{16}
 \bibcite{PredictiveCodingNetworks}{17}
-\gdef \@abspage@last{19}
+\gdef \@abspage@last{20}
