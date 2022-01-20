@@ -615,11 +615,6 @@ INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm
-INPUT ./graphics/mnist.png
-INPUT ./graphics/mnist.png
-INPUT graphics/mnist.png
-INPUT ./graphics/mnist.png
-INPUT ./graphics/mnist.png
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT ./graphics/bio-neuron.png
 INPUT ./graphics/bio-neuron.png
@@ -675,6 +670,7 @@ INPUT ./report.out
 INPUT /Users/anders/Library/texlive/2021basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb

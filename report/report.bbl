@@ -40,10 +40,21 @@ Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
   imagenet classification.
 \newblock 2015.
 
+\bibitem{resnet}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Deep residual learning for image recognition.
+\newblock In {\em 2016 IEEE Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, pages 770--778, 2016.
+
 \bibitem{hebb1949}
 Donald~O. Hebb.
 \newblock {\em The Organization of Behaviour - A neuropsychological theory}.
 \newblock John Wiley \& Sons, Inc., 1949.
+
+\bibitem{lstm}
+Sepp Hochreiter and Jürgen Schmidhuber.
+\newblock Long short-term memory.
+\newblock {\em Neural computation}, 9:1735--80, 12 1997.
 
 \bibitem{hunsberger2015spiking}
 Eric Hunsberger and Chris Eliasmith.
@@ -93,5 +104,11 @@ Yuhang Song, Thomas Lukasiewicz, Zhenghua Xu, and Rafal Bogacz.
 \newblock In H.~Larochelle, M.~Ranzato, R.~Hadsell, M.~F. Balcan, and H.~Lin,
   editors, {\em Advances in Neural Information Processing Systems}, volume~33,
   pages 22566--22579. Curran Associates, Inc., 2020.
+
+\bibitem{transformers}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N. Gomez, Lukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock {\em CoRR}, abs/1706.03762, 2017.
 
 \end{thebibliography}

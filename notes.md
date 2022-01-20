@@ -62,3 +62,6 @@ https://www.youtube.com/watch?v=P0yVuoATjzs
 
 Lot's of papers regarding predictive coding
 https://github.com/BerenMillidge/Predictive_Coding_Papers
+
+Faster convergence in Deep-Predictive-Coding networks to learn deeper representations
+https://arxiv.org/pdf/2101.06848.pdf

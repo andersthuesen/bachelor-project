@@ -33,14 +33,16 @@
 \setcounter{page}{1}
 
 \section{Introduction}
-\subsection{Motivation}
 % TODO:
 % Det er ikke kun weight update problemet vi har at gøre med, det er mere locality / unidirectionality vi har at gøre med samt kommunikation med spikes.
 % Vi kunne måske godt uddybe lidt mere om hvad fordelene er ved at gøre ting mere biological plausible?
 % - Hvis deep learning på en eller anden måde kan kobles til neuroscience kan vi bruge hvad vi ved om neuroscience i deep learning om omvendt. 
 % - Hjernen er bygget til at være meget effektiv. I dag kræver det store mængder computerkraft at træne dybe neurale netværk. Måske kan det gøres smartere ved at studere hvordan hjernen lærer.
 % - Vi kan lære mere om os selv ved at kigge på hvilke fejl der kan ske med en bio plausible læringsmekanisme. Måske vi kan komme til at lære mere om psykiske/mentale sygdomme/manglende hjernefunktioner.
-In the recent years, deep learning has shown impressive results due to the availability of massive parallel compute and huge amounts of data. From the biological inspiration of the neuron to the perceptron where data inputs are weighted, summed together and thresholded, several new modern architectures, like recurrent, residual and transformer neural networks have pushed the limits and achieved state of the art results in speech recognition, computer vision and natural language understanding. Despite of these networks being originally inspired by the brain, the backpropagation (backprop) algorithm for learning the weights and deep learning in general has been criticized for being biologically implausible \cite{BengioLBL15}. This project will primarily be dealing with on of them: The weight transport problem which arises from the way backprop uses the connection weights in both the forward pass (inference) and the backwards parse (calculating the gradients), requiring that both forward and backward connections have symmetric weights and that information is able to flow backwards through the weights. \\
+In the recent years, deep learning has shown impressive results due to the availability of massive parallel compute and huge amounts of data. From the biological inspiration of the neuron to the perceptron where data inputs are weighted, summed together and thresholded, several new modern architectures, like recurrent \cite{lstm}, residual \cite{resnet} and transformer neural networks \cite{transformers} have pushed the limits and achieved state of the art results in speech recognition, computer vision and natural language understanding. Despite of these networks being originally inspired by the brain, the back-propagation (backprop) algorithm for learning the weights and deep learning in general has been criticized for being biologically implausible \cite{BengioLBL15}. 
+
+% Rewrite the following
+This project will primarily be dealing with on of them: The weight transport problem which arises from the way backprop uses the connection weights in both the forward pass (inference) and the backwards parse (calculating the gradients), requiring that both forward and backward connections have symmetric weights and that information is able to flow backwards through the weights. \\
 Besides having both philosophical as well scientific interest, studying the computational aspects of how the human brain processes sensory input might lead to great improvements in deep learning and artificial intelligence.
 
 \subsection{Related work}
@@ -48,151 +50,80 @@ Besides having both philosophical as well scientific interest, studying the comp
 % Snak om de forskellige metoder der er blevet brugt.
 % Nævn gerne flere methoder der er blevet brugt
 % Måske nævn allerede her de to papers af Song og Hunsberger.
-
 % Towards biological plausible convolutional networks: https://arxiv.org/abs/2106.13031
-Several attempts has been made to make modern deep learning more biologically plausible. These can be divided into two types of categories. The first category consists of methods that try to optimize the inference on low-powered neuromorphic hardware such as the Intel Loihi or IBM TrueNorth chips, by converting existing neural network architectures into their spiking counterparts. The other category consists of methods that aim to make the learning phase biologically plausible by only relying on local weight updates in order to optimize for some objective. This is in alignment with the Hebbian learning theory from the neuroscience litterature which states that the synaptic plasticity is only dependent on the pre- and post-synaptic activity, possibly modulated through some global signaling mechasnism (ex. dopamine). One example hereof is the work by Bengio et al. on Continual Equilibrium Propagation \cite{EqProp}. 
+Several attempts has been made to make modern deep learning more biologically plausible. These can be divided into two types of categories. The first category consists of methods that try to optimize the inference on low-powered neuromorphic hardware such as the Intel Loihi or IBM TrueNorth chips, by converting existing neural network architectures into their spiking counterparts. The other category consists of methods that aim to make the learning phase biologically plausible by only relying on local weight updates in order to optimize for some objective. This is in alignment with the Hebbian learning theory from the neuroscience literature which states that the synaptic plasticity is only dependent on the pre- and post-synaptic activity, possibly modulated through some global signaling mechanism (ex. dopamine). One example hereof is the work by Bengio et al. on Continual Equilibrium Propagation \cite{EqProp}. 
 
 \subsection{Research questions}
 The project will address the following three research questions:
 \begin{itemize}
-  \item According to the current literature, what are the biological constraints of biological learning?
-  \item To what extent can predictive coding be used to approximate backpropagation under the above mentioned biological constraints?
-  \item In what ways can modern deep learning benefit from biological plausible learning algorithms?
+  \item \textbf{Does the combination of predictive coding networks and spiking neural networks provide a biologically plausible model of learning and how well does it perform compared to modern deep learning?} \\
+  Talk about it here. %TODO: Write this
+  \item \textbf{What are the effectiveness of weight updates in inference learning compared to back-propagation?} \\
+  Talk about it here. %TODO: Write this
+  \item \textbf{In what ways can modern deep learning benefit from biological plausible learning?} \\
+  Talk about it here. %TODO: Write this
 \end{itemize}
 
+\newpage
+
 \section{Classical deep learning}
-\subsection{Maximum Likelihood Estimation}
-% Frames learning (finding parameters of a model) as optimizing some objective function.
-Maximum Likelihood Estimation (MLE) is method of finding the optimal parameters, $\theta$, of some assumed probability distribution or model, $P$, in order to best describe the observed data, $\mathbf{X}$. Statistically this can be formulated as $P(\mathbf{X}; \theta)$ or more concisely $P_\theta(\mathbf{X})$. Assuming that the observed data is independent and identically distributed, the likelihood estimator function can be defined as:
-\begin{equation}
-  \mathcal{L}_\theta(\mathbf{X}) = \prod_{i=1}^{N}{P_\theta(x_i)}
-\end{equation} 
-where $\mathbf{X} = (x_i, \ldots, x_N)$. MLE can then be formulated as the optimization problem:
-\begin{equation}
-  \theta^\star = \argmax_{\theta} \hspace{5pt} \mathcal{L}_\theta(\mathbf{X})
-\end{equation}
-where the goal is to find the optimal set of model parameters (maximum likelihood estimate), $\theta^\star$, that maximizes the probability of the observed data (the likelihood). In the case of supervised learning it is often more interesting to model the conditional probability function $P_\theta(\mathbf{Y} | \mathbf{X})$ where $\mathbf{Y}$ might be some label of $\mathbf{X}$. Fortunately, MLE can be generalized to work with conditional probabilities \cite{Goodfellow-et-al-2016} using the conditional likelihood estimator:
-\begin{equation}
-  \mathcal{L}_\theta(\mathbf{Y} \mid \mathbf{X}) = \prod_{i=1}^{N}{P_\theta(y_i \mid x_i)}
-\end{equation}
-where $\mathbf{Y} = (y_i, \ldots, y_N)$. The MLE task is then to find $\theta^\star = \argmax_{\theta} \hspace{5pt} \mathcal{L}_\theta(\mathbf{Y} | \mathbf{X})$. Often, it is easier to instead minimize the negative log-probability as taking the logarithm of a product yields a sum of logs:
-\begin{equation} \label{eq:negative-log-likelihood}
-  -\log \mathcal{L}_{\theta}(\mathbf{Y} \mid \mathbf{X}) = -\sum_{i=1}^{N} \log P_{\theta}\left(y_{i} \mid x_{i}\right).
-\end{equation}
-As the logarithm is a monotonic increasing function, minimizing the log-probability is essentially the same as maximizing the probability itself. By assuming that $\mathbf{Y}$ follows a Gaussian distribution $P_{\theta}(\mathbf{Y} \mid \mathbf{X}) = \mathcal{N}(\hat{\mathbf{Y}}(\mathbf{X}), \sigma)$ with a mean of $\hat{\mathbf{Y}}$ and a fixed variance of $\sigma^2$ the log likelihood function can be written as:
-\begin{equation}
-  \begin{split}
-  -\log \mathcal{L}_{\theta}(\mathbf{Y} \mid \mathbf{X}) & = -\sum_{i=1}^{N} \log \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(y_i - \hat{y}_i)^{2}}{2 \sigma^{2}}} \\ 
-  & = \sum_{i=1}^{N} \frac{1}{2}(y_i - \hat{y}_i)^2 \frac{1}{\sigma^2} + \log\left( \sigma \sqrt{2\pi} \right).
-  \end{split}
-\end{equation}
-If all constant terms are dropped it becomes apparent that minimizing the mean squared error, $\frac{1}{N}\sum_{i=1}^{N} (y_i - \hat{y}_i)^2$, performs maximum likelihood estimation under the assumption that the data is normally distributed.
-% Maybe talk about regression here?
+Write something here about what this section is about, what it is not about etc. What we are going to do in each section and what this will lead us to / why this becomes relevant later in the report. 
+
+\subsection{Mathematical notation}
+Throughout this thesis, we will be using \textbf{boldface} and CAPITALIZATION when dealing with \textbf{MATRICES}, eg. $\mathbf{A}$ and \textbf{vectors}, eg. $\mathbf{x}$. To avoid irrelevant interruptions in derivations, vectors of lowercase letters will implicitly represent columns in their corresponding matrices unless otherwise stated, eg. $\mathbf{x}_i$ will be the $i$'th column in the matrix $\mathbf{X}$. The same is the case for non-boldface scalers and their corresponding vectors, eg. $x_j$ will be the $j$'th index in vector $\mathbf{x}_i$. The $\hat{\text{hat}}$ symbol will be used to indicate the prediction of a variable, eg. $\hat{y}$ will be the prediction of $y$. 
 
 \subsection{Dataset}
 % TODO:
-% Skriv lidt mere meta omkring datasæt og hvordan de bruges i deep learning til en start.
+% Fjern MNIST, da det ikke er vigtigt for nu.
+
 We define our dataset, $\mathcal{D} = \left\{(\mathbf{x}_i, \mathbf{y}_i)\right\}$ for $i = 1 \ldots N$ consisting of $N$ pairs of datapoints, $\mathbf{x}_i \in \mathbb{R}^k$ and $\mathbf{y}_i \in \mathbb{R}^l$ where $N$ is the size of the dataset. We notice, that both $\mathbf{x}_i$ and $\mathbf{y}_i$ can be vectors of possibly differently dimensions $k$ and $l$ respectively. $\mathbf{x}_i$ might represent eg. an image as it is the case with the MNIST dataset used later in this project that consists of 60.000 training examples and 10.000 test examples of 28x28 images depicting handwritten digits and their corresponding labels \cite{mnist}. As the images in the MNIST dataset are two-dimensional, the image has to be flattened into a one-dimensional vector. In the case of supervised learning, the objective is from $\mathbf{x}_i$ to predict the corresponding label, $\mathbf{y}_i$ which would amount to a single scalar number from 0 to 9 in the MNIST dataset. 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=280pt]{graphics/mnist.png}  
-  \caption{First 10 examples of the MNIST training dataset.}
-  \label{fig:MNIST}
-\end{figure}
-
-\subsubsection{MNIST}
-% Write specifically about MNIST here.
-
-\subsubsection{CIFAR10}
-% Write about CIFAR 10 dataset here.
-
+% \begin{figure}[ht]
+%   \centering
+%   \includegraphics[width=280pt]{graphics/mnist.png}  
+%   \caption{First 10 examples of the MNIST training dataset.}
+%   \label{fig:MNIST}
+% \end{figure}
 
 % TODO: Write more about mnist. How many training, test examples? What is the size of each image? Etc. Maybe also a little bit about fashion mnist. 
 
-
-\subsection{Feedforward neural networks}
-Feedforward neural networks (FNN) are considered the simplest kind of neural network where the connections between the nodes does not allow for any cycles or recurrent connections. Feedforward neural networks are divided into several layers, where input data from the first layer is "feed forward" through the so-called hidden layers to the final output layer of the network, considered the prediction of the network. FNNs are typically fully connected networks which entails that every node of the network is connected to every node in the previous layer. One special case of FNNs is that of when there are no hidden layers in the network and the input layer is linearly transformed to the output layer and "activated" through a softmax or sigmoid function, depending on the output of output nodes. In that case, the FNN will correspond to (multinomial) logistic regression. This correspondance incentivises the use of activation functions  after each linear transformation of the layers, as the network would otherwise not be able to describe non-linearities in the data. Historically, the sigmoid activation function $\sigma(z) = (1 + \exp(-z))^{-1}$ has been the go-to activation function, but recently the rectified linear unit, $\textrm{ReLU}(z) = \max(0, z)$, has become the de facto standard. \\
-\\*
-A feedforward neural network with $L-2$ hidden layers is parametarized by the weight matrices $\mathbf{W}^{(l)} \in \mathbb{R}^{m \times n}$ and biases $\mathbf{b}^{(l)} \in  \mathbb{R}^{m}$ for $l = 2 \ldots L$ where $n$ is the input dimension of the layer and $m$ the output dimension. A feedforward pass from layer $l-1$ to layer $l$ is given by $\mathbf{a}^{(l)} = \sigma(\mathbf{z}^{l})$ where $\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}$ and $\sigma$ is the chosen activation function. By letting the initial activation $\mathbf{a}^{(1)} = \mathbf{x}_i$ one can consider the final activation of the network the prediction of the network $\mathbf{\hat{y}}_i = \mathbf{a}^{(L)}$. \\
-test
-
-
-\subsection{Weight initialization}
-% TODO: Maybe write more about why this is important here?
-We initialize the weight matrices using Kaiming He initialization, where the entries of the matrix $W^{(l)}_{ij}$ are drawn from a normal distribution with zero mean and $\sqrt{2/n}$ standard deviation as this will help reduce vanishing and exploding gradient problem by keeping the variance in each layer equal when using ReLU activation. \cite{he2015delving}
-
-
-\subsection{Back-propagation}
-\label{sec:backprop}
-% TODOS
-% - Write stuff about the hadamard product.
-% - Fix transposes and stuffs in equations
-The working horse of allmost all modern deep learning models is the back-propagation (aka. backprop) algorithm first popularized for training neural networks by Rumelhart, Hinton \& Williams in 1986 \cite{rumelhart1986learning}. The algorithms solves what is referred to as the \textit{credit-assignment problem}. When learning the parameters of an artificial neural network we would like to know how changing a weight in the network contributes to the total loss, in order to change it in the direction that minimizes the loss. One naive way to do this would be simply to adjust a single random weight slightly, evaluate the new neural network on the dataset and observe the effect on the model loss. If the change leads to a decrease in loss, keep the change, otherwise repeat from the beginning. This would however be very computationally expensive, since the network would have to be evaluated on the entire dataset for each weight in the network. Fortunately, the backprop algorithm achieves this much more efficiently as we will see in the following section. \\
-\\*
-Back-propagation is an efficient method for calculating the weight updates that minimizes some loss function, $\mathcal{L}(\hat{\mathbf{y}}_i, \mathbf{y}_i)$, which measures the difference between the predicted output of the network, $\hat{\mathbf{y}}_i$, and the true output, $\mathbf{y}_i$. Examples of loss functions are squared error $\sum{\frac{1}{2}(\hat{\mathbf{y}}_i - \mathbf{y}_i)^2}$, typically used for regression and categorical cross entropy $-\sum{\mathbf{y}_i \cdot \log(\hat{\mathbf{y}}_i)}$ for classification. At its core, the back-propagation algorithm is simply applying the chain rule on the partial derivate of the loss function with respect to the parameters and realizing that a lot of computation can be reused or "back propagated" in order to calculate the weight and bias updates for earlier layers. It is therefore necessary that the loss function is differentiable with respect to the prediction variable. Some alternatives to back-propagation exist such as Direct Feedback Alignment \cite{noekland2016direct}, but is not commonly used in practice.  
-
-To demonstrate the efficiency of the back-propagation algorithm, one can consider the last and second to last layers of the network. For now, the demonstration will only consider the weights as the bias terms can integrated into the weight matrices by extending the output dimension $n$ by 1 and appending a 1 to the $\mathrm{a}^{(l)}$ vectors resulting which will give an equivalent result. Applying the chain rule on the partial derivative of the loss function wrt. $\mathbf{W}^{(L)}$ yields
-\begin{equation} \label{eq:dLdW1}
-  \frac{\partial \mathcal{L}}{\partial \mathbf{W}^{(L)}}  
-= \underbrace{
-    \frac{\partial \mathcal{L}}{\partial \mathbf{a}^{(L)}}
-    \frac{\partial \mathbf{a}^{(L)}}{\partial \mathbf{z}^{(L)}}
-  }_ {\delta^{(L)}}
-  \frac{\partial \mathbf{z}^{(L)}}{\partial \mathbf{W}^{(L)}}
-= \underbrace{
-    \mathcal{L}^\prime (\hat{\mathbf{y}}_i) \sigma^\prime(\mathbf{z}^{(L)})
-  }_{\delta^{(L)}}
- \mathbf{a}^{(L-1)}
-\end{equation}
-whose factors can be divided into the error term, $\delta^{(L)}$, and activation in the previous layer, $\mathbf{a}^{(L-1)}$. Yet again, applying the chain rule on the partial derivative of the loss function, but this time wrt. $\mathbf{W}^{(L-1)}$ hints at the source of its efficiency:
+\subsection{Maximum Likelihood Estimation}
+Maximum Likelihood Estimation (MLE) is method of finding the optimal parameters, $\theta$, of some assumed probability distribution or model, $P$, in order to best describe the observed data, $\mathbf{X}$. Statistically this can be formulated as $P(\mathbf{X}; \theta)$ or more concisely $P_\theta(\mathbf{X})$. Assuming that the observed data is independent and identically distributed, the likelihood estimator function can be defined as:
 \begin{equation}
-\begin{split}
-    \frac{\partial \mathcal{L}}{\partial \mathbf{W}^{(L-1)}}
-  % &= \frac{\partial \mathcal{L}}{\partial \mathbf{a}^{(L)}}
-  %   \frac{\partial \mathbf{a}^{(L)}}{\partial \mathbf{a}^{(L-1)}}
-  %   \frac{\partial \mathbf{a}^{(L-1)}}{\partial \mathbf{z}^{(L-1)}}
-  %   \frac{\partial \mathbf{z}^{(L-1)}}{\partial \mathbf{W}^{(L-1)}}
- &= \underbrace{
-   \frac{\partial \mathcal{L}}{\partial \mathbf{a}^{(L)}}
-   \frac{\partial \mathbf{a}^{(L)}}{\partial \mathbf{z}^{(L)}}
- }_{\delta^{(L)}}
-   \frac{\partial \mathbf{z}^{(L)}}{\partial \mathbf{a}^{(L-1)}}
-   \frac{\partial \mathbf{a}^{(L-1)}}{\partial \mathbf{z}^{(L-1)}}
-   \frac{\partial \mathbf{z}^{(L-1)}}{\partial \mathbf{W}^{(L-1)}}
-  = \underbrace{
-    \delta^{(L)}
-    \mathbf{W}^{(L)}
-    \sigma^\prime(\mathbf{z}^{(L-1)})
-  }_{\delta^{(L-1)}}
-  \mathbf{a}^{(L-2)}
-\end{split}
+  \mathcal{L}_\theta(\mathbf{X}) = \prod_{i=1}^{N}{P_\theta(\mathbf{x}_i)}.
+\end{equation} 
+MLE can then be formulated as the optimization problem:
+\begin{equation}
+  \theta^\star = \argmax_{\theta} \hspace{5pt} \mathcal{L}_\theta(\mathbf{X}).
 \end{equation}
-Though the derivation above only considers $\mathbf{W}^{(L)}$ and $\mathbf{W}^{(L-1)}$ it is the general case that
-\begin{equation} \label{eq:delta-terms}
-  \delta^{(L)} = \mathcal{L}^\prime (\hat{\mathbf{y}}_i) \sigma^\prime(\mathbf{z}^{(L)}), 
-  \hspace{10pt}
-  \delta^{(l)} =  \delta^{(l+1)}\mathbf{W}^{(l+1)}\sigma^\prime(\mathbf{z}^{(l)})
+where the goal is to find the optimal set of model parameters (maximum likelihood estimate), $\theta^\star$, that maximizes the probability of the observed data (the likelihood). In the case of supervised learning it is often more interesting to model the conditional probability function $P_\theta(\mathbf{Y} | \mathbf{X})$ where $\mathbf{Y}$ might be some label of $\mathbf{X}$. Fortunately, MLE can be generalized to work with conditional probabilities \cite{Goodfellow-et-al-2016} using the conditional likelihood estimator:
+\begin{equation}
+  \mathcal{L}_\theta(\mathbf{Y} \mid \mathbf{X}) = \prod_{i=1}^{N}{P_\theta(\mathbf{y}_i \mid \mathbf{x}_i)}.
 \end{equation}
-which can be computed using a dynamic programming approach to update the weight parameters using gradient descent with learning rate $\alpha$:
-\begin{equation} \label{eq:weight-update}
-  \mathbf{W}^{(l)} = \mathbf{W}^{(l)} -\alpha \delta^{(l)} \mathbf{a}^{(l-1)}.
+The MLE task is then to find $\theta^\star = \argmax_{\theta} \hspace{5pt} \mathcal{L}_\theta(\mathbf{Y} | \mathbf{X})$. Often, it is easier to instead minimize the negative log-probability as taking the logarithm of a product yields a sum of logs:
+\begin{equation} \label{eq:negative-log-likelihood}
+  -\log \mathcal{L}_{\theta}(\mathbf{Y} \mid \mathbf{X}) = -\sum_{i=1}^{N} \log P_{\theta}\left(\mathbf{y}_i \mid \mathbf{x}_i\right).
 \end{equation}
-The weight is updated in the opposite direction (hence the negation) of the gradient as the aim is to minimize the loss function. By reusing the computation of the error terms, $\delta^{(l)}$, backprop is able to very efficiently compute the weight updates to minimize the global loss function. In theory the weights should be updated according to all datapoints in the dataset to maximize the likelihood, however in practice stochastic gradient descent is used with mini-batches of datapoints that stochastically resembles the overall distribution of the dataset. 
-
-
-
-
-\subsection{Classification with softmax and cross entropy}
-% Write derivation of softmax.
-It is often of interest in computer vision to classify images into several categories. Examples hereof could be monitoring for explicit content on social media platforms, making images accessible for visually impaired by detecting and reading aloud the image contents or detecting pedestrians in self-driving cars. Although the last two examples are more advanced usecases of computer vision, namely scene recognition and image segmentation, they all rely on the ability to classify images or objects therein. \\
+As the logarithm is a monotonic increasing function, minimizing the log-probability is essentially the same as maximizing the probability itself. By assuming that $\mathbf{Y}$ follows a Gaussian distribution $P_{\theta}(\mathbf{Y} \mid \mathbf{X}) = \mathcal{N}(\hat{\mathbf{Y}}(\mathbf{X}), \sigma)$ with a mean of $\hat{\mathbf{Y}}$ and a fixed variance of $\sigma^2$ the log likelihood function can be written as:
+\begin{equation}
+  \begin{split} % TODO: Fix something here about the notation.
+  -\log \mathcal{L}_{\theta}(\mathbf{Y} \mid \mathbf{X}) & = -\sum_{i=1}^{N} \log \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(\mathbf{y}_i - \hat{\mathbf{y}}_i)^{2}}{2 \sigma^{2}}} \\ 
+  & = \sum_{i=1}^{N} \frac{1}{2}(\mathbf{y}_i - \hat{\mathbf{y}}_i)^2 \frac{1}{\sigma^2} + \log\left( \sigma \sqrt{2\pi} \right).
+  \end{split}
+\end{equation}
+If all constant terms are dropped it becomes apparent that minimizing the mean squared error, $\text{MSE} = \frac{1}{N}\sum_{i=1}^{N} \frac{1}{2}(y_i - \hat{y}_i)^2$, performs maximum likelihood estimation under the assumption that the data is normally distributed. To optimize this quantity with gradient based method it is necessary to compute the partial derivative:
+\begin{equation}
+  \frac{\partial}{\partial \hat{\mathbf{Y}}}\text{MSE} = \frac{1}{N}\sum_{i=1}^{N} \hat{\mathbf{y}}_i - \mathbf{y}_i
+\end{equation}
+\\*
+It is often of interest in computer vision to classify images into several categories. Examples hereof could be monitoring for explicit content on social media platforms, making images accessible for visually impaired by detecting and reading aloud the image contents or detecting pedestrians in self-driving cars. Although the last two examples are more advanced use cases of computer vision, namely scene recognition and image segmentation, they all rely on the ability to classify images or objects therein. \\
 It is possible to use artificial neural networks in classification tasks by transforming the output logits, $\mathbf{z} = (z_1, \ldots z_K) \in \mathbb{R}^K$, into a discrete probability distribution using the softmax vector function:
 \begin{equation} \label{eq:softmax}
-  \text{softmax}(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{K}{e^{z_j}}} \hspace{10pt} \text{for } i = 1,\ldots,K 
+  \text{softmax}(\mathbf{z})_k = \frac{e^{z_k}}{\sum_{j=1}^{K}{e^{z_j}}} \hspace{10pt} \text{for } k = 1,\ldots,K 
 \end{equation}
-The softmax function scales every $z_i$ to lie in the range from 0 to 1 and makes the sum of all output probabilities equal to 1. It thereby satisfies the formal definition of probability mass functions. An important property of the softmax function is that the ordering of logits and their respective output probabilities stays the same. Eg. the largest value element of $\mathbf{z}$ also has the largest output probability. \\
+The softmax function scales every $z_k$ to lie in the range from 0 to 1 and makes the sum of all output probabilities equal to 1. It thereby satisfies the formal definition of probability mass functions. An important property of the softmax function is that the ordering of logits and their respective output probabilities stays the same. Eg. the largest value element of $\mathbf{z}$ also has the largest output probability. \\
 If the label is one-hot encoded, meaning that the element in the vector with index corresponding to the correct class set to one and the rest to zero, $\mathbf{Y}$ would have distribution:
 \begin{equation}
-  p(y_i \mid x_i)_k = \begin{cases}
+  p(\mathbf{y}_i \mid \mathbf{x}_i)_k = \begin{cases}
     1 & \text{if } c_{i} = k \\
     0 & \text{otherwise}
   \end{cases} \hspace{5pt} \text{for } k = 1, \ldots, K
@@ -261,6 +192,76 @@ Finally, since $y_i$ sums to 1, the partial derivative of the cross-entropy wrt.
   \frac{\partial}{\partial z_j} H(p, q) = s_j - y_j.
 \end{equation}
 
+
+
+\subsection{Feedforward neural networks}
+Feedforward neural networks (FNN) are considered the simplest kind of neural network where the connections between the nodes does not allow for any cycles or recurrent connections. Feedforward neural networks are divided into several layers, where input data from the first layer is "feed forward" through the so-called hidden layers to the final output layer of the network, considered the prediction of the network. FNNs are typically fully connected networks which entails that every node of the network is connected to every node in the previous layer. One special case of FNNs is that of when there are no hidden layers in the network and the input layer is linearly transformed to the output layer and "activated" through a softmax or sigmoid function, depending on the output of output nodes. In that case, the FNN will correspond to (multinomial) logistic regression. This correspondance incentivises the use of activation functions  after each linear transformation of the layers, as the network would otherwise not be able to describe non-linearities in the data. Historically, the sigmoid activation function $\sigma(z) = (1 + \exp(-z))^{-1}$ has been the go-to activation function, but recently the rectified linear unit, $\textrm{ReLU}(z) = \max(0, z)$, has become the de facto standard. \\
+\\*
+A feedforward neural network with $L-2$ hidden layers is parametarized by the weight matrices $\mathbf{W}^{(l)} \in \mathbb{R}^{m \times n}$ and biases $\mathbf{b}^{(l)} \in  \mathbb{R}^{m}$ for $l = 2 \ldots L$ where $n$ is the input dimension of the layer and $m$ the output dimension. A feedforward pass from layer $l-1$ to layer $l$ is given by $\mathbf{a}^{(l)} = \sigma(\mathbf{z}^{l})$ where $\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}$ and $\sigma$ is the chosen activation function. By letting the initial activation $\mathbf{a}^{(1)} = \mathbf{x}_i$ one can consider the final activation of the network the prediction of the network $\mathbf{\hat{y}}_i = \mathbf{a}^{(L)}$.
+
+\subsubsection{Weight initialization}
+% TODO: Maybe write more about why this is important here?
+We initialize the weight matrices using Kaiming He initialization, where the entries of the matrix $W^{(l)}_{ij}$ are drawn from a normal distribution with zero mean and $\sqrt{2/n}$ standard deviation as this will help reduce vanishing and exploding gradient problem by keeping the variance in each layer equal when using ReLU activation. \cite{he2015delving}
+
+
+\subsection{Back-propagation}
+\label{sec:backprop}
+% TODOS
+% - Write stuff about the hadamard product.
+% - Fix transposes and stuffs in equations
+The working horse of allmost all modern deep learning models is the back-propagation (aka. backprop) algorithm first popularized for training neural networks by Rumelhart, Hinton \& Williams in 1986 \cite{rumelhart1986learning}. The algorithms solves what is referred to as the \textit{credit-assignment problem}. When learning the parameters of an artificial neural network we would like to know how changing a weight in the network contributes to the total loss, in order to change it in the direction that minimizes the loss. One naive way to do this would be simply to adjust a single random weight slightly, evaluate the new neural network on the dataset and observe the effect on the model loss. If the change leads to a decrease in loss, keep the change, otherwise repeat from the beginning. This would however be very computationally expensive, since the network would have to be evaluated on the entire dataset for each weight in the network. Fortunately, the backprop algorithm achieves this much more efficiently as we will see in the following section. \\
+\\*
+Back-propagation is an efficient method for calculating the weight updates that minimizes some loss function, $\mathcal{L}(\hat{\mathbf{y}}_i, \mathbf{y}_i)$, which measures the difference between the predicted output of the network, $\hat{\mathbf{y}}_i$, and the true output, $\mathbf{y}_i$. Examples of loss functions are squared error $\sum{\frac{1}{2}(\hat{\mathbf{y}}_i - \mathbf{y}_i)^2}$, typically used for regression and categorical cross entropy $-\sum{\mathbf{y}_i \cdot \log(\hat{\mathbf{y}}_i)}$ for classification. At its core, the back-propagation algorithm is simply applying the chain rule on the partial derivate of the loss function with respect to the parameters and realizing that a lot of computation can be reused or "back propagated" in order to calculate the weight and bias updates for earlier layers. It is therefore necessary that the loss function is differentiable with respect to the prediction variable. Some alternatives to back-propagation exist such as Direct Feedback Alignment \cite{noekland2016direct}, but is not commonly used in practice.  
+
+To demonstrate the efficiency of the back-propagation algorithm, one can consider the last and second to last layers of the network. For now, the demonstration will only consider the weights as the bias terms can integrated into the weight matrices by extending the output dimension $n$ by 1 and appending a 1 to the $\mathrm{a}^{(l)}$ vectors resulting which will give an equivalent result. Applying the chain rule on the partial derivative of the loss function wrt. $\mathbf{W}^{(L)}$ yields
+\begin{equation} \label{eq:dLdW1}
+  \frac{\partial \mathcal{L}}{\partial \mathbf{W}^{(L)}}  
+= \underbrace{
+    \frac{\partial \mathcal{L}}{\partial \mathbf{a}^{(L)}}
+    \frac{\partial \mathbf{a}^{(L)}}{\partial \mathbf{z}^{(L)}}
+  }_ {\delta^{(L)}}
+  \frac{\partial \mathbf{z}^{(L)}}{\partial \mathbf{W}^{(L)}}
+= \underbrace{
+    \mathcal{L}^\prime (\hat{\mathbf{y}}_i) \sigma^\prime(\mathbf{z}^{(L)})
+  }_{\delta^{(L)}}
+ \mathbf{a}^{(L-1)}
+\end{equation}
+whose factors can be divided into the error term, $\delta^{(L)}$, and activation in the previous layer, $\mathbf{a}^{(L-1)}$. Yet again, applying the chain rule on the partial derivative of the loss function, but this time wrt. $\mathbf{W}^{(L-1)}$ hints at the source of its efficiency:
+\begin{equation}
+\begin{split}
+    \frac{\partial \mathcal{L}}{\partial \mathbf{W}^{(L-1)}}
+  % &= \frac{\partial \mathcal{L}}{\partial \mathbf{a}^{(L)}}
+  %   \frac{\partial \mathbf{a}^{(L)}}{\partial \mathbf{a}^{(L-1)}}
+  %   \frac{\partial \mathbf{a}^{(L-1)}}{\partial \mathbf{z}^{(L-1)}}
+  %   \frac{\partial \mathbf{z}^{(L-1)}}{\partial \mathbf{W}^{(L-1)}}
+ &= \underbrace{
+   \frac{\partial \mathcal{L}}{\partial \mathbf{a}^{(L)}}
+   \frac{\partial \mathbf{a}^{(L)}}{\partial \mathbf{z}^{(L)}}
+ }_{\delta^{(L)}}
+   \frac{\partial \mathbf{z}^{(L)}}{\partial \mathbf{a}^{(L-1)}}
+   \frac{\partial \mathbf{a}^{(L-1)}}{\partial \mathbf{z}^{(L-1)}}
+   \frac{\partial \mathbf{z}^{(L-1)}}{\partial \mathbf{W}^{(L-1)}}
+  = \underbrace{
+    \delta^{(L)}
+    \mathbf{W}^{(L)}
+    \sigma^\prime(\mathbf{z}^{(L-1)})
+  }_{\delta^{(L-1)}}
+  \mathbf{a}^{(L-2)}
+\end{split}
+\end{equation}
+Though the derivation above only considers $\mathbf{W}^{(L)}$ and $\mathbf{W}^{(L-1)}$ it is the general case that
+\begin{equation} \label{eq:delta-terms}
+  \delta^{(L)} = \mathcal{L}^\prime (\hat{\mathbf{y}}_i) \sigma^\prime(\mathbf{z}^{(L)}), 
+  \hspace{10pt}
+  \delta^{(l)} =  \delta^{(l+1)}\mathbf{W}^{(l+1)}\sigma^\prime(\mathbf{z}^{(l)})
+\end{equation}
+which can be computed using a dynamic programming approach to update the weight parameters using gradient descent with learning rate $\alpha$:
+\begin{equation} \label{eq:weight-update}
+  \mathbf{W}^{(l)} = \mathbf{W}^{(l)} -\alpha \delta^{(l)} \mathbf{a}^{(l-1)}.
+\end{equation}
+The weight is updated in the opposite direction (hence the negation) of the gradient as the aim is to minimize the loss function. By reusing the computation of the error terms, $\delta^{(l)}$, backprop is able to very efficiently compute the weight updates to minimize the global loss function. In theory the weights should be updated according to all datapoints in the dataset to maximize the likelihood, however in practice stochastic gradient descent is used with mini-batches of datapoints that stochastically resembles the overall distribution of the dataset. 
+
+
 % TODO: Maybe write a little bit about why this is relevant?
 
 \subsection{Batch normalization}
@@ -284,11 +285,9 @@ where $\alpha=0.1$ is the default value. At inference time, batch normalization 
   \mathbf{y}_i = \frac{\gamma}{\sqrt{\sigma^{2}_\text{mov} +\epsilon}} \cdot \mathbf{x}_i +\left(\beta - \frac{\gamma \mu_\text{mov}}{\sqrt{\sigma^{2}_\text{mov}+\epsilon}}\right).
 \end{equation}
 
-\section{Biologically plausible deep learning}
-% TODO
-% - Maybe write a little bit about what this section is about?
-% - Maybe something about alternatives to predictive coding that are also biologically plausible?
+\newpage
 
+\section{Biologically plausible deep learning}
 The following section will focus on biologically plausible deep learning and what that entails. There are many aspects of being biological plausible, however this project will only be considering those that are computationally relevant for deep learning. Initially to gain an understanding of biology a brief summary of the neuron is presented. From this biological constraints are defined and compared with current deep learning approaches. Subsequent sections will describe alternative, more biologically plausible methods for training and evaluating artificial neural networks. This project will primarily focus on methods presented in the two papers \textit{Spiking Deep Networks with LIF Neurons} by Eric Hunsberger et al. \cite{hunsberger2015spiking} and \textit{Can the Brain Do Backpropagation? - Exact Implementation of Backpropagation in Predictive Coding Networks} by Yuhang Song et al. \cite{PredictiveCodingNetworks}. The endgoal of this project is to compare these methods with a unification of the two on the supervised task of predicting the label of MNIST digits. Hopefully, the combination of these methods will shine some light on the intersection between artificial and biological neural networks and provide a foundation for further research.
 
 \subsection{Biological neurons} \label{sec:neurons}
@@ -301,9 +300,6 @@ It is believed that the brain learns both by forming new connections between neu
 "When an axon of cell A is near enough to excite a cell B and repeatedly or persistently takes part in firing it, some growth process or metabolic change takes place in one or both cells such that A's efficiency, as one of the cells firing B, is increased."
 \end{quotation}
 This postulate is congruent with the learning mechanism of spike-timing dependent plasticity (STDP) where changes in synaptic strength depend on the relative timings of the pre- and postsynaptic spikes, which has been observed to happen in the brain\cite{Bi10464}.
-% Inhibitory
-
-% Note on the level of abstraction.
 
 \begin{figure}
   \centering
@@ -517,18 +513,20 @@ Song et al. takes this a step further by showing that a special variant of infer
   \end{itemize}
 \end{itemize}
 
-\subsubsection{Variational free energy}
-Why is this relevant?
 
-\subsection{Variational Inference}
-Kriston paper about 
 
-\subsection{Energy Based Models}
-\begin{itemize}
-  \item What can they be used for in general?
-  \item Is predictive coding an instance of this?
-  \item How do they handle adverserial attacks?
-\end{itemize}
+% \subsubsection{Variational free energy}
+% Why is this relevant?
+
+% \subsection{Variational Inference}
+% Kriston paper about 
+
+% \subsection{Energy Based Models}
+% \begin{itemize}
+%   \item What can they be used for in general?
+%   \item Is predictive coding an instance of this?
+%   \item How do they handle adverserial attacks?
+% \end{itemize}
 
 \section{Results}
 
