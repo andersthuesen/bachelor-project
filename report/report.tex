@@ -10,6 +10,7 @@
 
 % Preamble
 \DeclareMathOperator{\Pois}{Pois}
+\DeclareMathOperator{\softmax}{softmax}
 \DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
 
 \title{
@@ -23,6 +24,12 @@
 \maketitle
 \thispagestyle{empty}
 \section*{Abstract}
+Write abstract here.
+
+\newpage 
+\thispagestyle{empty}
+\section*{Preface}
+Thank you to a lot of people here.
 
 \newpage
 \tableofcontents
@@ -45,7 +52,7 @@ In the recent years, deep learning has shown impressive results due to the avail
 This project will primarily be dealing with on of them: The weight transport problem which arises from the way backprop uses the connection weights in both the forward pass (inference) and the backwards parse (calculating the gradients), requiring that both forward and backward connections have symmetric weights and that information is able to flow backwards through the weights. \\
 Besides having both philosophical as well scientific interest, studying the computational aspects of how the human brain processes sensory input might lead to great improvements in deep learning and artificial intelligence.
 
-\subsection{Related work}
+\subsection{Related Work}
 % TODO:
 % Snak om de forskellige metoder der er blevet brugt.
 % Nævn gerne flere methoder der er blevet brugt
@@ -53,23 +60,30 @@ Besides having both philosophical as well scientific interest, studying the comp
 % Towards biological plausible convolutional networks: https://arxiv.org/abs/2106.13031
 Several attempts has been made to make modern deep learning more biologically plausible. These can be divided into two types of categories. The first category consists of methods that try to optimize the inference on low-powered neuromorphic hardware such as the Intel Loihi or IBM TrueNorth chips, by converting existing neural network architectures into their spiking counterparts. The other category consists of methods that aim to make the learning phase biologically plausible by only relying on local weight updates in order to optimize for some objective. This is in alignment with the Hebbian learning theory from the neuroscience literature which states that the synaptic plasticity is only dependent on the pre- and post-synaptic activity, possibly modulated through some global signaling mechanism (ex. dopamine). One example hereof is the work by Bengio et al. on Continual Equilibrium Propagation \cite{EqProp}. 
 
-\subsection{Research questions}
+\subsection{Research Questions}
 The project will address the following three research questions:
 \begin{itemize}
-  \item \textbf{Does the combination of predictive coding networks and spiking neural networks provide a biologically plausible model of learning and how well does it perform compared to modern deep learning?} \\
-  Talk about it here. %TODO: Write this
-  \item \textbf{What are the effectiveness of weight updates in inference learning compared to back-propagation?} \\
-  Talk about it here. %TODO: Write this
-  \item \textbf{In what ways can modern deep learning benefit from biological plausible learning?} \\
-  Talk about it here. %TODO: Write this
+  \item \textbf{What are the effectiveness of weight updates in inference learning compared to back-propagation?} \vspace{5pt} \\ % TODO: Might change!
+  In order to compare the weight updates from inference learning with back-propagation, we train two analogous models with each learning algorithm to predict MNIST digits and compare their accuracies as functions of number of weight updates.
+  \item \textbf{Does the combination of predictive coding networks and spiking neural networks provide a biologically plausible model of learning and how well does it perform compared to deep learning methods?} \vspace{5pt} \\ 
+  We examine the biological plausibility of the novel combination of predictive coding networks, inference learning and spiking network shadow training by evaluating it against biological constraints defined by Bengio et al. \cite{BengioLBL15} and later expanded upon by Hunsberger \cite{Eric2018} together with constraints of locality, spiking and unidirectionality derived from biological neurons. The performance of the model and learning algorithm is then compared against feed-forward neural networks trained with back-propagation on the MNIST benchmark dataset.
+
+  \item \textbf{In what ways can deep learning methods benefit from biological plausible learning?} \vspace{5pt} \\
+  We discuss different possibilities for improving the training of deep neural networks with biological plausible methods and how this work contributes to this. % TODO: Write more about this.
 \end{itemize}
+
+\subsection{Project Outline}
+The thesis is structured in three parts. In the first chapter, deep learning methods are introduced and reviewed to provide a foundation for the second part of the thesis. The second part will begin by defining what biological plausibility entails and what constraints must be satisfied for models and methods to be biological plausible. The chapter will then go on to introducing predictive coding networks, inference learning and spiking neural network shadow training, claimed to be more biological plausible than current deep learning methods. Finally, in the results and discussion section of the thesis, a novel combination of the previous mentioned, self-acclaimed biological plausible methods will be investigated according to the research questions above. Finally, the thesis will conclude. \\
+\\*
+All code from this project is available at \href{https://github.com/ande765a/bachelor-project}{https://github.com/ande765a/bachelor-project}.
 
 \newpage
 
-\section{Classical deep learning}
-Write something here about what this section is about, what it is not about etc. What we are going to do in each section and what this will lead us to / why this becomes relevant later in the report. 
+\section{Deep Learning}
+To give an understanding of the current deep learning landscape and de facto standard methods, this first part of the thesis will go into the different aspects of training deep neural networks. It is by no means meant to be an exhaustive review, and will primarily be focused on the tasks of supervised learning and simple feed-forward models. Hopefully, this will provide a firm foundation for the second part of the thesis when alternative biological plausible methods will be introduced and compared against. We begin by generically defining our dataset, central to supervised learning, from which we would like to train our neural network to learn a mapping from input to output variables. As we will later be training our networks to predict the written digits in the MNIST dataset, our focus will primarily be on discriminative models and classification tasks. The method of maximum likelihood estimation as a means of optimally estimating parameters of statistical models will be introduced and shown to output the particular loss functions used in deep learning. With connections to error units in predictive coding networks, introduced in the latter part of this thesis, we show how derivatives of loss functions in both regression and classification settings can be defined in terms of prediction residuals. Finally, back-propagation, crucial in training deep neural networks, will be derived for feed-forward models along with batch normalization for efficiently doing so.
 
-\subsection{Mathematical notation}
+
+\subsection{Mathematical Notation}
 Throughout this thesis, we will be using \textbf{boldface} and CAPITALIZATION when dealing with \textbf{MATRICES}, eg. $\mathbf{A}$ and \textbf{vectors}, eg. $\mathbf{x}$. To avoid irrelevant interruptions in derivations, vectors of lowercase letters will implicitly represent columns in their corresponding matrices unless otherwise stated, eg. $\mathbf{x}_i$ will be the $i$'th column in the matrix $\mathbf{X}$. The same is the case for non-boldface scalers and their corresponding vectors, eg. $x_j$ will be the $j$'th index in vector $\mathbf{x}_i$. The $\hat{\text{hat}}$ symbol will be used to indicate the prediction of a variable, eg. $\hat{y}$ will be the prediction of $y$. 
 
 \subsection{Dataset}
@@ -86,7 +100,7 @@ We define our dataset, $\mathcal{D} = \left\{(\mathbf{x}_i, \mathbf{y}_i)\right\
 
 % TODO: Write more about mnist. How many training, test examples? What is the size of each image? Etc. Maybe also a little bit about fashion mnist. 
 
-\subsection{Maximum Likelihood Estimation}
+\subsection{Maximum Likelihood Estimation} \label{sec:MLE}
 Maximum Likelihood Estimation (MLE) is method of finding the optimal parameters, $\theta$, of some assumed probability distribution or model, $P$, in order to best describe the observed data, $\mathbf{X}$. Statistically this can be formulated as $P(\mathbf{X}; \theta)$ or more concisely $P_\theta(\mathbf{X})$. Assuming that the observed data is independent and identically distributed, the likelihood estimator function can be defined as:
 \begin{equation}
   \mathcal{L}_\theta(\mathbf{X}) = \prod_{i=1}^{N}{P_\theta(\mathbf{x}_i)}.
@@ -103,7 +117,7 @@ The MLE task is then to find $\theta^\star = \argmax_{\theta} \hspace{5pt} \math
 \begin{equation} \label{eq:negative-log-likelihood}
   -\log \mathcal{L}_{\theta}(\mathbf{Y} \mid \mathbf{X}) = -\sum_{i=1}^{N} \log P_{\theta}\left(\mathbf{y}_i \mid \mathbf{x}_i\right).
 \end{equation}
-As the logarithm is a monotonic increasing function, minimizing the log-probability is essentially the same as maximizing the probability itself. By assuming that $\mathbf{Y}$ follows a Gaussian distribution $P_{\theta}(\mathbf{Y} \mid \mathbf{X}) = \mathcal{N}(\hat{\mathbf{Y}}(\mathbf{X}), \sigma)$ with a mean of $\hat{\mathbf{Y}}$ and a fixed variance of $\sigma^2$ the log likelihood function can be written as:
+As the logarithm is a monotonic increasing function, minimizing the log-probability is essentially the same as maximizing the probability itself. By assuming that $\mathbf{Y}$ follows a Gaussian distribution $P_{\theta}(\mathbf{Y} \mid \mathbf{X}) = \mathcal{N}(\hat{\mathbf{Y}}(\mathbf{X}), \sigma^2)$ with a mean of $\hat{\mathbf{Y}}$ and a fixed variance of $\sigma^2$ the log likelihood function can be written as:
 \begin{equation}
   \begin{split} % TODO: Fix something here about the notation.
   -\log \mathcal{L}_{\theta}(\mathbf{Y} \mid \mathbf{X}) & = -\sum_{i=1}^{N} \log \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(\mathbf{y}_i - \hat{\mathbf{y}}_i)^{2}}{2 \sigma^{2}}} \\ 
@@ -111,7 +125,7 @@ As the logarithm is a monotonic increasing function, minimizing the log-probabil
   \end{split}
 \end{equation}
 If all constant terms are dropped it becomes apparent that minimizing the mean squared error, $\text{MSE} = \frac{1}{N}\sum_{i=1}^{N} \frac{1}{2}(y_i - \hat{y}_i)^2$, performs maximum likelihood estimation under the assumption that the data is normally distributed. To optimize this quantity with gradient based method it is necessary to compute the partial derivative:
-\begin{equation}
+\begin{equation} \label{eq:regression-loss-deriv}
   \frac{\partial}{\partial \hat{\mathbf{Y}}}\text{MSE} = \frac{1}{N}\sum_{i=1}^{N} \hat{\mathbf{y}}_i - \mathbf{y}_i
 \end{equation}
 \\*
@@ -128,7 +142,7 @@ If the label is one-hot encoded, meaning that the element in the vector with ind
     0 & \text{otherwise}
   \end{cases} \hspace{5pt} \text{for } k = 1, \ldots, K
 \end{equation}
-where $c_i$ is the correct class for label $x_i$. Neural networks with softmax activation in the last layer can be trained by minimizing the cross-entropy between the one-hot encoded label, $p$, and the output distribution of the network, $q$, given by:
+where $c_i$ is the correct class for label $\mathbf{x}_i$. Neural networks with softmax activation in the last layer can be trained by minimizing the cross-entropy between the one-hot encoded label, $p$, and the output distribution of the network, $q$, given by:
 \begin{equation}
   H(p, q) = - \sum_{i=1}^N \sum_{k=1}^K p(y_i \mid x_i)_k \log q(y_i \mid x_i)_k.
 \end{equation}
@@ -188,16 +202,15 @@ and as $s_j$ does not depend on $i$, it can be pulled out of the sum:
   = s_j \sum_{i=1}^{K}{ y_{i} } - y_{j}.
 \end{equation}
 Finally, since $y_i$ sums to 1, the partial derivative of the cross-entropy wrt. $z_j$ becomes:
-\begin{equation}
+\begin{equation} \label{eq:cross-entropy-loss-deriv}
   \frac{\partial}{\partial z_j} H(p, q) = s_j - y_j.
 \end{equation}
+Interestingly, in both regression and classification settings it turns out that the derivative of the loss functions (equation \ref{eq:regression-loss-deriv} and \ref{eq:cross-entropy-loss-deriv}) can be formulated as the residual of the prediction and the label. This may be intuitive in the case of regression where continuous values are predicted, but not so much in the case of classification. In order to grasp why this is still the case, it might be useful to imagine a binary classification problem. In the case of a false positive ($s_j = 1$, $y_j = 0$), the derivative of the cross-entropy will be positive, meaning that further increasing $s_j$ (although not possible due to softmax) will further increase the cross-entropy. We therefore update our parameters in the negative direction of the gradient.
 
-
-
-\subsection{Feedforward neural networks}
-Feedforward neural networks (FNN) are considered the simplest kind of neural network where the connections between the nodes does not allow for any cycles or recurrent connections. Feedforward neural networks are divided into several layers, where input data from the first layer is "feed forward" through the so-called hidden layers to the final output layer of the network, considered the prediction of the network. FNNs are typically fully connected networks which entails that every node of the network is connected to every node in the previous layer. One special case of FNNs is that of when there are no hidden layers in the network and the input layer is linearly transformed to the output layer and "activated" through a softmax or sigmoid function, depending on the output of output nodes. In that case, the FNN will correspond to (multinomial) logistic regression. This correspondance incentivises the use of activation functions  after each linear transformation of the layers, as the network would otherwise not be able to describe non-linearities in the data. Historically, the sigmoid activation function $\sigma(z) = (1 + \exp(-z))^{-1}$ has been the go-to activation function, but recently the rectified linear unit, $\textrm{ReLU}(z) = \max(0, z)$, has become the de facto standard. \\
+\subsection{Feed-forward Neural Networks}
+Feed-forward neural networks (FNN) are considered the simplest kind of neural network where the connections between the nodes does not allow for any cycles or recurrent connections. Feed-forward neural networks are divided into several layers, where input data from the first layer is "feed forward" through the so-called hidden layers to the final output layer of the network, considered the prediction of the network. FNNs are typically fully connected networks which entails that every node of the network is connected to every node in the previous layer. One special case of FNNs is that of when there are no hidden layers in the network and the input layer is linearly transformed to the output layer and "activated" through a softmax or sigmoid function, depending on the output of output nodes. In that case, the FNN will correspond to (multinomial) logistic regression. This correspondence incentives the use of activation functions  after each linear transformation of the layers, as the network would otherwise not be able to describe non-linearities in the data. Historically, the sigmoid activation function $\sigma(z) = (1 + \exp(-z))^{-1}$ has been the go-to activation function, but recently the rectified linear unit, $\textrm{ReLU}(z) = \max(0, z)$, has become the de facto standard. \\
 \\*
-A feedforward neural network with $L-2$ hidden layers is parametarized by the weight matrices $\mathbf{W}^{(l)} \in \mathbb{R}^{m \times n}$ and biases $\mathbf{b}^{(l)} \in  \mathbb{R}^{m}$ for $l = 2 \ldots L$ where $n$ is the input dimension of the layer and $m$ the output dimension. A feedforward pass from layer $l-1$ to layer $l$ is given by $\mathbf{a}^{(l)} = \sigma(\mathbf{z}^{l})$ where $\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}$ and $\sigma$ is the chosen activation function. By letting the initial activation $\mathbf{a}^{(1)} = \mathbf{x}_i$ one can consider the final activation of the network the prediction of the network $\mathbf{\hat{y}}_i = \mathbf{a}^{(L)}$.
+A feed-forward neural network with $L-2$ hidden layers is parameterized by the weight matrices $\mathbf{W}^{(l)} \in \mathbb{R}^{m \times n}$ and biases $\mathbf{b}^{(l)} \in  \mathbb{R}^{m}$ for $l = 2 \ldots L$ where $n$ is the input dimension of the layer and $m$ the output dimension. A feed-forward pass from layer $l-1$ to layer $l$ is given by $\mathbf{a}^{(l)} = \sigma(\mathbf{z}^{l})$ where $\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}$ and $\sigma$ is the chosen activation function. By letting the initial activation $\mathbf{a}^{(1)} = \mathbf{x}_i$ one can consider the final activation of the network the prediction of the network $\mathbf{\hat{y}}_i = \mathbf{a}^{(L)}$.
 
 \subsubsection{Weight initialization}
 % TODO: Maybe write more about why this is important here?
@@ -209,7 +222,7 @@ We initialize the weight matrices using Kaiming He initialization, where the ent
 % TODOS
 % - Write stuff about the hadamard product.
 % - Fix transposes and stuffs in equations
-The working horse of allmost all modern deep learning models is the back-propagation (aka. backprop) algorithm first popularized for training neural networks by Rumelhart, Hinton \& Williams in 1986 \cite{rumelhart1986learning}. The algorithms solves what is referred to as the \textit{credit-assignment problem}. When learning the parameters of an artificial neural network we would like to know how changing a weight in the network contributes to the total loss, in order to change it in the direction that minimizes the loss. One naive way to do this would be simply to adjust a single random weight slightly, evaluate the new neural network on the dataset and observe the effect on the model loss. If the change leads to a decrease in loss, keep the change, otherwise repeat from the beginning. This would however be very computationally expensive, since the network would have to be evaluated on the entire dataset for each weight in the network. Fortunately, the backprop algorithm achieves this much more efficiently as we will see in the following section. \\
+The working horse of almost all modern deep learning models is the back-propagation (aka. backprop) algorithm first popularized for training neural networks by Rumelhart, Hinton \& Williams in 1986 \cite{rumelhart1986learning}. The algorithms solves what is referred to as the \textit{credit-assignment problem}. When learning the parameters of an artificial neural network we would like to know how changing a weight in the network contributes to the total loss, in order to change it in the direction that minimizes the loss. One naive way to do this would be simply to adjust a single random weight slightly, evaluate the new neural network on the dataset and observe the effect on the model loss. If the change leads to a decrease in loss, keep the change, otherwise repeat from the beginning. This would however be very computationally expensive, since the network would have to be evaluated on the entire dataset for each weight in the network. Fortunately, the backprop algorithm achieves this much more efficiently as we will see in the following section. \\
 \\*
 Back-propagation is an efficient method for calculating the weight updates that minimizes some loss function, $\mathcal{L}(\hat{\mathbf{y}}_i, \mathbf{y}_i)$, which measures the difference between the predicted output of the network, $\hat{\mathbf{y}}_i$, and the true output, $\mathbf{y}_i$. Examples of loss functions are squared error $\sum{\frac{1}{2}(\hat{\mathbf{y}}_i - \mathbf{y}_i)^2}$, typically used for regression and categorical cross entropy $-\sum{\mathbf{y}_i \cdot \log(\hat{\mathbf{y}}_i)}$ for classification. At its core, the back-propagation algorithm is simply applying the chain rule on the partial derivate of the loss function with respect to the parameters and realizing that a lot of computation can be reused or "back propagated" in order to calculate the weight and bias updates for earlier layers. It is therefore necessary that the loss function is differentiable with respect to the prediction variable. Some alternatives to back-propagation exist such as Direct Feedback Alignment \cite{noekland2016direct}, but is not commonly used in practice.  
 
@@ -452,20 +465,20 @@ Predictive coding is hierarchial theory of perception in the brain where higher 
   \label{fig:predictive-coding-network}
 \end{figure}
 Predictive coding networks are very similar to feedforward neural networks but include error nodes, $\epsilon_{i,t}^{(l)}$, between value nodes (as illustrated in figure \ref{fig:predictive-coding-network}) that encode the difference between a value node, $x_{i,t}^{(l)}$, and its prediction, $u_{i,t}^{(l)}$:
-\begin{equation}
-  \mathbf{\epsilon}_t^{(l)} = \mathbf{x}_t^{(l)} - \mathbf{u}_t^{(l)},\hspace{10pt}  \mathbf{u}_t^{(l)} = \mathbf{W}^{(l)} \sigma(\mathbf{x}_t^{(l-1)}) + \mathbf{b}^{(l)}
+\begin{equation} \label{eq:pc-error-nodes-and-preds}
+  \mathbf{\epsilon}_t^{(l)} = \mathbf{x}_t^{(l)} - \mathbf{u}_t^{(l)},\hspace{10pt}  \mathbf{u}_t^{(l)} = \mathbf{W}^{(l)} \sigma^{(l)}(\mathbf{x}_t^{(l-1)}) + \mathbf{b}^{(l)}
 \end{equation}
  Inference learning (IL) is a particular algorithm introduced by Song et al. \cite{PredictiveCodingNetworks} to learn the parameters of predictive coding networks for both supervised and un-supervised learning tasks. The algorithm runs in two phases; an inference phase and a learning phase. To train the network supervised, the input and target nodes are clamped to the input and target variables that the network should learn a mapping between. Then in the inference phase, value nodes are inferred such that they minimize the total free energy of the network:
 \begin{equation}
-  F = \sum_{l=2}^{L}{
-    \frac{1}{2}{\mathbf{\epsilon}^{(l)}}^T\mathbf{\epsilon}^{(l)}.
+  F_t = \sum_{l=2}^{L}{
+    \frac{1}{2}{\lVert \mathbf{\epsilon}_t^{(l)} \rVert}^2.
   }
 \end{equation}
 To minimize the error nodes, the value nodes are updating according to the following rules;
 \begin{equation} \label{eq:update-value-nodes}
   \dot{\mathbf{x}}_t^{(l)} = \begin{cases}
     0 & \text{if } l=1 \\
-     -\mathbf{\epsilon}_t^{(l)} + \sigma^\prime(\mathbf{x}_t^{(l)}) ( \mathbf{\epsilon}_t^{(l+1)} \mathbf{W}^{(l+1)} )  & \text{if } l = 2 \ldots L-1 \\
+     -\mathbf{\epsilon}_t^{(l)} + \sigma^{(l)\prime}(\mathbf{x}_t^{(l)}) ( \mathbf{\epsilon}_t^{(l+1)} \mathbf{W}^{(l+1)} )  & \text{if } l = 2 \ldots L-1 \\
     - \mathbf{\epsilon}_t^{(l)} & \text {if } l = L \text{ during prediction} \\
     0 & \text {if } l = L \text{ during learning}
   \end{cases}
@@ -481,30 +494,35 @@ where $\alpha$ is the learning rate. A possible source of confusion when coming 
 Here, $\mathbf{x}_{T}^{(L)} - \mathbf{u}_T^{(L)}$ is the derivative of the squared loss $\mathcal{L}(y, \hat{y}) = \frac{1}{2}\left( y - \hat{y}  \right)^2$. 
 
 
-\subsubsection{Softmax and cross-entropy loss in inference learning}
-How do we do this??
-We have to redefine our errors to something smart.
-We have to use softmax and maybe change the weight updates. 
-
 \subsubsection{Z-IL and equivalence to back-propagation}
 Song et al. takes this a step further by showing that a special variant of inference learning, zero-divergence inference learning (Z-IL) gives rise to the exact same weight updates as the back-propagation algorithm \cite{PredictiveCodingNetworks}. They show this by first assuming that every value node, $x_{i,t}^{(l)}$ and prediction $u_{i,t}^{(l)}$ is equal to the corresponding forward activity of the equivalent ANN. This is naturally satisfied when the input node is clamped to the input value of some training pair and the network is relaxed to an equilibrium. This corresponds to the forward propagation necessary in back-propagation algorithm. The output node is then fixed to the output value of the training pair after which each value node is updated to minimize $F$ according to equation \ref{eq:update-value-nodes} with integration step size $\gamma = 1$. At last, the weights are scheduled to be updated according to equation \ref{eq:il-weight-update} at time $t=l$.
 
 \subsubsection{Predictive coding networks for classification}
-% TODO:
-% - Skriv hvordan man kan få et predictive coding netværk til at implementere en softmax funktion.
+Predictive coding networks by default predict continuous valued output variables and are therefore more suited for regression tasks than classification. However, it is possible to modify the network to perform classification by relying on the insight of deriving the partial derivative of the cross-entropy loss function in section \ref{sec:MLE}. Inference learning updates value nodes in order to minimize the total free energy of the network according to:
+\begin{equation}
+  \begin{split}
+  \dot{\mathbf{x}}_t^{(l)} = -\frac{\partial F_t}{\partial \mathbf{x}_t^{(l)}} & = - \frac{\partial }{\partial \mathbf{x}_t^{(l)}} \left[ \frac{1}{2} {\lVert \epsilon_t^{(l)} \rVert}^2 + \frac{1}{2} {\lVert \epsilon_t^{(l+1)} \rVert}^2  \right] \\
+  & = -\epsilon_t^{(l)} - \frac{\partial \frac{1}{2} {\lVert \epsilon_t^{(L)} \rVert}^2}{\partial \mathbf{u}_t^{(l+1)}} \frac{\partial \mathbf{u}_t^{(l+1)}}{\partial \mathbf{x}_t^{(l)}} \\
+  & = -\epsilon_{t}^{(l)}+\sigma^{(l+1)\prime}(\mathbf{x}_{t}^{(l)})(\epsilon_{t}^{(l+1)} \mathbf{W}^{(l+1)}).
+  \end{split}
+\end{equation}
+as changing the value node $\mathbf{x}_t^{(l)}$ will both effect its own layers error nodes and error nodes in the next layer as seen in equation \ref{eq:pc-error-nodes-and-preds}. In order for the predictive coding network to perform classification, we set the last weight to the identity matrix, activation function $\sigma^{(L)}(\cdot)$ to the $\softmax$ function and the derivative of the activation function to $\sigma^{(L)\prime}(\cdot) = 1$. We will now consider the second last layer, $L-1$, in the network, corresponding to the logits before being transformed by the softmax function. From the above, the value nodes in the second last layer will now change according to:
+\begin{equation}
+  \dot{\mathbf{x}}_{t}^{(L-1)} = -\epsilon_{t}^{(L-1)} + \epsilon_{t}^{(L)}.
+\end{equation}
+Here, we notice that changing $\mathbf{x}_t^{(L-1)}$ in the direction of $\epsilon_{t}^{(L)}$ will actually minimize the cross-entropy loss (as seen in equation \ref{eq:cross-entropy-loss-deriv}), since:
+\begin{equation}
+  \epsilon_{t}^{(L)} = -\frac{\partial H(\mathbf{x}_t^{(L)}, \mathbf{u}_t^{(L)})}{\partial \mathbf{x}_t^{(L-1)}} = \mathbf{x}_t^{(L)} - \mathbf{u}_t^{(L)}
+\end{equation}
+% Write finale.
 
-%\begin{itemize}
-%  \item Talk about how predictive coding takes the total network error into account when updating the weights. 
-%  \item Backprop does not but is probably more efficient to compute. Is there any examples of weights that can be learned by predictive coding, but not backprop? Maybe backprop will be able to learn those, but with a much smaller learning rate since predictive coding takes this into account in the inference phase. 
-%\end{itemize}
+% the predictive coding network will therefore learn to perform classification.
+% 
 
-
-% Write something about softmax and cross entropy
+\newpage
 
 
 \subsubsection{Biological plausability}
-
-
 
 \begin{itemize}
   \item Write about the biological plausability.
