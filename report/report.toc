@@ -28,7 +28,7 @@
 \contentsline {subsubsection}{\numberline {3.5.1}Predictive coding networks and inference learning}{17}{subsubsection.3.5.1}%
 \contentsline {subsubsection}{\numberline {3.5.2}Z-IL and equivalence to back-propagation}{18}{subsubsection.3.5.2}%
 \contentsline {subsubsection}{\numberline {3.5.3}Predictive coding networks for classification}{18}{subsubsection.3.5.3}%
-\contentsline {subsubsection}{\numberline {3.5.4}Biological plausability}{19}{subsubsection.3.5.4}%
+\contentsline {subsubsection}{\numberline {3.5.4}Biological plausability}{18}{subsubsection.3.5.4}%
 \contentsline {section}{\numberline {4}Results}{19}{section.4}%
 \contentsline {section}{\numberline {5}Discussion}{19}{section.5}%
 \contentsline {section}{\numberline {6}Conclusion}{19}{section.6}%
