@@ -46,19 +46,22 @@ Thank you to a lot of people here.
 % - Hvis deep learning på en eller anden måde kan kobles til neuroscience kan vi bruge hvad vi ved om neuroscience i deep learning om omvendt. 
 % - Hjernen er bygget til at være meget effektiv. I dag kræver det store mængder computerkraft at træne dybe neurale netværk. Måske kan det gøres smartere ved at studere hvordan hjernen lærer.
 % - Vi kan lære mere om os selv ved at kigge på hvilke fejl der kan ske med en bio plausible læringsmekanisme. Måske vi kan komme til at lære mere om psykiske/mentale sygdomme/manglende hjernefunktioner.
-In the recent years, deep learning has shown impressive results due to the availability of massive parallel compute and huge amounts of data. From the biological inspiration of the neuron to the perceptron where data inputs are weighted, summed together and thresholded, several new modern architectures, like recurrent \cite{lstm}, residual \cite{resnet} and transformer neural networks \cite{transformers} have pushed the limits and achieved state of the art results in speech recognition, computer vision and natural language understanding. Despite of these networks being originally inspired by the brain, the back-propagation (backprop) algorithm for learning the weights and deep learning in general has been criticized for being biologically implausible \cite{BengioLBL15}. 
+In the recent years, deep learning has shown impressive results due to the availability of massive parallel compute and huge amounts of data. From the initial biological inspiration of the brain’s neurons to the perceptron where data inputs are weighted, summed together and thresholded, several new modern architectures, like recurrent \cite{lstm}, residual \cite{resnet} and transformer neural networks \cite{transformers} have pushed the limits and achieved state of the art results in speech recognition, computer vision and natural language understanding. Although deep learning has shown impressive results in the last decade, training state-of-the-art models requires an increasing amount of compute and energy resources often only available to large corporations and research institutions as well as innumerable training examples that are often expensive to obtain. Is now is the time to evaluate on what we have learned in the last decade of deep learning and begins to look for alternative, more efficient methods? One source of inspiration is to again look at the brain, still considered state-of-the-art in generalization, data- and energy-efficiency. Today, most success of deep learning has been in supervised learning problems. It is not, however, currently known how the brain would have access to labels on what is a cat and what is a dog in the same way. Perhaps a more plausible scenario is that the brain uses self-supervised learning to predict the future from past experiences. Optimizing deep learning for self-supervised learning might offer an appealing replacement for the vast amount of labeled data needed today. However, self-supervised learning is just one part to this. Equally important is how the learning is actually done. By studying the biological constraints of the brain and the interconnection between neurons it might be possible to discover more efficient learning mechanism and implementations for improving deep learning. Researchers have proposed alternative methods that aim to make different parts of deep learning more biological plausible, but so far little work has been put into combining these methods and showing the results.
 
 % Rewrite the following
-This project will primarily be dealing with on of them: The weight transport problem which arises from the way backprop uses the connection weights in both the forward pass (inference) and the backwards parse (calculating the gradients), requiring that both forward and backward connections have symmetric weights and that information is able to flow backwards through the weights. \\
-Besides having both philosophical as well scientific interest, studying the computational aspects of how the human brain processes sensory input might lead to great improvements in deep learning and artificial intelligence.
+%This project will primarily be dealing with on of them: The weight transport problem which arises from the way backprop uses the connection weights in both the forward pass (inference) and the backwards parse (calculating the gradients), requiring that both forward and backward connections have symmetric weights and that information is able to flow backwards through the weights. \\
+%Besides having both philosophical as well scientific interest, studying the computational aspects of how the human brain processes sensory input might lead to great improvements in deep learning and artificial intelligence.
 
 \subsection{Related Work}
 % TODO:
-% Snak om de forskellige metoder der er blevet brugt.
-% Nævn gerne flere methoder der er blevet brugt
-% Måske nævn allerede her de to papers af Song og Hunsberger.
 % Towards biological plausible convolutional networks: https://arxiv.org/abs/2106.13031
-Several attempts has been made to make modern deep learning more biologically plausible. These can be divided into two types of categories. The first category consists of methods that try to optimize the inference on low-powered neuromorphic hardware such as the Intel Loihi or IBM TrueNorth chips, by converting existing neural network architectures into their spiking counterparts. The other category consists of methods that aim to make the learning phase biologically plausible by only relying on local weight updates in order to optimize for some objective. This is in alignment with the Hebbian learning theory from the neuroscience literature which states that the synaptic plasticity is only dependent on the pre- and post-synaptic activity, possibly modulated through some global signaling mechanism (ex. dopamine). One example hereof is the work by Bengio et al. on Continual Equilibrium Propagation \cite{EqProp}. 
+Several approaches have been made to make deep learning more aligned with how the brain learns. These can generally be divided into two types of categories. The first category consists of methods that aim to make the learning phase biologically plausible by only relying on local weight updates. This is in alignment with the Hebbian learning theory from the neuroscience literature which states that the synaptic plasticity is only dependent on the pre- and post-synaptic activity, possibly modulated through some global signaling mechanism (ex. dopamine). Recently, methods such as (Direct) Feedback Alignment (DFA/FA) \cite{noekland2016direct} \cite{lillicrap2014random}, has been proposed as a biological plausible alternative to back-propagation, capable of scaling to state-of-the-art deep learning tasks and architectures. DFA and FA aim to mitigate the symmetric weight problem of back-propagation problematized by Bengio et al \cite{BengioLBL15}, by back-propagating prediction errors through random weights. This happens either directly from the output layer to each hidden layer in the case of DFA or sequentially back through the network in standard FA. Other biological alternatives to back-propagation include Equilibrium Propagation (EP) \cite{EqProp} for training energy-based models, which claims to be well suited for neuromorphic hardware implementations. Training using EP occur in two phases. In the first phase, the network is presented with the input of a training pair. After the network comes to an equilibrium, the prediction of the network is then nudged towards the correct label. When the network relaxes in the second phase, the weights are then updates according to the local activity differences in each neuron that implicitly encode the gradient of the loss function. EP, however, requires connection weights to be symmetric and access to previous neuron activity after the network has come to an equilibrium in the second phase, which is not local in time. Continual Equilibrium Propagation (C-EP) \cite{ContinualEqProp} fixes this issue by simultaneously updating the weights while the network reaches equilibrium in the second phase, but still requires symmetric weights. To address this issue, the same authors adapt C-EP to systems with asymmetric connection weights and call this method the Continual Vector Field (C-VF) approach. A third kind of biological alternative to back-propagation is Predictive Coding Networks (PCN) and Inference Learning (IL) \cite{predcoding} inspired by the seminal neurocomputational theory of perception by Rao and Ballard \cite{raoballard1999}. PCNs have in the past couple of years shown to approximate the backprop algorithm and even under certain conditions implement it exactly using Zero-divergence Inference Learning (Z-IL) \cite{PredictiveCodingNetworks} and work on arbitrary computation graphs \cite{salvatori2021reverse} \cite{milladge2020predictive}. 
+
+The second category consists of methods that aim to make the communication between neurons more biologically plausible and possible more efficient on low-powered neuromorphic hardware such as the Intel Loihi or IBM TrueNorth chips by relying on binary spikes for communication. SpikeProp \cite{Boht2000SpikePropBF} is one of the early proposed methods for training spiking neural networks. The method uses an algorithm akin to back-propagation directly on the generated spikes using surrogate gradient functions. Another approach is to use a recurrent neural network type architecture to model the dynamics of neurons and trained with back-propagation using \href{https://snntorch.readthedocs.io/en/latest/}{snnTorch framework} \cite{eshraghian2021training}. A third approach is the method of shadow training, where standard ANNs are training using a neural response function of the spiking frequency as function of the input stimuli and later run in simulation or hardware using the exact neuronal dynamics \cite{hunsberger2015spiking}. \\
+\\*
+This project will primarily focus on PCN and shadow training methods presented in the two papers \textit{Spiking Deep Networks with LIF Neurons} by Eric Hunsberger et al. \cite{hunsberger2015spiking} and \textit{Can the Brain Do Backpropagation? - Exact Implementation of Backpropagation in Predictive Coding Networks} by Yuhang Song et al. \cite{PredictiveCodingNetworks}. The endgoal of this project is to compare these methods with a unification of the two on the supervised task of predicting the label of MNIST digits. Hopefully, the combination of these methods will shine some light on the intersection between artificial and biological neural networks and provide a foundation for further research.
+
+\newpage
 
 \subsection{Research Questions}
 The project will address the following three research questions:
@@ -301,7 +304,7 @@ where $\alpha=0.1$ is the default value. At inference time, batch normalization 
 \newpage
 
 \section{Biologically plausible deep learning}
-The following section will focus on biologically plausible deep learning and what that entails. There are many aspects of being biological plausible, however this project will only be considering those that are computationally relevant for deep learning. Initially to gain an understanding of biology a brief summary of the neuron is presented. From this biological constraints are defined and compared with current deep learning approaches. Subsequent sections will describe alternative, more biologically plausible methods for training and evaluating artificial neural networks. This project will primarily focus on methods presented in the two papers \textit{Spiking Deep Networks with LIF Neurons} by Eric Hunsberger et al. \cite{hunsberger2015spiking} and \textit{Can the Brain Do Backpropagation? - Exact Implementation of Backpropagation in Predictive Coding Networks} by Yuhang Song et al. \cite{PredictiveCodingNetworks}. The endgoal of this project is to compare these methods with a unification of the two on the supervised task of predicting the label of MNIST digits. Hopefully, the combination of these methods will shine some light on the intersection between artificial and biological neural networks and provide a foundation for further research.
+The following section will focus on biologically plausible deep learning and what that entails. There are many aspects of being biological plausible, however this project will only be considering those that are computationally relevant for deep learning. Initially to gain an understanding of biology a brief summary of the neuron is presented. From this biological constraints are defined and compared with current deep learning approaches. Subsequent sections will describe alternative, more biologically plausible methods for training and evaluating artificial neural networks. 
 
 \subsection{Biological neurons} \label{sec:neurons}
 This section aims to briefly describe the biological neuron from a highlevel perspective to give an intuition of how processing is happening in the human brain. Hopefully this will lead to a better understanding of what biologically plausibility encapsulates. It is by no means fully comprehensive nor capturing all the nuanced details of the biological processes. \\
@@ -517,32 +520,12 @@ Here, we notice that changing $\mathbf{x}_t^{(L-1)}$ in the direction of $\epsil
 Hence, the predictive coding network will learn to perform classification. 
 % TODO: Maybe write a little more to this.
 
-
-\subsubsection{Biological plausability}
-
-\begin{itemize}
-  \item Write about the biological plausability.
-  \item Update rules are now local, but still require symmetric weights? \begin{itemize}
-    \item Maybe this could be solved with local random feedback alignment?
-  \end{itemize}
-\end{itemize}
-
-
-
-% \subsubsection{Variational free energy}
-% Why is this relevant?
-
-% \subsection{Variational Inference}
-% Kriston paper about 
-
-% \subsection{Energy Based Models}
-% \begin{itemize}
-%   \item What can they be used for in general?
-%   \item Is predictive coding an instance of this?
-%   \item How do they handle adverserial attacks?
-% \end{itemize}
+\newpage
 
 \section{Results}
+\subsection{Experimental Setup}
+
+
 
 \section{Discussion}
 

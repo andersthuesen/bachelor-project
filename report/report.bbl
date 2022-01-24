@@ -22,6 +22,12 @@ Maxence Ernoult, Julie Grollier, Damien Querlioz, Yoshua Bengio, and Benjamin
 \newblock Equilibrium propagation with continual weight updates.
 \newblock {\em CoRR}, abs/2005.04168, 2020.
 
+\bibitem{ContinualEqProp}
+Maxence Ernoult, Julie Grollier, Damien Querlioz, Yoshua Bengio, and Benjamin
+  Scellier.
+\newblock Equilibrium propagation with continual weight updates.
+\newblock {\em CoRR}, abs/2005.04168, 2020.
+
 \bibitem{eshraghian2021training}
 Jason~K Eshraghian, Max Ward, Emre Neftci, Xinxin Wang, Gregor Lenz, Girish
   Dwivedi, Mohammed Bennamoun, Doo~Seok Jeong, and Wei~D Lu.
@@ -77,9 +83,20 @@ Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
 \newblock Gradient-based learning applied to document recognition.
 \newblock {\em Proceedings of the IEEE}, 86(11):2278--2324, 1998.
 
+\bibitem{lillicrap2014random}
+Timothy~P. Lillicrap, Daniel Cownden, Douglas~B. Tweed, and Colin~J. Akerman.
+\newblock Random feedback weights support learning in deep neural networks,
+  2014.
+
 \bibitem{millidge2021predictive}
 Beren Millidge, Anil Seth, and Christopher~L Buckley.
 \newblock Predictive coding: a theoretical and experimental review, 2021.
+
+\bibitem{milladge2020predictive}
+Beren Millidge, Alexander Tschantz, and Christopher~L. Buckley.
+\newblock Predictive coding approximates backprop along arbitrary computation
+  graphs.
+\newblock {\em CoRR}, abs/2006.04182, 2020.
 
 \bibitem{noekland2016direct}
 Arild Nøkland.
@@ -97,6 +114,11 @@ David~E Rumelhart, Geoffrey~E Hinton, and Ronald~J Williams.
 \newblock Learning representations by back-propagating errors.
 \newblock {\em nature}, 323(6088):533--536, 1986.
 
+\bibitem{salvatori2021reverse}
+Tommaso Salvatori, Yuhang Song, Thomas Lukasiewicz, Rafal Bogacz, and Zhenghua
+  Xu.
+\newblock Reverse differentiation via predictive coding, 2021.
+
 \bibitem{PredictiveCodingNetworks}
 Yuhang Song, Thomas Lukasiewicz, Zhenghua Xu, and Rafal Bogacz.
 \newblock Can the brain do backpropagation? --- exact implementation of
@@ -110,5 +132,11 @@ Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
   Aidan~N. Gomez, Lukasz Kaiser, and Illia Polosukhin.
 \newblock Attention is all you need.
 \newblock {\em CoRR}, abs/1706.03762, 2017.
+
+\bibitem{predcoding}
+James Whittington and Rafal Bogacz.
+\newblock An approximation of the error backpropagation algorithm in a
+  predictive coding network with local hebbian synaptic plasticity.
+\newblock {\em Neural Computation}, 29:1--34, 03 2017.
 
 \end{thebibliography}
