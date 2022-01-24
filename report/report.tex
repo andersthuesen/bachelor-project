@@ -524,6 +524,42 @@ Hence, the predictive coding network will learn to perform classification.
 
 \section{Results}
 \subsection{Experimental Setup}
+For all experiments we train classification models in a supervised manner to predict digits in the permutation invariant MNIST task. Each model contains two hidden layer each with 300 neurons. For shadow training SNNs the Adam optimizer is used with a learning rate of $0.0001$ while the PCNs uses SGD with a learning rate of $0.001$. 
+
+\subsection{Experiment 1 - Shadow training spiking neural networks}
+\begin{figure}[ht]
+  \begin{subfigure}{0.49\linewidth}
+    \includegraphics[width=\linewidth]{graphics/spikes_0.png}  
+    \subcaption{Neuron activity in the first hidden layer}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.49\linewidth}
+    \includegraphics[width=\linewidth]{graphics/spikes_1.png}  
+    \subcaption{Neuron activity in the second hidden layer}
+  \end{subfigure}
+  \\
+  \begin{subfigure}{\linewidth}
+    \includegraphics[width=\linewidth]{graphics/spikes-output.png}  
+    \subcaption{Output activity of last layer}
+  \end{subfigure}
+  \caption{Neuron activity in }
+\end{figure}
+
+
+We first use shadow training to train a spiking neural network with LIF dynamics. 
+
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l | c|}
+  \hline
+  \textbf{Model}   & \textbf{Test accuracy} \\ \hline
+  Baseline         & 97.68\%                \\
+  SNN (Rate-coded) & 97.97\%                \\
+  SNN (Spiking)    & 97.71\%                \\ \hline
+  \end{tabular}
+\end{table}
+
 
 
 

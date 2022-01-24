@@ -30,5 +30,6 @@
 \contentsline {subsubsection}{\numberline {3.5.3}Predictive coding networks for classification}{19}{subsubsection.3.5.3}%
 \contentsline {section}{\numberline {4}Results}{20}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Experimental Setup}{20}{subsection.4.1}%
-\contentsline {section}{\numberline {5}Discussion}{20}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion}{20}{section.6}%
+\contentsline {subsection}{\numberline {4.2}Experiment 1 - Shadow training spiking neural networks}{20}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Discussion}{21}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion}{21}{section.6}%
