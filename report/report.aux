@@ -93,11 +93,13 @@
 \newlabel{fig:rate-scaling}{{2c}{15}{Scaling of the rate function in the interval $[0; 10]$ to mimic ReLU.\relax }{figure.caption.5}{}}
 \newlabel{sub@fig:rate-scaling}{{c}{15}{Scaling of the rate function in the interval $[0; 10]$ to mimic ReLU.\relax }{figure.caption.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Plots of smoothed, poisson coded and ReLU-like rate functions, respectively.\relax }}{15}{figure.caption.5}\protected@file@percent }
+\newlabel{eq:soft-rate}{{35}{15}{Leaky-Integrate-and-Fire neurons}{equation.3.35}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Poisson rate coding}{15}{subsubsection.3.3.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Low-pass alpha-filter}{15}{subsubsection.3.3.4}\protected@file@percent }
 \newlabel{eq:alpha-filter}{{37}{15}{Low-pass alpha-filter}{equation.3.37}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Shadow training spiking neural networks}{16}{subsection.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Activation scaling}{16}{subsubsection.3.4.1}\protected@file@percent }
+\newlabel{sec:activation-scaling}{{3.4.1}{16}{Activation scaling}{subsubsection.3.4.1}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Rate estimation using alpha-filter}{16}{subsubsection.3.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3}Fusing batch normalization}{16}{subsubsection.3.4.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4}Testing spiking neural networks}{16}{subsubsection.3.4.4}\protected@file@percent }
@@ -115,12 +117,17 @@
 \newlabel{eq:il-weight-update}{{43}{18}{Predictive coding networks and inference learning}{equation.3.43}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Z-IL and equivalence to back-propagation}{18}{subsubsection.3.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Predictive coding networks for classification}{19}{subsubsection.3.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{20}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experimental Setup}{20}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Experiment 1 - Shadow training spiking neural networks}{20}{subsection.4.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Neuron activity in \relax }}{20}{figure.caption.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{21}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{21}{section.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Neuron activity in each hidden and output layer of SNN presented with an image of the digit 7 for 200ms. For visualisation purposes each hidden layer only contains 32 neurons.\relax }}{20}{figure.caption.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results and Discussion}{20}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experiment 1 - Shadow training spiking neural networks}{20}{subsection.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Test accuracies on the P-MNIST benchmark.\relax }}{20}{table.caption.8}\protected@file@percent }
+\newlabel{fig:snn-accuracies}{{1}{20}{Test accuracies on the P-MNIST benchmark.\relax }{table.caption.8}{}}
+\citation{milladge2020predictive}
+\citation{salvatori2021reverse}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Test accuracy and cross-entropy loss as function of number of parameter update steps for backprop and Z-IL.\relax }}{21}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:Z-IL-backprop-comparison}{{5}{21}{Test accuracy and cross-entropy loss as function of number of parameter update steps for backprop and Z-IL.\relax }{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Experiment 2 - Z-IL vs. Backprop}{21}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{21}{section.5}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{refs}
 \bibcite{BengioLBL15}{1}

@@ -28,8 +28,7 @@
 \contentsline {subsubsection}{\numberline {3.5.1}Predictive coding networks and inference learning}{17}{subsubsection.3.5.1}%
 \contentsline {subsubsection}{\numberline {3.5.2}Z-IL and equivalence to back-propagation}{18}{subsubsection.3.5.2}%
 \contentsline {subsubsection}{\numberline {3.5.3}Predictive coding networks for classification}{19}{subsubsection.3.5.3}%
-\contentsline {section}{\numberline {4}Results}{20}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Experimental Setup}{20}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Experiment 1 - Shadow training spiking neural networks}{20}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Discussion}{21}{section.5}%
-\contentsline {section}{\numberline {6}Conclusion}{21}{section.6}%
+\contentsline {section}{\numberline {4}Results and Discussion}{20}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Experiment 1 - Shadow training spiking neural networks}{20}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Experiment 2 - Z-IL vs. Backprop}{21}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Conclusion}{21}{section.5}%

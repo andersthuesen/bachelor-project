@@ -384,7 +384,7 @@ when the input current exceed the threshold $j>V_\text{th}$ by setting $v(t) = V
 \end{equation}
 Notice that $t_\text{ref}$ is added to the time-to-spike, to incorporate the effect of the refractory period. Using the rate function directly as activation function would lead to problems as its derivative goes to infinity when $j \to 0_{+}$. Hunsberger et al. therefore introduces a smoothed rate function using the softplus function $\rho(x) = \gamma \log(1 + \exp(x / \gamma))$ that works as a smooth $\max$ function and does in fact becomes equivilant when $\gamma \to 0$.
 
-\begin{equation}
+\begin{equation} \label{eq:soft-rate}
   r_\rho(j) = \left[t_\text{ref} - \tau_{RC} \log \left(1 + \frac{ V_{\text{th}} }{ \rho(j - V_\text{th})}\right) \right]^{-1}
 \end{equation}
 A plot of the original and smoothed rate functions can be seen in figure \ref{fig:rate-function}.
@@ -436,7 +436,7 @@ where $\tau_s$ is some time-constant.
 \subsection{Shadow training spiking neural networks}
 The method of shadow training spiking neural networks amounts to the task of training a standard neural network using back-propagation, incorporating the rate-function of the chosen dynamical neuron model as activation function, whereby a spiking neural network can be constructed with the learned weight and bias parameters. However, doing so is in some cases not always quite as trivial. This section will go into the details of shadow training feedforward neural networks and the tricks for successfully doing so. 
 
-\subsubsection{Activation scaling}
+\subsubsection{Activation scaling} \label{sec:activation-scaling}
 When training neural networks using the analytical spiking rate as activation function, we found that down-scaling the activation function drastically improved the converge of the network. The reason for this result can be explained by the combination of the Kaiming He initialization of the weights which keeps the variance of the intermediate representations in the network close to $1$ when used in conjunction with ReLU activation. By scaling the rate function with a factor of $0.05$ the rate function and its derivative will more closely mimic that of the ReLU in the interval $[0; 10]$ as seen in figure \ref{fig:rate-scaling}. 
 
 \subsubsection{Rate estimation using alpha-filter}
@@ -498,7 +498,7 @@ Here, $\mathbf{x}_{T}^{(L)} - \mathbf{u}_T^{(L)}$ is the derivative of the squar
 
 
 \subsubsection{Z-IL and equivalence to back-propagation}
-Song et al. takes this a step further by showing that a special variant of inference learning, zero-divergence inference learning (Z-IL) gives rise to the exact same weight updates as the back-propagation algorithm \cite{PredictiveCodingNetworks}. They show this by first assuming that every value node, $x_{i,t}^{(l)}$ and prediction $u_{i,t}^{(l)}$ is equal to the corresponding forward activity of the equivalent ANN. This is naturally satisfied when the input node is clamped to the input value of some training pair and the network is relaxed to an equilibrium. This corresponds to the forward propagation necessary in back-propagation algorithm. The output node is then fixed to the output value of the training pair after which each value node is updated to minimize $F$ according to equation \ref{eq:update-value-nodes} with integration step size $\gamma = 1$. At last, the weights are scheduled to be updated according to equation \ref{eq:il-weight-update} at time $t=l$.
+Song et al. takes this a step further by showing that a special variant of inference learning, zero-divergence inference learning (Z-IL) gives rise to the exact same weight updates as the back-propagation algorithm \cite{PredictiveCodingNetworks}. They show this by first assuming that every value node, $x_{i,t}^{(l)}$ and prediction $u_{i,t}^{(l)}$ is equal to the corresponding forward activity of the equivalent ANN. This is naturally satisfied when the input node is clamped to the input value of some training pair and the network is relaxed to an equilibrium. This corresponds to the forward propagation necessary in back-propagation algorithm. The output node is then fixed to the output value of the training pair after which each value node is updated to minimize $F$ according to equation \ref{eq:update-value-nodes} with integration step size $\gamma = 1$. At last, the weights are scheduled to be updated according to equation \ref{eq:il-weight-update} at time $t=L-l$.
 
 \subsubsection{Predictive coding networks for classification}
 Predictive coding networks by default predict continuous valued output variables and are therefore more suited for regression tasks than classification. However, it is possible to modify the network to perform classification by relying on the insight of deriving the partial derivative of the cross-entropy loss function in section \ref{sec:MLE}. Inference learning updates value nodes in order to minimize the total free energy of the network according to:
@@ -522,34 +522,27 @@ Hence, the predictive coding network will learn to perform classification.
 
 \newpage
 
-\section{Results}
-\subsection{Experimental Setup}
-For all experiments we train classification models in a supervised manner to predict digits in the permutation invariant MNIST task. Each model contains two hidden layer each with 300 neurons. For shadow training SNNs the Adam optimizer is used with a learning rate of $0.0001$ while the PCNs uses SGD with a learning rate of $0.001$. 
+\section{Results and Discussion}
+For all experiments we train classification models in a supervised manner to predict digits in the permutation invariant MNIST task (P-MNIST). Each model consists of a two hidden layer fully connected feed-forward network with 300 neuron in each hidden layer. For shadow training SNNs the Adam optimizer is used with a learning rate of $0.0001$ while PCNs and its analogous FFNN use SGD with a learning rate of $0.01$. All models were trained to minimize the cross-entropy loss for 20 epochs with a batch size of 64. Training was done on a 2021 MacBook Air with 8GB of RAM as not much compute was needed, but all code was written in a manner for easily taking advantage of GPU acceleration using the PyTorch framework. 
 
 \subsection{Experiment 1 - Shadow training spiking neural networks}
-\begin{figure}[ht]
-  \begin{subfigure}{0.49\linewidth}
-    \includegraphics[width=\linewidth]{graphics/spikes_0.png}  
-    \subcaption{Neuron activity in the first hidden layer}
+\begin{figure}
+  \begin{subfigure}[t]{0.32\columnwidth}
+    \includegraphics[width=\linewidth]{graphics/spikes_0.pdf}  
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.49\linewidth}
-    \includegraphics[width=\linewidth]{graphics/spikes_1.png}  
-    \subcaption{Neuron activity in the second hidden layer}
+  \begin{subfigure}[t]{0.32\columnwidth}
+    \includegraphics[width=\linewidth]{graphics/spikes_1.pdf}  
   \end{subfigure}
-  \\
-  \begin{subfigure}{\linewidth}
-    \includegraphics[width=\linewidth]{graphics/spikes-output.png}  
-    \subcaption{Output activity of last layer}
+  \hfill
+  \begin{subfigure}[t]{0.32\columnwidth}
+    \includegraphics[width=\linewidth]{graphics/spikes_2.pdf}  
   \end{subfigure}
-  \caption{Neuron activity in }
+  \caption{Neuron activity in each hidden and output layer of SNN presented with an image of the digit 7 for 200ms. For visualisation purposes each hidden layer only contains 32 neurons.}
+
 \end{figure}
-
-
-We first use shadow training to train a spiking neural network with LIF dynamics. 
-
-
-\begin{table}[h]
+We shadow train a SNN using the soft rate function from equation \ref{eq:soft-rate}, scaled according to section \ref{sec:activation-scaling} with a factor of $0.05$, as activation function and compare it against a feed-forward baseline model using ReLU activation. Batch normalization was applied after each linear transform for both SNN and baseline models to improve training stability. 
+\begin{table}[ht]
   \centering
   \begin{tabular}{|l | c|}
   \hline
@@ -558,12 +551,26 @@ We first use shadow training to train a spiking neural network with LIF dynamics
   SNN (Rate-coded) & 97.97\%                \\
   SNN (Spiking)    & 97.71\%                \\ \hline
   \end{tabular}
-\end{table}
+  \caption{Test accuracies on the P-MNIST benchmark.}
+  \label{fig:snn-accuracies}
+\end{table} \\
+From figure \ref{fig:snn-accuracies} we see that our rate-coded SNN performs on-par with our baseline model with a slightly higher accuracy. Whether this small improvement is caused by the statistical variation in the initialization of the weights or due to the smooth rate function, unlike ReLU, having non-zero gradient for values less than zero, requires more careful experimentation with precise weight initialization and larger sample sizes. Interestingly, only very little performance is lost when the learned weights in the rate-coded model is fused with batch normalization and used for simulation of the LIF dynamics. This might be due to the noise introduced in the Possion coding process along with a limited simulation time of 200ms before comparing the most spiking neuron with the correct label. 
 
+\subsection{Experiment 2 - Z-IL vs. Backprop}
+\begin{figure}]
+  \begin{subfigure}[]{0.45\linewidth}
+    \includegraphics[width=\linewidth]{graphics/Z-IL-backprop-accuracy.pdf}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{0.45\linewidth}
+    \includegraphics[width=\linewidth]{graphics/Z-IL-backprop-loss.pdf}
+  \end{subfigure}
 
+  \caption{Test accuracy and cross-entropy loss as function of number of parameter update steps for backprop and Z-IL.}
+  \label{fig:Z-IL-backprop-comparison}
+\end{figure} 
+We train a PCN and its analogous FFNN, both employing our scaled soft rate as activation function, to emperically validate the equivalence of the weight updates. From figure \ref{fig:Z-IL-backprop-comparison} we see that Z-IL performs very well and gives rise to the same accuracy and loss curves as backprop with only minor deviations that might be caused by numerical precision in the specific implementation. Although the final accuracy of our PCN trained with Z-IL of 97.31\% does not achieve state-of-the-art results, it might be possible to further improve the model with more recent methods such as convolutions, residual connections, batch normalization, etc. which can all be implemented in PCNs and trained with Z-IL as shown by Milladge et al. \cite{milladge2020predictive} and Salvatori et al. \cite{salvatori2021reverse}. 
 
-
-\section{Discussion}
 
 \section{Conclusion}
 \newpage
