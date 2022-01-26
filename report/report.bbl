@@ -40,6 +40,11 @@ Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
 \newblock MIT Press, 2016.
 \newblock \url{http://www.deeplearningbook.org}.
 
+\bibitem{goodfellow2014generative}
+Ian~J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David
+  Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio.
+\newblock Generative adversarial networks, 2014.
+
 \bibitem{he2015delving}
 Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
 \newblock Delving deep into rectifiers: Surpassing human-level performance on
