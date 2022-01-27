@@ -67,6 +67,12 @@ Sepp Hochreiter and Jürgen Schmidhuber.
 \newblock Long short-term memory.
 \newblock {\em Neural computation}, 9:1735--80, 12 1997.
 
+\bibitem{Hodgkin1952}
+A.L. Hodgkin and A.F. Huxley.
+\newblock A quantitative description of membrane current and its application to
+  conduction and excitation in nerve.
+\newblock {\em Journal of Physiology}, 117:500--544, 1952.
+
 \bibitem{hunsberger2015spiking}
 Eric Hunsberger and Chris Eliasmith.
 \newblock Spiking deep networks with lif neurons.
@@ -92,6 +98,12 @@ Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
 Timothy~P. Lillicrap, Daniel Cownden, Douglas~B. Tweed, and Colin~J. Akerman.
 \newblock Random feedback weights support learning in deep neural networks,
   2014.
+
+\bibitem{lotter-prednet}
+William Lotter, Gabriel Kreiman, and David~D. Cox.
+\newblock Deep predictive coding networks for video prediction and unsupervised
+  learning.
+\newblock {\em CoRR}, abs/1605.08104, 2016.
 
 \bibitem{millidge2021predictive}
 Beren Millidge, Anil Seth, and Christopher~L Buckley.

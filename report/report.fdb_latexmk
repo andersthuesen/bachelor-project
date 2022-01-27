@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex report"] 1643208092 "report.aux" "report.bbl" "report" 1643209071
+["bibtex report"] 1643290686 "report.aux" "report.bbl" "report" 1643290687
   "/usr/local/texlive/2021basic/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "refs.bib" 1643206597 11094 d53a504aee25a0dcc8339beb300d0688 ""
-  "report.aux" 1643209071 12434 2ea9539e38e8afcae65d3997a59db342 "pdflatex"
+  "refs.bib" 1643284507 12297 a38e8254ac33e49ba39cb4393b413bc6 ""
+  "report.aux" 1643290687 12559 f0d1f02e4c5bff4189e37b0239d27204 "pdflatex"
   (generated)
   "report.blg"
   "report.bbl"
-["pdflatex"] 1643209070 "/Users/anders/dtu/bachelor-project/report/report.tex" "report.pdf" "report" 1643209071
+["pdflatex"] 1643290686 "/Users/anders/dtu/bachelor-project/report/report.tex" "report.pdf" "report" 1643290687
   "/Users/anders/Library/texlive/2021basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1641203330 12644 c0b76b7902a6c1d8740d49fd2bf261e1 ""
-  "/Users/anders/dtu/bachelor-project/report/report.tex" 1643209069 74503 d317ff42baf20f35bc24ae578e07c1ee ""
+  "/Users/anders/dtu/bachelor-project/report/report.tex" 1643290684 77332 1bf994bf31f5f76686c45443f8697b66 ""
   "/usr/local/texlive/2021basic/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -134,14 +134,14 @@
   "graphics/spikes_0.pdf" 1643103051 9857 0f9697fd84bf462d038eef9e3b8c5eed ""
   "graphics/spikes_1.pdf" 1643103051 10631 63c0731adbc6ff82f6c7983418bc6a00 ""
   "graphics/spikes_2.pdf" 1643103051 11085 2e613b6d5da8e7128812324205da6639 ""
-  "report.aux" 1643209071 12434 2ea9539e38e8afcae65d3997a59db342 "pdflatex"
-  "report.bbl" 1643208092 5571 ddd71dae12d538ef576d2189db5a9731 "bibtex report"
-  "report.out" 1643209071 7317 eb5ae5eedaa606ec9196931155b87d5e "pdflatex"
-  "report.tex" 1643209069 74503 d317ff42baf20f35bc24ae578e07c1ee ""
-  "report.toc" 1643209071 3523 84e2fe0f020f19865aa6411b880c999d "pdflatex"
+  "report.aux" 1643290687 12559 f0d1f02e4c5bff4189e37b0239d27204 "pdflatex"
+  "report.bbl" 1643290686 6014 3e47b613e955fabc6fc1925a0398f79a "bibtex report"
+  "report.out" 1643290687 7317 9ee06ff43e4877f87d8c2b26bc5518b3 "pdflatex"
+  "report.tex" 1643290684 77332 1bf994bf31f5f76686c45443f8697b66 ""
+  "report.toc" 1643290687 3524 219390a474762b726dce23d2b27be06d "pdflatex"
   (generated)
-  "report.out"
-  "report.log"
-  "report.aux"
   "report.toc"
+  "report.aux"
+  "report.log"
+  "report.out"
   "report.pdf"
