@@ -87,14 +87,7 @@ Throughout this thesis, we will be using \textbf{boldface} and CAPITALIZATION wh
 % Fjern MNIST, da det ikke er vigtigt for nu.
 
 We define our dataset, $\mathcal{D} = \left\{(\mathbf{x}_i, \mathbf{y}_i)\right\}$ for $i = 1 \ldots N$ consisting of $N$ pairs of datapoints, $\mathbf{x}_i \in \mathbb{R}^k$ and $\mathbf{y}_i \in \mathbb{R}^l$ where $N$ is the size of the dataset. We notice, that both $\mathbf{x}_i$ and $\mathbf{y}_i$ can be vectors of possibly differently dimensions $k$ and $l$ respectively. $\mathbf{x}_i$ might represent eg. an image as it is the case with the MNIST dataset used later in this project that consists of 60.000 training examples and 10.000 test examples of 28x28 images depicting handwritten digits and their corresponding labels \cite{mnist}. As the images in the MNIST dataset are two-dimensional, the image has to be flattened into a one-dimensional vector. In the case of supervised learning, the objective is from $\mathbf{x}_i$ to predict the corresponding label, $\mathbf{y}_i$ which would amount to a single scalar number from 0 to 9 in the MNIST dataset. 
-% \begin{figure}[ht]
-%   \centering
-%   \includegraphics[width=280pt]{graphics/mnist.png}  
-%   \caption{First 10 examples of the MNIST training dataset.}
-%   \label{fig:MNIST}
-% \end{figure}
 
-% TODO: Write more about mnist. How many training, test examples? What is the size of each image? Etc. Maybe also a little bit about fashion mnist. 
 
 \subsection{Maximum Likelihood Estimation} \label{sec:MLE}
 Maximum Likelihood Estimation (MLE) is method of finding the optimal parameters, $\theta$, of some assumed probability distribution or model, $P$, in order to best describe the observed data, $\mathbf{X}$. Statistically this can be formulated as $P(\mathbf{X}; \theta)$ or more concisely $P_\theta(\mathbf{X})$. Assuming that the observed data is independent and identically distributed, the likelihood estimator function can be defined as:
@@ -208,7 +201,7 @@ Feed-forward neural networks (FNN) are considered the simplest kind of neural ne
 \\*
 A feed-forward neural network with $L-2$ hidden layers is parameterized by the weight matrices $\mathbf{W}^{(l)} \in \mathbb{R}^{m \times n}$ and biases $\mathbf{b}^{(l)} \in  \mathbb{R}^{m}$ for $l = 2 \ldots L$ where $n$ is the input dimension of the layer and $m$ the output dimension. A feed-forward pass from layer $l-1$ to layer $l$ is given by $\mathbf{a}^{(l)} = \sigma(\mathbf{z}^{l})$ where $\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}$ and $\sigma$ is the chosen activation function. By letting the initial activation $\mathbf{a}^{(1)} = \mathbf{x}_i$ one can consider the final activation of the network the prediction of the network $\mathbf{\hat{y}}_i = \mathbf{a}^{(L)}$.
 
-\subsubsection{Weight initialization}
+\subsection{Weight initialization}
 % TODO: Maybe write more about why this is important here?
 We initialize the weight matrices using Kaiming He initialization, where the entries of the matrix $W^{(l)}_{ij}$ are drawn from a normal distribution with zero mean and $\sqrt{2/n}$ standard deviation as this will help reduce vanishing and exploding gradient problem by keeping the variance in each layer equal when using ReLU activation. \cite{he2015delving}
 
@@ -268,12 +261,32 @@ which can be computed using a dynamic programming approach to update the weight 
 \begin{equation} \label{eq:weight-update}
   \mathbf{W}^{(l)} = \mathbf{W}^{(l)} -\alpha \delta^{(l)} \mathbf{a}^{(l-1)}.
 \end{equation}
-The weight is updated in the opposite direction (hence the negation) of the gradient as the aim is to minimize the loss function. By reusing the computation of the error terms, $\delta^{(l)}$, backprop is able to very efficiently compute the weight updates to minimize the global loss function. 
-\newpage
-% \subsection{SGD and Adam}
-% As the goal is to optimize the joint likelihood over the entire dataset, back-propagation should in theory process all datapoints in the dataset in each forward-backwards pass and update the weights in the negative direction using Gradient Descent. As datasets are often very large, requiring an equal amount of memory, this is rarely done in practice. Instead, mini-batches of data, typically containing $8$ to $128$ datapoints are used in Stochastic Gradient Descent to update the parameters. The assumption is that the mini-batches capture the underlying distribution of the dataset. This turn out to work really well, as taking more noisy steps in the loss landscape is often favorable compared to a single step in the direction of steepest descent for the entire dataset. A good rule of thumb when choosing batch size is to pick the larges batch size able to fit in memory when training on GPUs. This will lead to more accurate gradients as well as performant computation as the datapoints in the mini-batch will be processed in parallel. 
+The weight is updated in the opposite direction (hence the negation) of the gradient as the aim is to minimize the loss function. By reusing the computation of the error terms, $\delta^{(l)}$, backprop is able to very efficiently compute the weight updates to minimize the global loss function. As the goal is to optimize the joint likelihood over the entire dataset, back-propagation should in theory process all datapoints in the dataset in each forward-backwards pass and update the weights using gradient descent or some other optimizer. As datasets are often very large, requiring an equal amount of memory, this is rarely done in practice. Instead, mini-batches of data, typically containing $8$ to $128$ datapoints are used to update the parameters with eg. stochastic gradient descent. The assumption is that the mini-batches capture the underlying distribution of the dataset. This turns out to work really well, as taking more noisy steps in the loss landscape is often favorable compared to a single step in the direction of steepest descent for the entire dataset. A good rule of thumb when choosing batch size is to pick the larges batch size able to fit in memory when training on GPUs. This will lead to more accurate gradients while taking advantage of the computational power by processing each batch in parallel. 
 
-% TODO: Maybe write a little bit about why this is relevant?
+\subsection{Adam optimizer}
+The Adam optimizer \cite{kingma2014adam} is an extension to stochastic gradient descent that combines the advantages of AdaGrad \cite{duchi2011adaptive} on sparse gradients and RMSProp \cite{hinton2012rmsprop} that incorporates root mean squared momentum. Introducing momentum is often useful as it is more robust to noise in the mini-batch gradients and therefore leads to faster convergence \cite{QIAN1999145}. Adam does this by keeping track of a running average of the gradient and the square of the gradient:
+\begin{equation}
+  \begin{split}
+    m_t &\leftarrow \beta_1 \cdot m_{t-1} + (1-\beta_1) \cdot g_t \\
+    v_t &\leftarrow \beta_2 \cdot v_{t-1} + (1-\beta_2) \cdot g_t^2 \\
+  \end{split}
+\end{equation}
+where $\beta_1$ and $\beta_2$ are hyper-parameters, in the range $[0, 1)$, that control the momentum decay rate of the gradient. They are typically set to $\beta_1 = 0.9$ and $\beta_2 = 0.999$ as default. The moment estimates are then bias-corrected:
+\begin{equation}
+  \begin{split}
+    \hat{m}_t &\leftarrow  \frac{m_t}{1-\beta_1} \\
+    \hat{v}_t &\leftarrow \frac{v_t}{1-\beta_2}
+  \end{split}
+\end{equation}
+and used to transform the gradient:
+\begin{equation}
+  \theta_t \leftarrow \theta_{t-1} - \alpha \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
+\end{equation}
+where $\alpha$ is the learning rate and $\epsilon$ a small constant (typically $10^{-8}$) to prevent division by zero. 
+
+% TODO: Write about adam optimizer here.
+
+
 
 \subsection{Batch normalization}
 When training deep neural networks, it is often necessary to normalize the inputs to the network in obtain good results. By normalizing the input variables to the network the gradient of the loss function is more likely to point in the direction of the local minima resulting in more efficient and stable training. According to the authors \cite{ioffe2015batch}, batch normalization has the effect of reducing ``internal covariate shift'' of the networks intermediate representations. As the weights and biases of each layer in the network is updated, the distribution of the internal representations tends to change aswell. This has the effect of slowing down learning and decrease the chance of converging to a good local minima. By normalizing each mini-batch, batch normalization is able to accelerate deep learning by enabling higher learning rates and fewer training steps. Batch normalization works by using a combination of the mean and variance of the current mini-batch and a running mean and variance. At training time, batch normalization standardizes the mini-batch according to
@@ -349,6 +362,8 @@ In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regardin
 % These methods are comprised of spiking neural networks for making the communication between neurons 
 
 % Discuss how these methods aim to overcome the current biological constraints defined in section 3.2
+
+\newpage
 
 \subsection{Spiking neural networks}
 Spiking neural networks (SNNs) are a particular type of network that uses spikes for inter-neuron communication. In that way they more closely mimic biological neural networks, but share their structure and dense connectivity with feed-forward neural networks. Spiking neurons are temporal in their dynamics in the sense that they are integrating input spikes over time. When the threshold membrane potential is exceeded a spike is sent to the connected neurons in the next layer. The implementation of SNNs requires a particular neuron model of the action potential often modelled as a first order differential equation describing the exact dynamics. Several different neuron models exists ranging from simple and compute efficient models like the Integrate-and-Fire (IF) model that only captures the coarse dynamics of biological neurons to more nuanced models like the Hodgkin-Huxley model \cite{Hodgkin1952}. We will be using a variation of the IF neuron model which leaks membrane potential over time, called the Leaky-Integrate-and-Fire model. This particular model has the advantage of being relatively biologically plausible yet still being very efficient to compute. 
@@ -508,6 +523,9 @@ Here, $\mathbf{x}_{T}^{(L)} - \mathbf{u}_T^{(L)}$ is the derivative of the squar
 \subsubsection{Z-IL and equivalence to back-propagation}
 Song et al. takes this a step further by showing that a special variant of inference learning, zero-divergence inference learning (Z-IL) gives rise to the exact same weight updates as the back-propagation algorithm \cite{PredictiveCodingNetworks}. They show this by first assuming that every value node, $x_{i,t}^{(l)}$ and prediction $u_{i,t}^{(l)}$ is equal to the corresponding forward activity of the equivalent ANN. This is naturally satisfied when the input node is clamped to the input value of some training pair and the network is relaxed to an equilibrium, corresponding to the forward propagation necessary in the back-propagation algorithm. The output node is then fixed to the output value of the training pair after which each value node is updated to minimize $F$ according to equation \ref{eq:update-value-nodes} with integration step size $\gamma = 1$. At last, the weights are scheduled to be updated according to equation \ref{eq:il-weight-update} at time $t=L-l$.
 
+\subsubsection{Batch normalization in predictive coding networks}
+Write about how we can implement it here.
+
 \subsubsection{Predictive coding networks for classification}
 Predictive coding networks by default predict continuous valued output variables and are therefore more suited for regression tasks than classification. However, it is possible to modify the network to perform classification by relying on the insight of deriving the partial derivative of the cross-entropy loss function in section \ref{sec:MLE}. Inference learning updates value nodes in order to minimize the total free energy of the network according to:
 \begin{equation}
@@ -531,6 +549,12 @@ Hence, the predictive coding network will learn to perform classification.
 \newpage
 
 \section{Results and Discussion}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=280pt]{graphics/mnist.png}  
+  \caption{First 10 examples of the MNIST training dataset.}
+  \label{fig:MNIST}
+\end{figure}
 For all experiments we train classification models in a supervised manner to predict digits in the permutation invariant MNIST task (P-MNIST). Each model consists of a two hidden layer fully connected feed-forward network with 300 neuron in each hidden layer. For shadow training SNNs the Adam optimizer is used with a learning rate of $0.0001$ while PCNs and its analogous FFNN use SGD with a learning rate of $0.01$. All models were trained to minimize the cross-entropy loss for 20 epochs with a batch size of 64. Training was done on a 2021 MacBook Air with 8GB of RAM as not much compute was needed, but all code was written in a manner for easily taking advantage of GPU acceleration using the PyTorch framework. 
 \subsection{Experiment 1 - Z-IL vs. Backprop}
 \begin{figure}[ht]
@@ -580,7 +604,7 @@ We shadow train a SNN using the soft rate function from equation \ref{eq:soft-ra
 \end{table} \\
 From figure \ref{fig:snn-accuracies} we see that our rate-coded SNN performs on-par with our baseline model with a slightly higher accuracy. Whether this small improvement is caused by the statistical variation in the initialization of the weights or due to the smooth rate function, unlike ReLU, having non-zero gradient for values less than zero, requires more careful experimentation with precise weight initialization and larger sample sizes. Interestingly, only very little performance is lost when the learned weights in the rate-coded model is fused with batch normalization and used for simulation of the LIF dynamics. This might be due to the noise introduced in the Possion coding process along with a limited simulation time of 200ms before comparing the most spiking neuron with the correct label. Using batch normalization is known to also have a regularizing effect \cite{ioffe2015batch} which might explain this robustness, however further experimentation is needed to confirm this. 
 
-
+\newpage
 
 \subsection{Evaluation of Biological Plausibility}
 We will now consider the biological plausability of the combination of predictive coding networks and spiking networks in relation to the problems of back-propagation and ANNs in section \ref{sec:biological-constraints}, beginning with the three constraints derived from the biological neuron. As all value nodes and weights are updated according to local learning rules, we consider the the first constraint of locality satisfied. The constraint of spikes requires that inter-neuron communication happens via spikes. As this is only the case after the shadow network is converted to its spiking form and not in the learning phase, we only consider this partially satisfied. At last, we do not consider the constraint of unidirectionality satisfied. Although the parameter updates of IL does not directly use symmetric weights, error and value nodes used for the update require the backwards flow of error information from higher-level layers. Predictive coding does therefore not solve the weight transport problem in its presented form. As PCNs are very closely related to ANNs, incorporating methods suchs as DFA/FA might be possible without limiting the learning capabilities of the network. Inference learning does also not seem to solve the derivative problem of back-propagation, as the derivative of the activation function is used to update the value nodes. However, by considering our spike rate as activation function, its derivative might be approximated as the change in duration between spikes. This interpretation also solves the spiking problem, as numerical values are communicated by the use of rate-coding. In their paper \cite{PredictiveCodingNetworks}, Song et al. introduces a further modification to the Z-IL algorithm, Full autonomy Z-IL, that detects when weight layers should be updated. Although this solves the problem of the network depending on external control a more biologically plausible method might be continually updating the weights as it is the case in Continual Equilibrium Propagation \cite{ContinualEqProp}.  Throughout this thesis, we have only considered the task of supervised leaning for simpliticy's sake. Although this provides a useful way to measure how well the networks perform, it is unlikely to be happening in the brain, as it would require the brain to have access to the exact labels it is trying to learn. A more likely scenario is probably that of self-supervised learning discussed in the introduction. The problem then becomes to define what objective function the network should minimize. In the case of predicting future stimuli from past experience, it might not be enough to simply minimize the prediction error. Doing this for video frames using a squared loss between pixels would lead to blurry predictions due to the uncertainty of the future. An alternative could be that the objective function is itself learned such as the discriminator in Generative Adverserial Networks \cite{goodfellow2014generative}. 

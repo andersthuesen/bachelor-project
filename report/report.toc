@@ -7,31 +7,33 @@
 \contentsline {subsection}{\numberline {2.2}Dataset}{4}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Maximum Likelihood Estimation}{4}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Feed-forward Neural Networks}{8}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Weight initialization}{8}{subsubsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.5}Back-propagation}{8}{subsection.2.5}%
-\contentsline {subsection}{\numberline {2.6}Batch normalization}{10}{subsection.2.6}%
-\contentsline {section}{\numberline {3}Biologically plausible deep learning}{11}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Biological neurons}{11}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Biological constraints}{12}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Biological violations of backprop and deep learning}{12}{subsubsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.3}Spiking neural networks}{13}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Training spiking neural networks}{14}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Leaky-Integrate-and-Fire neurons}{14}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Poisson rate coding}{15}{subsubsection.3.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.4}Low-pass alpha-filter}{15}{subsubsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.4}Shadow training spiking neural networks}{16}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}Activation scaling}{16}{subsubsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {3.4.2}Rate estimation using alpha-filter}{16}{subsubsection.3.4.2}%
-\contentsline {subsubsection}{\numberline {3.4.3}Fusing batch normalization}{16}{subsubsection.3.4.3}%
-\contentsline {subsubsection}{\numberline {3.4.4}Testing spiking neural networks}{17}{subsubsection.3.4.4}%
-\contentsline {subsection}{\numberline {3.5}Predictive Coding}{17}{subsection.3.5}%
+\contentsline {subsection}{\numberline {2.5}Weight initialization}{8}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Back-propagation}{8}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Adam optimizer}{10}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Batch normalization}{10}{subsection.2.8}%
+\contentsline {section}{\numberline {3}Biologically plausible deep learning}{12}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Biological neurons}{12}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Biological constraints}{13}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Biological violations of backprop and deep learning}{13}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.3}Spiking neural networks}{15}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Training spiking neural networks}{15}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Leaky-Integrate-and-Fire neurons}{15}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Poisson rate coding}{16}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Low-pass alpha-filter}{17}{subsubsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.4}Shadow training spiking neural networks}{17}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Activation scaling}{17}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Rate estimation using alpha-filter}{17}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Fusing batch normalization}{17}{subsubsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.4}Testing spiking neural networks}{18}{subsubsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.5}Predictive Coding}{18}{subsection.3.5}%
 \contentsline {subsubsection}{\numberline {3.5.1}Predictive coding networks and inference learning}{18}{subsubsection.3.5.1}%
-\contentsline {subsubsection}{\numberline {3.5.2}Z-IL and equivalence to back-propagation}{19}{subsubsection.3.5.2}%
-\contentsline {subsubsection}{\numberline {3.5.3}Predictive coding networks for classification}{19}{subsubsection.3.5.3}%
-\contentsline {section}{\numberline {4}Results and Discussion}{20}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Experiment 1 - Z-IL vs. Backprop}{20}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Experiment 2 - Shadow training spiking neural networks}{20}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Evaluation of Biological Plausibility}{21}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Benefits to biological plausible learning}{22}{subsection.4.4}%
-\contentsline {section}{\numberline {5}Conclusion}{23}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Further research}{23}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}Z-IL and equivalence to back-propagation}{20}{subsubsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.3}Batch normalization in predictive coding networks}{20}{subsubsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.4}Predictive coding networks for classification}{20}{subsubsection.3.5.4}%
+\contentsline {section}{\numberline {4}Results and Discussion}{21}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Experiment 1 - Z-IL vs. Backprop}{21}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Experiment 2 - Shadow training spiking neural networks}{22}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Evaluation of Biological Plausibility}{23}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Benefits to biological plausible learning}{23}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Conclusion}{24}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Further research}{24}{subsection.5.1}%

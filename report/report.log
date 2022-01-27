@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.11.4)  27 JAN 2022 14:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.11.4)  27 JAN 2022 16:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -376,93 +376,98 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has b
 <to be read again> 
                    \relax 
 l.76 \newpage
-              [3] [4] [5] [6] [7] [8] [9] [10] [11]
-<graphics/bio-neuron.png, id=359, 2509.375pt x 1618.045pt>
+              [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]
+<graphics/bio-neuron.png, id=384, 2509.375pt x 1618.045pt>
 File: graphics/bio-neuron.png Graphic file (type png)
 <use graphics/bio-neuron.png>
-Package pdftex.def Info: graphics/bio-neuron.png  used on input line 319.
+Package pdftex.def Info: graphics/bio-neuron.png  used on input line 332.
 (pdftex.def)             Requested size: 220.0pt x 141.84029pt.
- [12 <./graphics/bio-neuron.png>] [13] [14]
-<graphics/smooth-rate.png, id=401, 387.4475pt x 266.9975pt>
+ [13 <./graphics/bio-neuron.png>] [14] [15]
+<graphics/smooth-rate.png, id=425, 387.4475pt x 266.9975pt>
 File: graphics/smooth-rate.png Graphic file (type png)
 <use graphics/smooth-rate.png>
-Package pdftex.def Info: graphics/smooth-rate.png  used on input line 399.
+Package pdftex.def Info: graphics/smooth-rate.png  used on input line 414.
 (pdftex.def)             Requested size: 138.76157pt x 95.62198pt.
-<graphics/poisson.png, id=403, 394.47375pt x 266.9975pt>
+<graphics/poisson.png, id=427, 394.47375pt x 266.9975pt>
 File: graphics/poisson.png Graphic file (type png)
 <use graphics/poisson.png>
-Package pdftex.def Info: graphics/poisson.png  used on input line 406.
+Package pdftex.def Info: graphics/poisson.png  used on input line 421.
 (pdftex.def)             Requested size: 138.76157pt x 93.91902pt.
 
-Underfull \hbox (badness 1817) in paragraph at lines 407--407
+Underfull \hbox (badness 1817) in paragraph at lines 422--422
 []\OT1/cmr/m/n/10 (b) |The-o-ret-i-cal (or-ange) and
  []
 
-<graphics/rate-scaling.png, id=404, 383.4325pt x 262.9825pt>
+<graphics/rate-scaling.png, id=428, 383.4325pt x 262.9825pt>
 File: graphics/rate-scaling.png Graphic file (type png)
 <use graphics/rate-scaling.png>
-Package pdftex.def Info: graphics/rate-scaling.png  used on input line 413.
+Package pdftex.def Info: graphics/rate-scaling.png  used on input line 428.
 (pdftex.def)             Requested size: 138.76157pt x 95.1712pt.
-[15 <./graphics/smooth-rate.png> <./graphics/poisson.png> <./graphics/rate-scaling.png>] [16]
+[16 <./graphics/smooth-rate.png> <./graphics/poisson.png> <./graphics/rate-scaling.png>] [17]
 
 pdfTeX warning: pdflatex (file ./graphics/predictive-coding-network.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<graphics/predictive-coding-network.pdf, id=433, 391.4625pt x 171.64125pt>
+<graphics/predictive-coding-network.pdf, id=458, 391.4625pt x 171.64125pt>
 File: graphics/predictive-coding-network.pdf Graphic file (type pdf)
 <use graphics/predictive-coding-network.pdf>
-Package pdftex.def Info: graphics/predictive-coding-network.pdf  used on input line 474.
+Package pdftex.def Info: graphics/predictive-coding-network.pdf  used on input line 489.
 (pdftex.def)             Requested size: 300.0pt x 131.54605pt.
-[17 <./graphics/predictive-coding-network.pdf>] [18] [19]
-<graphics/Z-IL-backprop-accuracy.pdf, id=573, 337.59875pt x 208.60309pt>
+[18] [19 <./graphics/predictive-coding-network.pdf>] [20]
+<graphics/mnist.png, id=599, 1414.28375pt x 553.06625pt>
+File: graphics/mnist.png Graphic file (type png)
+<use graphics/mnist.png>
+Package pdftex.def Info: graphics/mnist.png  used on input line 554.
+(pdftex.def)             Requested size: 280.0pt x 109.49733pt.
+<graphics/Z-IL-backprop-accuracy.pdf, id=600, 337.59875pt x 208.60309pt>
 File: graphics/Z-IL-backprop-accuracy.pdf Graphic file (type pdf)
 <use graphics/Z-IL-backprop-accuracy.pdf>
-Package pdftex.def Info: graphics/Z-IL-backprop-accuracy.pdf  used on input line 538.
+Package pdftex.def Info: graphics/Z-IL-backprop-accuracy.pdf  used on input line 562.
 (pdftex.def)             Requested size: 212.47617pt x 131.29013pt.
-<graphics/Z-IL-backprop-loss.pdf, id=574, 331.21553pt x 208.60309pt>
+<graphics/Z-IL-backprop-loss.pdf, id=601, 331.21553pt x 208.60309pt>
 File: graphics/Z-IL-backprop-loss.pdf Graphic file (type pdf)
 <use graphics/Z-IL-backprop-loss.pdf>
-Package pdftex.def Info: graphics/Z-IL-backprop-loss.pdf  used on input line 542.
+Package pdftex.def Info: graphics/Z-IL-backprop-loss.pdf  used on input line 566.
 (pdftex.def)             Requested size: 212.47617pt x 133.8238pt.
-<graphics/spikes_0.pdf, id=578, 274.63103pt x 208.60309pt>
+<graphics/spikes_0.pdf, id=605, 274.63103pt x 208.60309pt>
 File: graphics/spikes_0.pdf Graphic file (type pdf)
 <use graphics/spikes_0.pdf>
-Package pdftex.def Info: graphics/spikes_0.pdf  used on input line 553.
+Package pdftex.def Info: graphics/spikes_0.pdf  used on input line 577.
 (pdftex.def)             Requested size: 138.76157pt x 105.39941pt.
-<graphics/spikes_1.pdf, id=579, 273.56488pt x 208.60309pt>
+<graphics/spikes_1.pdf, id=606, 273.56488pt x 208.60309pt>
 File: graphics/spikes_1.pdf Graphic file (type pdf)
 <use graphics/spikes_1.pdf>
-Package pdftex.def Info: graphics/spikes_1.pdf  used on input line 557.
+Package pdftex.def Info: graphics/spikes_1.pdf  used on input line 581.
 (pdftex.def)             Requested size: 138.76157pt x 105.81003pt.
-<graphics/spikes_2.pdf, id=580, 271.69266pt x 208.60309pt>
+<graphics/spikes_2.pdf, id=607, 271.69266pt x 208.60309pt>
 File: graphics/spikes_2.pdf Graphic file (type pdf)
 <use graphics/spikes_2.pdf>
-Package pdftex.def Info: graphics/spikes_2.pdf  used on input line 561.
+Package pdftex.def Info: graphics/spikes_2.pdf  used on input line 585.
 (pdftex.def)             Requested size: 138.76157pt x 106.53894pt.
- [20 <./graphics/Z-IL-backprop-accuracy.pdf> <./graphics/Z-IL-backprop-loss.pdf
+ [21 <./graphics/mnist.png> <./graphics/Z-IL-backprop-accuracy.pdf> <./graphics/Z-IL-backprop-loss.pdf
 
 pdfTeX warning: pdflatex (file ./graphics/Z-IL-backprop-loss.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->] [21 <./graphics/spikes_0.pdf> <./graphics/spikes_1.pdf
+>] [22 <./graphics/spikes_0.pdf> <./graphics/spikes_1.pdf
 
 pdfTeX warning: pdflatex (file ./graphics/spikes_1.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./graphics/spikes_2.pdf
 
 pdfTeX warning: pdflatex (file ./graphics/spikes_2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->] [22] [23] (./report.bbl [24]) [25] (./report.aux)
+>] [23] [24] (./report.bbl [25] [26]) [27] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 9EE06FF43E4877F87D8C2B26BC5518B3;7317.
+(rerunfilecheck)             Checksum: 8F1111DF391AC417464663F387DDBC40;7766.
  ) 
 Here is how much of TeX's memory you used:
- 10568 strings out of 480445
- 162461 string characters out of 5892391
- 472146 words of memory out of 5000000
- 27534 multiletter control sequences out of 15000+600000
+ 10593 strings out of 480445
+ 162866 string characters out of 5892391
+ 472375 words of memory out of 5000000
+ 27546 multiletter control sequences out of 15000+600000
  417097 words of font info for 79 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  71i,23n,74p,3260b,515s stack positions out of 5000i,500n,10000p,200000b,80000s
  </Users/anders/Library/texlive/2021basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on report.pdf (28 pages, 1953591 bytes).
+Output written on report.pdf (30 pages, 1976477 bytes).
 PDF statistics:
- 859 PDF objects out of 1000 (max. 8388607)
- 628 compressed objects within 7 object streams
- 155 named destinations out of 1000 (max. 500000)
- 347 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 892 PDF objects out of 1000 (max. 8388607)
+ 658 compressed objects within 7 object streams
+ 167 named destinations out of 1000 (max. 500000)
+ 368 words of extra memory for PDF output out of 10000 (max. 10000000)
 

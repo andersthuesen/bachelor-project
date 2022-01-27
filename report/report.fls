@@ -659,6 +659,11 @@ INPUT ./graphics/predictive-coding-network.pdf
 INPUT graphics/predictive-coding-network.pdf
 INPUT ./graphics/predictive-coding-network.pdf
 INPUT ./graphics/predictive-coding-network.pdf
+INPUT ./graphics/mnist.png
+INPUT ./graphics/mnist.png
+INPUT graphics/mnist.png
+INPUT ./graphics/mnist.png
+INPUT ./graphics/mnist.png
 INPUT ./graphics/Z-IL-backprop-accuracy.pdf
 INPUT ./graphics/Z-IL-backprop-accuracy.pdf
 INPUT graphics/Z-IL-backprop-accuracy.pdf

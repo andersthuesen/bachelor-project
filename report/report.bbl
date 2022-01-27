@@ -16,6 +16,12 @@ Sander~M. Boht{\'e}, Joost~N. Kok, and Han~La Poutr{\'e}.
 \newblock Spikeprop: backpropagation for networks of spiking neurons.
 \newblock In {\em ESANN}, 2000.
 
+\bibitem{duchi2011adaptive}
+John Duchi, Elad Hazan, and Yoram Singer.
+\newblock Adaptive subgradient methods for online learning and stochastic
+  optimization.
+\newblock {\em Journal of Machine Learning Research}, 12(Jul):2121--2159, 2011.
+
 \bibitem{EqProp}
 Maxence Ernoult, Julie Grollier, Damien Querlioz, Yoshua Bengio, and Benjamin
   Scellier.
@@ -62,6 +68,12 @@ Donald~O. Hebb.
 \newblock {\em The Organization of Behaviour - A neuropsychological theory}.
 \newblock John Wiley \& Sons, Inc., 1949.
 
+\bibitem{hinton2012rmsprop}
+Geoffrey Hinton, Nitish Srivastava, and Kevin Swersky.
+\newblock Neural networks for machine learning: Lecture 6a overview of
+  mini-batch gradient descent.
+\newblock Online, 2012.
+
 \bibitem{lstm}
 Sepp Hochreiter and Jürgen Schmidhuber.
 \newblock Long short-term memory.
@@ -88,6 +100,13 @@ Eric Hunsberger and Chris Eliasmith.
 Sergey Ioffe and Christian Szegedy.
 \newblock Batch normalization: Accelerating deep network training by reducing
   internal covariate shift, 2015.
+
+\bibitem{kingma2014adam}
+Diederik Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock 2014.
+\newblock cite arxiv:1412.6980Comment: Published as a conference paper at the
+  3rd International Conference for Learning Representations, San Diego, 2015.
 
 \bibitem{mnist}
 Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
@@ -119,6 +138,11 @@ Beren Millidge, Alexander Tschantz, and Christopher~L. Buckley.
 Arild Nøkland.
 \newblock Direct feedback alignment provides learning in deep neural networks,
   2016.
+
+\bibitem{QIAN1999145}
+Ning Qian.
+\newblock On the momentum term in gradient descent learning algorithms.
+\newblock {\em Neural Networks}, 12(1):145--151, 1999.
 
 \bibitem{raoballard1999}
 Rajesh Rao and Dana Ballard.
