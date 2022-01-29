@@ -590,14 +590,18 @@ We train a PCN and its corresponding FFNN, both employing our scaled soft rate a
 We shadow train a SNN using the soft rate function from equation \ref{eq:soft-rate}, scaled according to section \ref{sec:activation-scaling} with a factor of $0.05$, as activation function and compare it against a feed-forward baseline model using ReLU activation. To make the input image mimic it is spiking, we scale each pixel value to the full range of firing rates $[0; t_\text{ref}^{-1}]$. Batch normalization was applied after each linear transform for both SNN and baseline models to improve training stability. 
 \begin{table}[ht]
   \centering
-  \begin{tabular}{|c | c | c | c | c | c |}
+  \begin{tabular}{|c | c | c | c | c | c | c |}
   \hline
-  \textbf{Model}   & \textbf{Algorithm}  & \textbf{Optimizer}  & \textbf{Activation}   & \textbf{Spiking}   & \textbf{Test accuracy} \\ \hline
-  Baseline         & Backprop                     & ADAM                & ReLU                  & No                 & 97.68\%                \\
-  SNN              & Backprop                     & ADAM                & Soft-rate             & No                 & 97.97\%                \\
-  SNN              & Backprop                     & ADAM                & Soft-rate             & Yes                & 97.71\%                \\
-  SNN              & Z-IL                         & SGD                 & Soft-rate             & No                 & 96.30\%                \\ \hline
-  SNN              & Z-IL                         & SGD                 & Soft-rate             & Yes                & 95.21\%                \\ \hline
+    \textbf{Algorithm}  & \textbf{Optimizer}  & \textbf{Activation} & \textbf{BN.}  & \textbf{Spiking}   & \textbf{Accuracy}      \\ \hline
+    Backprop            & ADAM                & ReLU                & Yes           & No                 & 97.68\%                \\
+    Backprop            & ADAM                & Soft-rate           & Yes           & No                 & 97.97\%                \\
+    Backprop            & ADAM                & Soft-rate           & Yes           & Yes                & 97.71\%                \\
+    Z-IL                & SGD                 & Soft-rate           & No            & No                 & 96.30\%                \\
+    Z-IL                & SGD                 & Soft-rate           & No            & Yes                & 95.21\%                \\
+    Z-IL                & ADAM                & Soft-rate           & No            & No                 & 96.94\%                \\ 
+    Z-IL                & ADAM                & Soft-rate           & No            & Yes                & 96.32\%                \\ 
+    Z-IL                & ADAM                & Soft-rate           & Yes           & No                 & 97.35\%                \\ \hline
+    Z-IL                & ADAM                & Soft-rate           & Yes           & Yes                & 96.29\%                \\ \hline
   \end{tabular}
   \caption{Test accuracies on the P-MNIST benchmark.}
   \label{fig:snn-accuracies}
