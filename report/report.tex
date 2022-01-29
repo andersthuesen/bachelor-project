@@ -131,7 +131,7 @@ If the label is one-hot encoded, meaning that the element in the vector with ind
     0 & \text{otherwise}
   \end{cases} \hspace{5pt} \text{for } k = 1, \ldots, K
 \end{equation}
-where $c_i$ is the correct class for label $\mathbf{x}_i$. Neural networks with softmax activation in the last layer can be trained by minimizing the cross-entropy between the one-hot encoded label, $p$, and the output distribution of the network, $q$, given by:
+where $c_i$ is the correct class label for $\mathbf{x}_i$. Neural networks with softmax activation in the last layer can be trained by minimizing the cross-entropy between the one-hot encoded label, $p$, and the output distribution of the network, $q$, given by:
 \begin{equation}
   H(p, q) = - \sum_{i=1}^N \sum_{k=1}^K p(y_i \mid x_i)_k \log q(y_i \mid x_i)_k.
 \end{equation}
@@ -149,7 +149,7 @@ By comparison with equation \ref{eq:negative-log-likelihood}, minimizing the cro
     \end{matrix} 
   \right)
 \end{equation}
-where each $s_i$ is is the $i$'th entry of the softmax output. As each entry is positive, the partial derivative of the logarithm of $s_i$ wrt. $z_i$ can be written as:
+where each $s_i$ is the $i$'th entry of the softmax output. As each entry is positive, the partial derivative of the logarithm of $s_i$ wrt. $z_i$ can be written as:
 \begin{equation} \label{eq:softmax-derivative}
   \frac{\partial}{\partial z_j} \log s_i = \frac{1}{s_i} \frac{\partial s_i}{\partial z_j}
   \Rightarrow \frac{\partial s_i}{\partial z_j} = s_i \cdot \frac{\partial}{\partial z_j} \log s_i.
@@ -249,9 +249,9 @@ whose factors can be divided into the error term, $\delta^{(L)}$, and activation
     \sigma^\prime(\mathbf{z}^{(L-1)})
   }_{\delta^{(L-1)}}
   \mathbf{a}^{(L-2)}
-\end{split}
+\end{split}.
 \end{equation}
-Though the derivation above only considers $\mathbf{W}^{(L)}$ and $\mathbf{W}^{(L-1)}$ it is the general case that
+Though the derivation above only considers $\mathbf{W}^{(L)}$ and $\mathbf{W}^{(L-1)}$ it is the general case that:
 \begin{equation} \label{eq:delta-terms}
   \delta^{(L)} = \mathcal{L}^\prime (\hat{\mathbf{y}}_i) \sigma^\prime(\mathbf{z}^{(L)}), 
   \hspace{10pt}
@@ -261,7 +261,7 @@ which can be computed using a dynamic programming approach to update the weight 
 \begin{equation} \label{eq:weight-update}
   \mathbf{W}^{(l)} = \mathbf{W}^{(l)} -\alpha \delta^{(l)} \mathbf{a}^{(l-1)}.
 \end{equation}
-The weight is updated in the opposite direction (hence the negation) of the gradient as the aim is to minimize the loss function. By reusing the computation of the error terms, $\delta^{(l)}$, backprop is able to very efficiently compute the weight updates to minimize the global loss function. As the goal is to optimize the joint likelihood over the entire dataset, back-propagation should in theory process all datapoints in the dataset in each forward-backwards pass and update the weights using gradient descent or some other optimizer. As datasets are often very large, requiring an equal amount of memory, this is rarely done in practice. Instead, mini-batches of data, typically containing $8$ to $128$ datapoints are used to update the parameters with eg. stochastic gradient descent. The assumption is that the mini-batches capture the underlying distribution of the dataset. This turns out to work really well, as taking more noisy steps in the loss landscape is often favorable compared to a single step in the direction of steepest descent for the entire dataset. A good rule of thumb when choosing batch size is to pick the larges batch size able to fit in memory when training on GPUs. This will lead to more accurate gradients while taking advantage of the computational power by processing each batch in parallel. 
+The weight is updated in the opposite direction (hence the negation) of the gradient as the aim is to minimize the loss function. By reusing the computation of the error terms, $\delta^{(l)}$, backprop is able to very efficiently compute the weight updates to minimize the global loss function. As the goal is to optimize the joint likelihood over the entire dataset, back-propagation should in theory process all datapoints in the dataset in each forward-backwards pass and update the weights using gradient descent or some other optimizer. As datasets are often very large, requiring a proportional amount of memory, this is rarely done in practice. Instead, mini-batches of data, typically containing $8$ to $128$ datapoints are used to update the parameters with eg. stochastic gradient descent. The assumption is that the mini-batches capture the underlying distribution of the dataset. This turns out to work really well, as taking more noisy steps in the loss landscape is often favorable compared to a single step in the direction of steepest descent for the entire dataset. A good rule of thumb when choosing batch size is to pick the larges batch size able to fit in memory when training on GPUs. This will lead to more accurate gradients while taking advantage of the computational power by processing each batch in parallel. 
 
 \subsection{Adam optimizer}
 The Adam optimizer \cite{kingma2014adam} is an extension to stochastic gradient descent that combines the advantages of AdaGrad \cite{duchi2011adaptive} on sparse gradients and RMSProp \cite{hinton2012rmsprop} that incorporates root mean squared momentum. Introducing momentum is often useful as it is more robust to noise in the mini-batch gradients and therefore leads to faster convergence \cite{QIAN1999145}. Adam does this by keeping track of a running average of the gradient and the square of the gradient:
@@ -273,38 +273,35 @@ The Adam optimizer \cite{kingma2014adam} is an extension to stochastic gradient 
 \end{equation}
 where $\beta_1$ and $\beta_2$ are hyper-parameters, in the range $[0, 1)$, that control the momentum decay rate of the gradient. They are typically set to $\beta_1 = 0.9$ and $\beta_2 = 0.999$ as default. The moment estimates are then bias-corrected:
 \begin{equation}
-  \begin{split}
-    \hat{m}_t &\leftarrow  \frac{m_t}{1-\beta_1} \\
-    \hat{v}_t &\leftarrow \frac{v_t}{1-\beta_2}
-  \end{split}
+    \hat{m}_t \leftarrow  \frac{m_t}{1-\beta_1} \hspace{20pt} \hat{v}_t \leftarrow \frac{v_t}{1-\beta_2}
 \end{equation}
 and used to transform the gradient:
 \begin{equation}
   \theta_t \leftarrow \theta_{t-1} - \alpha \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 \end{equation}
-where $\alpha$ is the learning rate and $\epsilon$ a small constant (typically $10^{-8}$) to prevent division by zero. 
+where $\alpha$ is the learning rate and $\epsilon$ a small constant (typically $10^{-8}$) to prevent division by zero. Adam has been shown in general to lead to very fast convergence with good performance and is therefore used to great extend when training deep learning models. 
 
 % TODO: Write about adam optimizer here.
 
 
 
 \subsection{Batch normalization}
-When training deep neural networks, it is often necessary to normalize the inputs to the network in obtain good results. By normalizing the input variables to the network the gradient of the loss function is more likely to point in the direction of the local minima resulting in more efficient and stable training. According to the authors \cite{ioffe2015batch}, batch normalization has the effect of reducing ``internal covariate shift'' of the networks intermediate representations. As the weights and biases of each layer in the network is updated, the distribution of the internal representations tends to change aswell. This has the effect of slowing down learning and decrease the chance of converging to a good local minima. By normalizing each mini-batch, batch normalization is able to accelerate deep learning by enabling higher learning rates and fewer training steps. Batch normalization works by using a combination of the mean and variance of the current mini-batch and a running mean and variance. At training time, batch normalization standardizes the mini-batch according to
+When training deep neural networks, it is often necessary to normalize the inputs to the network in obtain good results. By normalizing the input variables to the network the gradient of the loss function is more likely to point in the direction of the local minima resulting in more efficient and stable training. According to the authors \cite{ioffe2015batch}, batch normalization has the effect of reducing ``internal covariate shift'' of the networks intermediate representations. As the weights and biases of each layer in the network is updated, the distribution of the internal representations tends to change aswell. This has the effect of slowing down learning and decrease the chance of converging to a good local minima. By normalizing each mini-batch, batch normalization is able to accelerate deep learning by enabling higher learning rates and fewer training steps. Batch normalization works by using a combination of the mean and variance of the current mini-batch and a running mean and variance. At training time, batch normalization standardizes the mini-batch according to:
 \begin{equation}
   \hat{\mathbf{x}}_{i}^{(l)} = \frac{\mathbf{x}^{(l)}_{i}-\mu^{(l)}_{B}}{\sqrt{{\sigma^{2}}^{(l)}_{B}+\epsilon}}
 \end{equation}
-where $\mu_{B}$ is the mean of the batch, $\sigma_{B}^{2}$ is the variance of the batch and $\epsilon$ is some small value for numerical stability (typically $10^{-5}$). Batch norm then outputs an affine transformation using learned parameters $\gamma$ and $\beta$
+where $\mu_{B}$ is the mean of the batch, $\sigma_{B}^{2}$ is the variance of the batch and $\epsilon$ is some small value for numerical stability (typically $10^{-5}$). Batch norm then outputs an affine transformation using learned parameters $\gamma$ and $\beta$:
 \begin{equation}
   \mathbf{y}_{i} = \gamma \hat{\mathbf{x}}_{i}+\beta \equiv \mathrm{BN}_{\gamma, \beta}\left(\mathbf{x}_{i}\right).
 \end{equation}
-During the training fase, the mean and variance of the dataset is estimated by the means of an exponential moving average
+During the training fase, the mean and variance of the dataset is estimated using an exponential moving average:
 \begin{equation}
   \begin{split}
     \mu_\text{mov} &\leftarrow \alpha \mu_\text{mov} + (1 - \alpha)\mu_{B} \\
     \sigma^2_\text{mov} &\leftarrow \alpha \sigma^2_\text{mov} + (1 - \alpha)\sigma^2_{B} \\
   \end{split}
 \end{equation}
-where $\alpha=0.1$ is the default value. At inference time, batch normalization uses the dataset mean and variance estimations and affine scaling and translation parameters to normalize the intermediate representations
+where $\alpha=0.1$ is the default value. Then at inference time, batch normalization uses the dataset's mean and variance estimations and affine scaling and translation parameters to normalize the intermediate representations according to:
 \begin{equation} \label{eq:batch-norm}
   \mathbf{y}_i = \frac{\gamma}{\sqrt{\sigma^{2}_\text{mov} +\epsilon}} \cdot \mathbf{x}_i +\left(\beta - \frac{\gamma \mu_\text{mov}}{\sqrt{\sigma^{2}_\text{mov}+\epsilon}}\right).
 \end{equation}
@@ -319,7 +316,7 @@ The following section will focus on biologically plausible deep learning and wha
 \subsection{Biological neurons} \label{sec:neurons}
 This section aims to briefly describe the biological neuron from a highlevel perspective to give an intuition of how processing is happening in the human brain. Hopefully this will lead to a better understanding of what biologically plausibility encapsulates. It is by no means fully comprehensive nor capturing all the nuanced details of the biological processes. \\
 \\*
-A neuron is an electrically excitable cell capable of communicating with other neurons by sending electrical signals called action potentials or spikes. Most often, multiple spikes are generated in sequence, called a spike train. When spikes are generated the neuron is said to be \textit{firing}. The neuron has a cell body called the soma which is the central element in processing. From the soma root like structures called dendrites extrude, which capture signals from other nearby neurons. Receiving spikes from other presynaptic neurons will lead to polerization of the cell and trigger the neuron to spike itself if the input spikes exceed a certain threshold. As the neuron spikes an action potential will travel from the soma, through the axon and to the synaptic terminal where it will cause the release of neurotransmitter molecules to the postsynaptic neurons dendrites. Neurons are usually in computational models described by their membrane potential or voltage which arises from the fact that neurons maintain a voltage across its membrane. It achieves this by actively regulating the intracellular concentration of charged potassium, sodium and calcium ions through ion pumps until a resting potential is reached (around -70mV). When neurotransmitter molecules bind to receptors on the dendrites, it will cause various types of ion channels to open. This will result in a change in the ionic concentration and thereby membrane potential of the neuron. Once the membrane voltage reaches a certain level called the threshold voltage (around -55mV) voltage-gated ion channels open and ions flood in to the cell, further increasing the membrane voltage to form a chain reaction. This reaction causes neurotransmitter to be released at the synaptic terminal. In other words, the neuron will spike. After spiking a phase of hyperpolerization called the refractory period might occur. In this phase, ion pumps decrease the membrane potential beyond the resting potential and prevents the neurons from spiking. \\
+A neuron is an electrically excitable cell capable of communicating with other neurons by sending electrical signals called action potentials or spikes. Most often, multiple spikes are generated in sequence, called a spike train. When spikes are generated the neuron is said to be \textit{firing}. The neuron has a cell body called the soma which is broadly considered the central element in processing. From the soma root like structures called dendrites extrude, which capture signals from other nearby neurons. Receiving spikes from other presynaptic neurons will lead to polerization of the cell and trigger the neuron to spike itself if the input spikes exceed a certain threshold. As the neuron spikes an action potential will travel from the soma, through the axon and to the synaptic terminal where it will cause the release of neurotransmitter molecules to the postsynaptic neurons dendrites. Neurons are usually in computational models described by their membrane potential or voltage which arises from the fact that neurons maintain a voltage across its membrane. It achieves this by actively regulating the intracellular concentration of charged potassium, sodium and calcium ions through ion pumps until a resting potential is reached (around -70mV). When neurotransmitter molecules bind to receptors on the dendrites, it will cause various types of ion channels to open. This will result in a change in the ionic concentration and thereby membrane potential of the neuron. Once the membrane voltage reaches a certain level called the threshold voltage (around -55mV) voltage-gated ion channels open and ions flood in to the cell, further increasing the membrane voltage to form a chain reaction. This reaction causes neurotransmitter to be released at the synaptic terminal. In other words, the neuron will spike. After spiking a phase of hyperpolerization called the refractory period might occur. In this phase, ion pumps decrease the membrane potential beyond the resting potential and prevents the neurons from spiking. \\
 \\*
 It is believed that the brain learns both by forming new connections between neurons and by varying the amount of neurotransmitter receptors resulting in strengthening or weakening of existing connections. In the book, The \textit{Organization of Behaviour} by Donald Hebb \cite{hebb1949}, he postulates that the pre- and postsynaptic activity drive this change, known as Hebb's postulate or Hebbian learning: 
 \begin{quotation}
@@ -344,7 +341,7 @@ In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regardin
 
 \begin{enumerate}
   \item \textbf{Weight transport problem}: \vspace{5pt} \\
-  Back-propagation uses the same connection weights in both the forward pass for prediction and in the backwards pass when calculating the gradients as seen in equation \ref{eq:delta-terms}. A well established fact of biological neurons is that of spikes travilling unidirectionally from the soma, through the axons and across the synapses as neurotransmitter chemicals. Backprop does not seem to comply with this constraint. % TODO: Mention "constraint of unidirectionality"
+  Back-propagation uses the same connection weights in both the forward pass for prediction and in the backwards pass when calculating the gradients as seen in equation \ref{eq:delta-terms}. A well established fact of biological neurons is that spikes travel uni-directionally from the soma, through the axons and across the synapses as neurotransmitter chemicals. Backprop does not seem to comply with this constraint. 
   \item \textbf{The derivative problem}: \vspace{5pt} \\
   The derivative problem problematises the need for the derivative of the activation function (ex. sigmoid or ReLU used in the forward pass) in order to back-propagate the error signal as it is also the case in equation \ref{eq:delta-terms}. It is not known that biological neurons can do this.
   \item \textbf{The linear feedback problem}: \vspace{5pt} \\
@@ -369,7 +366,7 @@ In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regardin
 Spiking neural networks (SNNs) are a particular type of network that uses spikes for inter-neuron communication. In that way they more closely mimic biological neural networks, but share their structure and dense connectivity with feed-forward neural networks. Spiking neurons are temporal in their dynamics in the sense that they are integrating input spikes over time. When the threshold membrane potential is exceeded a spike is sent to the connected neurons in the next layer. The implementation of SNNs requires a particular neuron model of the action potential often modelled as a first order differential equation describing the exact dynamics. Several different neuron models exists ranging from simple and compute efficient models like the Integrate-and-Fire (IF) model that only captures the coarse dynamics of biological neurons to more nuanced models like the Hodgkin-Huxley model \cite{Hodgkin1952}. We will be using a variation of the IF neuron model which leaks membrane potential over time, called the Leaky-Integrate-and-Fire model. This particular model has the advantage of being relatively biologically plausible yet still being very efficient to compute. 
 
 \subsubsection{Training spiking neural networks}
-There exist several methods for training SNNs such SpikeProp \cite{Boht2000SpikePropBF} which uses an algorithm akin to backprop directly on the generated spikes using surrogate gradient functions or modelling approaches where the spiking dynamics of neurons is defined using recurrent networks and trained using backprop through time, like snnTorch \cite{eshraghian2021training}. This project will use a method of shadow training where a ``shadow'' ANN will be trained using spike-rate coding and later run as spiking neural network at inference time using the learned weights from the ANN. This has the advantage of leveraging existing deep learning infrastructure and optimization techniques while being deployable on low-powered or analog hardware. 
+There exist several methods for training SNNs such SpikeProp \cite{Boht2000SpikePropBF} and snnTorch \cite{eshraghian2021training} mentioned earlier. This project will use a method of shadow training where a ``shadow'' ANN will be trained using spike-rate coding and later run as spiking neural network at inference time using the learned weights from the ANN. This has the advantage of leveraging existing deep learning infrastructure and optimization techniques while being deployable on low-powered or analog hardware. 
 
 \subsubsection{Leaky-Integrate-and-Fire neurons}
 % Maybe a note about units?
@@ -400,7 +397,7 @@ when the input current exceed the threshold $j>V_\text{th}$ by setting $v(t) = V
       0 & \text{otherwise}
   \end{cases}
 \end{equation}
-Notice that $t_\text{ref}$ is added to the time-to-spike, to incorporate the effect of the refractory period. Using the rate function directly as activation function would lead to problems as its derivative goes to infinity when $j \to 0_{+}$. Hunsberger et al. therefore introduces a smoothed rate function using the softplus function $\rho(x) = \gamma \log(1 + \exp(x / \gamma))$ that works as a smooth $\max$ function and does in fact becomes equivilant when $\gamma \to 0$.
+Notice that $t_\text{ref}$ is added to the time-to-spike, to incorporate the effect of the refractory period. Using the rate function directly as activation function would lead to problems as its derivative goes to infinity when $j \to 0_{+}$. Hunsberger et al. therefore introduces a smoothed rate function using the softplus function $\rho(x) = \gamma \log(1 + \exp(x / \gamma))$ that works as a smooth $\max$ function and does in fact becomes equivilant when $\gamma \to 0$. The smooth rate function becomes:
 
 \begin{equation} \label{eq:soft-rate}
   r_\rho(j) = \left[t_\text{ref} - \tau_{RC} \log \left(1 + \frac{ V_{\text{th}} }{ \rho(j - V_\text{th})}\right) \right]^{-1}
@@ -523,12 +520,9 @@ Here, $\mathbf{x}_{T}^{(L)} - \mathbf{u}_T^{(L)}$ is the derivative of the squar
 \subsubsection{Z-IL and equivalence to back-propagation}
 Song et al. takes this a step further by showing that a special variant of inference learning, zero-divergence inference learning (Z-IL) gives rise to the exact same weight updates as the back-propagation algorithm \cite{PredictiveCodingNetworks}. They show this by first assuming that every value node, $x_{i,t}^{(l)}$ and prediction $u_{i,t}^{(l)}$ is equal to the corresponding forward activity of the equivalent ANN. This is naturally satisfied when the input node is clamped to the input value of some training pair and the network is relaxed to an equilibrium, corresponding to the forward propagation necessary in the back-propagation algorithm. The output node is then fixed to the output value of the training pair after which each value node is updated to minimize $F$ according to equation \ref{eq:update-value-nodes} with integration step size $\gamma = 1$. At last, the weights are scheduled to be updated according to equation \ref{eq:il-weight-update} at time $t=L-l$.
 
-\subsubsection{Batch normalization in predictive coding networks}
-Write about how we can implement it here.
-
 \subsubsection{Predictive coding networks for classification}
 Predictive coding networks by default predict continuous valued output variables and are therefore more suited for regression tasks than classification. However, it is possible to modify the network to perform classification by relying on the insight of deriving the partial derivative of the cross-entropy loss function in section \ref{sec:MLE}. Inference learning updates value nodes in order to minimize the total free energy of the network according to:
-\begin{equation}
+\begin{equation} \label{eq:value-node-derivative}
   \begin{split}
   \dot{\mathbf{x}}_t^{(l)} = -\frac{\partial F_t}{\partial \mathbf{x}_t^{(l)}} & = - \frac{\partial }{\partial \mathbf{x}_t^{(l)}} \left[ \frac{1}{2} {\lVert \epsilon_t^{(l)} \rVert}^2 + \frac{1}{2} {\lVert \epsilon_t^{(l+1)} \rVert}^2  \right] \\
   & = -\epsilon_t^{(l)} - \frac{\partial \frac{1}{2} {\lVert \epsilon_t^{(L)} \rVert}^2}{\partial \mathbf{u}_t^{(l+1)}} \frac{\partial \mathbf{u}_t^{(l+1)}}{\partial \mathbf{x}_t^{(l)}} \\
@@ -539,12 +533,41 @@ as changing the value node $\mathbf{x}_t^{(l)}$ will both effect its own layers 
 \begin{equation}
   \dot{\mathbf{x}}_{t}^{(L-1)} = -\epsilon_{t}^{(L-1)} + \epsilon_{t}^{(L)}.
 \end{equation}
-Here, we notice that changing $\mathbf{x}_t^{(L-1)}$ in the direction of $\epsilon_{t}^{(L)}$ will actually minimize the cross-entropy loss (as seen in equation \ref{eq:cross-entropy-loss-deriv}), since:
+Here, we notice that changing $\mathbf{x}_t^{(L-1)}$ in the direction of $\epsilon_{t}^{(L)}$ will minimize the cross-entropy loss (as seen in equation \ref{eq:cross-entropy-loss-deriv}), since:
 \begin{equation}
   \epsilon_{t}^{(L)} = -\frac{\partial H(\mathbf{x}_t^{(L)}, \mathbf{u}_t^{(L)})}{\partial \mathbf{x}_t^{(L-1)}} = \mathbf{x}_t^{(L)} - \mathbf{u}_t^{(L)}
 \end{equation}
 Hence, the predictive coding network will learn to perform classification. 
 % TODO: Maybe write a little more to this.
+
+\newpage 
+
+\subsubsection{Batch normalization in predictive coding networks}
+It is possible to implement batch normalization in PCNs, although some minor modifications to the update equations are necessary. We implement a batch normalizing layer in our PCN, similarly as when introducing a softmax layer: To only allow for one-to-one connections, the weight matrix is set to the identity matrix. Bias is set to the zero vector and activation function to the batch normalization operation, such that the prediction of the next layer becomes:
+\begin{equation}
+  \mathbf{u}_{t}^{(l)} = \mathbf{I} \sigma^{(l)}(\mathbf{x}_{t}^{(l-1)}) + \mathbf{0} = \text{BN}_{\gamma^{(l)},\beta^{(l)}}(\mathbf{x}_{t}^{(l-1)}) = \mathbf{y}_t^{(l)}.
+\end{equation}
+To derive the dynamics for value nodes and parameter updates of $\gamma^{(l)}$ and $\beta^{(\beta)}$ we will be taking our starting point in the gradient of the batch normalization operation as given in the original paper \cite{ioffe2015batch} included as appendix \ref{appendix:batch-norm-grad}.
+\\
+As shown in the previous section, inference learning changes the value nodes to minimize the total free energy by minimizing the error node local to the value node as well as the affected error nodes in the next layer. In layer $l$, just before a batch normalization layer, the value node will change according to:
+\begin{equation}
+  \begin{split}
+    \dot{\mathbf{x}}_{i,t}^{(l)} &= -\epsilon_{i,t}^{(l)} - \frac{\partial \frac{1}{2}\lVert\epsilon_{i,t}^{(l+1)}\rVert^{2}}{ \partial \mathbf{x}_{i,t}^{(l)}}
+  \end{split}
+\end{equation}
+By letting the loss function be equal to the squared error unit $\ell=\frac{1}{2}\lVert\epsilon_{i,t}^{(l+1)}\rVert^{2}$, we see from the batch norm derivatives in the appendix, that the last term in the equation above can be substituted for $\frac{\partial \ell}{\partial \mathbf{x}_{i,t}^{(l)}}$ where $\frac{\partial \ell}{\partial \mathbf{y}_{i,t}^{(l+1)}} = \frac{\partial F_t}{\partial \mathbf{u}_{i,t}^{(l+1)}} = - \epsilon_{i,t}^{(l+1)}$ giving us the update rule:
+\begin{equation}
+  \dot{\mathbf{x}}_{i,t}^{(l)} = -\epsilon_{i, t}^{(l)} - 
+    \frac{\partial \ell}{\partial \widehat{\mathbf{x}}_{i,t}^{(l)}} \cdot \frac{1}{\sqrt{ {\sigma_{\mathcal{B}}^{2}}^{(l)} + \epsilon }} - \frac{\partial \ell}{\partial {\sigma_{\mathcal{B}}^{2}}^{(l)}} \cdot \frac{2\left(\mathbf{x}_{i,t}^{(l)}-\mu_{\mathcal{B}}^{(l)} \right)}{m}- \frac{\partial \ell}{\partial \mu_{\mathcal{B}}^{(l)}} \cdot \frac{1}{m}.
+\end{equation}
+The parameters are in the same fashion learned by minimizing free energy:
+\begin{equation}
+  \Delta \gamma^{(l)} = -\alpha \frac{\partial \ell}{\partial \gamma^{(l)}} \hspace{10pt} \Delta \beta^{(l)} -\alpha \frac{\partial \ell}{\partial \beta^{(l)}}
+\end{equation}
+%By considering the loss function $\ell = F_t$, 
+% \frac{1}{2}\left\|\epsilon_{t}^{(l+1)}\right\|^{2}
+%As the batch normalizing in the PCN aims to minimize its error unit,  
+
 
 \newpage
 
@@ -631,5 +654,19 @@ What should be done in the future?
 \bibliographystyle{plain}
 \bibliography{refs}
 
+\newpage
+\section{Appendix}
+\subsection{Batch normalization gradients} \label{appendix:batch-norm-grad}
+Derivatives of the batch normalization operation as presented in the original paper \cite{ioffe2015batch}:
+\begin{equation}
+  \begin{aligned}
+    \frac{\partial \ell}{\partial \widehat{x}_{i}} &=\frac{\partial \ell}{\partial y_{i}} \cdot \gamma \\
+    \frac{\partial \ell}{\partial \sigma_{\mathcal{B}}^{2}} &=\sum_{i=1}^{m} \frac{\partial \ell}{\partial \widehat{x}_{i}} \cdot\left(x_{i}-\mu_{\mathcal{B}}\right) \cdot \frac{-1}{2}\left(\sigma_{\mathcal{B}}^{2}+\epsilon\right)^{-3 / 2} \\
+    \frac{\partial \ell}{\partial \mu_{\mathcal{B}}} &=\left(\sum_{i=1}^{m} \frac{\partial \ell}{\partial \widehat{x}_{i}} \cdot \frac{-1}{\sqrt{\sigma_{\mathcal{B}}^{2}+\epsilon}}\right)+\frac{\partial \ell}{\partial \sigma_{\mathcal{B}}^{2}} \cdot \frac{\sum_{i=1}^{m}-2\left(x_{i}-\mu_{\mathcal{B}}\right)}{m} \\
+    \frac{\partial \ell}{\partial x_{i}} &=\frac{\partial \ell}{\partial \widehat{x}_{i}} \cdot \frac{1}{\sqrt{\sigma_{\mathcal{B}}^{2}+\epsilon}}+\frac{\partial \ell}{\partial \sigma_{\mathcal{B}}^{2}} \cdot \frac{2\left(x_{i}-\mu_{\mathcal{B}}\right)}{m}+\frac{\partial \ell}{\partial \mu_{\mathcal{B}}} \cdot \frac{1}{m} \\
+    \frac{\partial \ell}{\partial \gamma} &=\sum_{i=1}^{m} \frac{\partial \ell}{\partial y_{i}} \cdot \widehat{x}_{i} \\
+    \frac{\partial \ell}{\partial \beta} &=\sum_{i=1}^{m} \frac{\partial \ell}{\partial y_{i}}
+  \end{aligned}
+\end{equation}
 
 \end{document}
