@@ -14,7 +14,7 @@
 \contentsline {section}{\numberline {3}Biologically plausible deep learning}{12}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Biological neurons}{12}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Biological constraints}{13}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Biological violations of backprop and deep learning}{13}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1}Biological violations of backprop and deep learning}{14}{subsubsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.3}Spiking neural networks}{15}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}Training spiking neural networks}{15}{subsubsection.3.3.1}%
 \contentsline {subsubsection}{\numberline {3.3.2}Leaky-Integrate-and-Fire neurons}{15}{subsubsection.3.3.2}%
@@ -30,12 +30,10 @@
 \contentsline {subsubsection}{\numberline {3.5.2}Z-IL and equivalence to back-propagation}{20}{subsubsection.3.5.2}%
 \contentsline {subsubsection}{\numberline {3.5.3}Predictive coding networks for classification}{20}{subsubsection.3.5.3}%
 \contentsline {subsubsection}{\numberline {3.5.4}Batch normalization in predictive coding networks}{21}{subsubsection.3.5.4}%
-\contentsline {section}{\numberline {4}Results and Discussion}{22}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Experiment 1 - Z-IL vs. Backprop}{22}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Experiment 2 - SPCN performance on MNIST digits}{23}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Evaluation of Biological Plausibility}{24}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Benefits to biological plausible learning}{24}{subsection.4.4}%
-\contentsline {section}{\numberline {5}Conclusion}{26}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Further research}{26}{subsection.5.1}%
-\contentsline {section}{\numberline {6}Appendix}{30}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Batch normalization derivatives}{30}{subsection.6.1}%
+\contentsline {section}{\numberline {4}Results and Discussion}{23}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Experiment 1 - Z-IL vs. Backprop}{23}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Experiment 2 - SPCN performance on MNIST digits}{24}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Evaluation of Biological Plausibility}{25}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Benefits to biological plausible learning}{25}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Conclusion}{27}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Further research}{27}{subsection.5.1}%

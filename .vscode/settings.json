@@ -1,11 +1,11 @@
 {
   "cSpell.words": [
     "backprop",
+    "neuromorphic",
     "perceptron",
     "problematizes",
     "softmax",
-    "unidirectionality",
-    "unidirectionally"
+    "unidirectionality"
   ],
   "cSpell.enableFiletypes": ["!python"]
 }
