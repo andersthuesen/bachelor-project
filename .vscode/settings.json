@@ -1,4 +1,11 @@
 {
-  "cSpell.words": ["backprop", "perceptron", "softmax"],
+  "cSpell.words": [
+    "backprop",
+    "perceptron",
+    "problematizes",
+    "softmax",
+    "unidirectionality",
+    "unidirectionally"
+  ],
   "cSpell.enableFiletypes": ["!python"]
 }

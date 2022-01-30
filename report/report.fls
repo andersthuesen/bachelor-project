@@ -598,9 +598,10 @@ INPUT /usr/local/texlive/2021basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT /usr/local/texlive/2021basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT /usr/local/texlive/2021basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./report.toc
 INPUT report.toc
 INPUT report.toc
@@ -638,7 +639,6 @@ INPUT graphics/smooth-rate.png
 INPUT ./graphics/smooth-rate.png
 INPUT ./graphics/smooth-rate.png
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm

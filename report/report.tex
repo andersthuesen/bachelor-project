@@ -23,13 +23,22 @@
 \begin{document}
 \maketitle
 \thispagestyle{empty}
-\section*{Abstract}
-Write abstract here.
+
+\newpage
+\thispagestyle{empty}
+\begin{abstract}  
+Alternative biological plausible models and learning algorithms to deep neural networks (DNNs) and back-propagation (BP), have lately become an interesting area of research, giving insights into how the brain might learn and possibly providing efficient learning algorithms for neuromorphic hardware. Several models, learning algorithms and methods such as Predictive Coding Networks (PCNs), Zero-Divergence Inference Learning (Z-IL) and Shadow Training of Spiking Neural Networks (SNNs) have been proposed to satisfy different constraints of biological plausibility. However, little work has gone into examining the biological plausibility and performance of a mixture of these methods. \\
+\\*
+This bachelor thesis introduces the novel combination of PCNs, Z-IL and shadow training in Spiking Predictive Coding Networks (SPCNs) and shows how this combination can be used in classification tasks. We then examine the collective biological plausibility of SPCNs as well as their relative performance to deep learning methods in predicting MNIST digits. Our findings show that SPCNs are not fully biological plausible, as they rely on symmetric weights and do not use spikes during training, but that they are able to achieve similar accuracies to DNNs trained with BP, possibly providing an attractive alternative in combination with neuromorphic hardware.
+\end{abstract}
 
 \newpage 
 \thispagestyle{empty}
 \section*{Preface}
-Thank you to a lot of people here.
+This bachelor thesis has been submitted to the Technical University of Denmark in partial fulfilment for the degreee Bachelor of Science in Artificial Intelligence and Data Science. The project has been carried out between  
+October 11th, 2021 and January 30th, 2022 with a workload of 20 ECTS points. \\
+\\*
+I would like to thank Morten Mørup for being the main supervisor of this project, responding to emails at late hours, providing valuable feedback and helping me concretize the idea, research questions and experiments for the project. Also thanks to Kristoffer Hougaard Madsen for being co-supervised and giving insights into the biological aspects of neurons. 
 
 \newpage
 \tableofcontents
@@ -50,7 +59,9 @@ Several approaches have been made to make deep learning more aligned with how th
 
 The second category consists of methods that aim to make the communication between neurons more biologically plausible and possible more efficient on low-powered neuromorphic hardware such as the Intel Loihi or IBM TrueNorth chips by relying on binary spikes for communication. SpikeProp \cite{Boht2000SpikePropBF} is one of the early proposed methods for training spiking neural networks. The method uses an algorithm akin to back-propagation directly on the generated spikes using surrogate gradient functions. Another approach is to use a recurrent neural network type architecture to model the dynamics of neurons and trained with back-propagation using \href{https://snntorch.readthedocs.io/en/latest/}{snnTorch framework} \cite{eshraghian2021training}. A third approach is the method of shadow training, where standard ANNs are training using a neural response function of the spiking frequency as function of the input stimuli and later run in simulation or hardware using the exact neuronal dynamics \cite{hunsberger2015spiking}. \\
 \\*
-This project will primarily focus on PCN and shadow training methods presented in the two papers \textit{Spiking Deep Networks with LIF Neurons} by Eric Hunsberger et al. \cite{hunsberger2015spiking} and \textit{Can the Brain Do Backpropagation? - Exact Implementation of Backpropagation in Predictive Coding Networks} by Yuhang Song et al. \cite{PredictiveCodingNetworks}. The endgoal of this project is to compare these methods with a unification of the two on the supervised task of predicting the label of MNIST digits. Hopefully, the combination of these methods will shine some light on the intersection between artificial and biological neural networks and provide a foundation for further research.
+This project will introduce and examine Spiking Predictive Coding Networks (SPCNs) as the novel combination of PCN and shadow training methods presented in the two papers \textit{Can the Brain Do Backpropagation? - Exact Implementation of Backpropagation in Predictive Coding Networks} by Yuhang Song et al. \cite{PredictiveCodingNetworks} and \textit{Spiking Deep Networks with LIF Neurons} by Eric Hunsberger et al. \cite{hunsberger2015spiking}. The aim of this project is evaluate the biological plausibility of SPCNs as well as their performance and
+applicability. Hopefully, the combination of these methods will shine some light on the intersection between artificial and biological neural networks and provide a foundation for further research.
+
 
 \newpage
 
@@ -59,19 +70,18 @@ The project will address the following three research questions:
 \begin{itemize}
   % \item \textbf{What are the effectiveness of weight updates in inference learning compared to back-propagation?} \vspace{5pt} \\ % TODO: Might change!
   % In order to compare the weight updates from inference learning with back-propagation, we train two analogous models with each learning algorithm to predict MNIST digits and compare their accuracies as functions of number of weight updates.
-  \item \textbf{Does the combination of predictive coding networks and spiking neural networks provide a biologically plausible model of learning} \vspace{5pt} \\ 
-  We examine the biological plausibility of the novel combination of predictive coding networks, inference learning and spiking network shadow training by evaluating it against biological constraints defined by Bengio et al. \cite{BengioLBL15} and later expanded upon by Hunsberger \cite{Eric2018} together with constraints of locality, spiking and unidirectionality derived from biological neurons. 
+  \item \textbf{Does SPCNs provide a plausible model of biological learning?} \vspace{5pt} \\ 
+  We examine the biological plausibility SPCNs by evaluating it against biological constraints defined by Bengio et al. \cite{BengioLBL15} and later expanded upon by Hunsberger \cite{Eric2018} together with constraints of locality, spiking and unidirectionality derived from biological neurons. 
 
-  \item \textbf{How well does the proposed biologically plausible model perform compared to deep learning methods?} \vspace{5pt} \\
-  The performance of the model and learning algorithm is then compared against feed-forward neural networks trained with back-propagation on the MNIST benchmark dataset.
+  \item \textbf{How well does SPCNs perform compared to deep learning methods?} \vspace{5pt} \\
+  The performance of SPCNs trained with Z-IL is compared against Feed-forward Neural Networks trained with back-propagation on the MNIST benchmark dataset.
 
   \item \textbf{In what ways can deep learning methods benefit from biological plausible learning?} \vspace{5pt} \\
   We discuss different possibilities for improving the training of deep neural networks with biological plausible methods and how this work contributes to this. % TODO: Write more about this.
 \end{itemize}
 \subsection{Project Outline}
-The thesis is structured in three parts. In the first chapter, deep learning methods are introduced and reviewed to provide a foundation for the second part of the thesis. The second part will begin by defining what biological plausibility entails and what constraints must be satisfied for models and methods to be biological plausible. The chapter will then go on to introducing predictive coding networks, inference learning and spiking neural network shadow training, claimed to be more biological plausible than current deep learning methods. Finally, in the results and discussion section of the thesis, a novel combination of the previous mentioned, self-acclaimed biological plausible methods will be investigated according to the research questions above. Finally, the thesis will conclude. \\
-\\*
-All code from this project is available at \href{https://github.com/andersthuesen/bachelor-project}{https://github.com/andersthuesen/bachelor-project}.
+The thesis is structured in three parts. In the first chapter, deep learning methods are introduced and reviewed to provide a foundation for the second part of the thesis. The second part will begin by defining what biological plausibility entails and what constraints must be satisfied for models and methods to be biological plausible. The chapter will then go on to introducing predictive coding networks, inference learning and spiking neural network shadow training, claimed to be more biological plausible than current deep learning methods. In the third section, results from experiments investigating SPCNs according to the research questions are presented and discussed. Finally, the thesis will conclude on its findings and provide thoughts on further research. \\
+All code in this project is available at \href{https://github.com/andersthuesen/bachelor-project}{https://github.com/andersthuesen/bachelor-project}.
 
 \newpage
 
@@ -290,7 +300,7 @@ When training deep neural networks, it is often necessary to normalize the input
 \begin{equation}
   \hat{\mathbf{x}}_{i}^{(l)} = \frac{\mathbf{x}^{(l)}_{i}-\mu^{(l)}_{B}}{\sqrt{{\sigma^{2}}^{(l)}_{B}+\epsilon}}
 \end{equation}
-where $\mu_{B}$ is the mean of the batch, $\sigma_{B}^{2}$ is the variance of the batch and $\epsilon$ is some small value for numerical stability (typically $10^{-5}$). Batch norm then outputs an affine transformation using learned parameters $\gamma$ and $\beta$:
+where $\mu_{B}$ is the mean for each feature over the batch dimension, $\sigma_{B}^{2}$ is the variance for each feature over the batch dimension and $\epsilon$ is some small value for numerical stability (typically $10^{-5}$). Batch norm then outputs an affine transformation using learned parameters $\gamma$ and $\beta$:
 \begin{equation}
   \mathbf{y}_{i} = \gamma \hat{\mathbf{x}}_{i}+\beta \equiv \mathrm{BN}_{\gamma, \beta}\left(\mathbf{x}_{i}\right).
 \end{equation}
@@ -334,16 +344,16 @@ This postulate is congruent with the learning mechanism of spike-timing dependen
 
 
 \subsection{Biological constraints} \label{sec:biological-constraints}
-To understand how the biological neurons process information and give rise to the emergent phenomenon of intelligence it is of interest to study the natural biological and physical limitations that they exhibit. One interesting question is to whether the perticular biological implementation of the neural networks in the brain are fundamental for the existense of intelligence or if it is rather a single instance in the set of possible configurations. For now, the focus will be on defining the constraints of the only tried-and-testet implementation we know of; the biological neuron. Neurons communicate using spikes of roughly the same amplitude, but are able to dynamically modulate the rate and timings of spikes depending on the presynaptic stimulation. This leads to our first \textbf{constraint of spikes} for communication. Due to the anatomical structure of neurons communication is unidirectional in the direction from the cell body, along the axon and to the synaptic terminal. No spiking signal is known to travel in the reverse direction from post-synaptic dendrites to pre-synaptic terminal. Thus we introduce a \textbf{constraint of unidirectionality}. Neurons primarily communicate with nearby neurons. Efficiency wise, it makes sense for the brain to place functionally dependent regions nearby to save energy in signal transmission. This principle of locality is also found in Hebb's postulate and STDP. We therefore say that biological learning is \textbf{constrained by locality}.
+To understand how the biological neurons process information and give rise to the emergent phenomenon of intelligence it is of interest to study the natural biological and physical limitations that they exhibit. One interesting question is to whether the particular biological implementation of the neural networks in the brain are fundamental for the existence of intelligence or if it is rather a single instance in the set of possible configurations. For now, the focus will be on defining the constraints of the only tried-and-tested implementation we know of; the biological neuron. Neurons communicate using spikes of roughly the same amplitude, but are able to dynamically modulate the rate and timings of spikes depending on the pre-synaptic stimulation. This leads to our first \textbf{constraint of spikes} for communication. Due to the anatomical structure of neurons communication is unidirectional in the direction from the cell body, along the axon and to the synaptic terminal. No spiking signal is known to travel in the reverse direction from post-synaptic dendrites to pre-synaptic terminal. Thus we introduce a \textbf{constraint of unidirectionality}. Neurons primarily communicate with nearby neurons. Efficiency wise, it makes sense for the brain to place functionally dependent regions nearby to save energy in signal transmission. This principle of locality is also found in Hebb's postulate and STDP. We therefore say that biological learning is \textbf{constrained by locality}.
 
 \subsubsection{Biological violations of backprop and deep learning}
-In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regarding the biologically plausibility of back-propagation and artificial neural networks which are nicely summarized and expanded upon in the PhD thesis by Hunsberger \cite{Eric2018} from which this project will use the same naming of the problems. To illustrate the problems more clearly in terms of dicussions in previous sections (\ref{sec:backprop}, \ref{sec:neurons}) the problems have been reformulated as follows.
+In their 2016 paper, Bengio et al \cite{BengioLBL15}. raises 6 problems regarding the biologically plausibility of back-propagation and artificial neural networks which are nicely summarized and expanded upon in the PhD thesis by Hunsberger \cite{Eric2018} from which this project will use the same naming of the problems. To illustrate the problems more clearly in terms of discussions in previous sections (\ref{sec:backprop}, \ref{sec:neurons}) the problems have been reformulated as follows.
 
 \begin{enumerate}
   \item \textbf{Weight transport problem}: \vspace{5pt} \\
-  Back-propagation uses the same connection weights in both the forward pass for prediction and in the backwards pass when calculating the gradients as seen in equation \ref{eq:delta-terms}. A well established fact of biological neurons is that spikes travel uni-directionally from the soma, through the axons and across the synapses as neurotransmitter chemicals. Backprop does not seem to comply with this constraint. 
+  Back-propagation uses the same connection weights in both the forward pass for prediction and in the backwards pass when calculating the gradients as seen in equation \ref{eq:delta-terms}. A well established fact of biological neurons is that spikes travel unidirectionally from the soma, through the axons and across the synapses as neurotransmitter chemicals. Backprop does not seem to comply with this constraint. 
   \item \textbf{The derivative problem}: \vspace{5pt} \\
-  The derivative problem problematises the need for the derivative of the activation function (ex. sigmoid or ReLU used in the forward pass) in order to back-propagate the error signal as it is also the case in equation \ref{eq:delta-terms}. It is not known that biological neurons can do this.
+  The derivative problem problematizes the need for the derivative of the activation function (ex. sigmoid or ReLU used in the forward pass) in order to back-propagate the error signal as it is also the case in equation \ref{eq:delta-terms}. It is not known that biological neurons can do this.
   \item \textbf{The linear feedback problem}: \vspace{5pt} \\
   The linear feedback problem is due to the fact that neurons communicate in a non-linear fashion making the linear dependence on the feedback error term, $\delta^{(l)}$, in equation \ref{eq:weight-update} difficult to implement for biological neurons. 
   \item \textbf{The spiking problem}: \vspace{5pt} \\
@@ -521,7 +531,7 @@ Here, $\mathbf{x}_{T}^{(L)} - \mathbf{u}_T^{(L)}$ is the derivative of the squar
 Song et al. takes this a step further by showing that a special variant of inference learning, zero-divergence inference learning (Z-IL) gives rise to the exact same weight updates as the back-propagation algorithm \cite{PredictiveCodingNetworks}. They show this by first assuming that every value node, $x_{i,t}^{(l)}$ and prediction $u_{i,t}^{(l)}$ is equal to the corresponding forward activity of the equivalent ANN. This is naturally satisfied when the input node is clamped to the input value of some training pair and the network is relaxed to an equilibrium, corresponding to the forward propagation necessary in the back-propagation algorithm. The output node is then fixed to the output value of the training pair after which each value node is updated to minimize $F$ according to equation \ref{eq:update-value-nodes} with integration step size $\gamma = 1$. At last, the weights are scheduled to be updated according to equation \ref{eq:il-weight-update} at time $t=L-l$.
 
 \subsubsection{Predictive coding networks for classification}
-Predictive coding networks by default predict continuous valued output variables and are therefore more suited for regression tasks than classification. However, it is possible to modify the network to perform classification by relying on the insight of deriving the partial derivative of the cross-entropy loss function in section \ref{sec:MLE}. Inference learning updates value nodes in order to minimize the total free energy of the network according to:
+Predictive coding networks by default minimize the squared distance and are therefore more suited for predicting continuous valued output variables in regression tasks than performing classification. However, it is possible to modify the network to perform classification by relying on the insight of deriving the partial derivative of the cross-entropy loss function in section \ref{sec:MLE}. Inference learning updates value nodes in order to minimize the total free energy of the network according to:
 \begin{equation} \label{eq:value-node-derivative}
   \begin{split}
   \dot{\mathbf{x}}_t^{(l)} = -\frac{\partial F_t}{\partial \mathbf{x}_t^{(l)}} & = - \frac{\partial }{\partial \mathbf{x}_t^{(l)}} \left[ \frac{1}{2} {\lVert \epsilon_t^{(l)} \rVert}^2 + \frac{1}{2} {\lVert \epsilon_t^{(l+1)} \rVert}^2  \right] \\
@@ -547,7 +557,7 @@ It is possible to implement batch normalization in PCNs, although some minor mod
 \begin{equation}
   \mathbf{u}_{t}^{(l)} = \mathbf{I} \sigma^{(l)}(\mathbf{x}_{t}^{(l-1)}) + \mathbf{0} = \text{BN}_{\gamma^{(l)},\beta^{(l)}}(\mathbf{x}_{t}^{(l-1)}) = \mathbf{y}_t^{(l)}.
 \end{equation}
-To derive the dynamics for value nodes and parameter updates of $\gamma^{(l)}$ and $\beta^{(\beta)}$ we will be taking our starting point in the gradient of the batch normalization operation as given in the original paper \cite{ioffe2015batch} included as appendix \ref{appendix:batch-norm-grad}.
+To derive the dynamics for value nodes and parameter updates of $\gamma^{(l)}$ and $\beta^{(\beta)}$ we will be taking our starting point in the gradient of the batch normalization operation as given in the original paper \cite{ioffe2015batch} included as appendix \ref{appendix:batch-norm-grad}. We will represent a specific sample with a subscript: Eg. $\mathbf{x}_{i,t}^{(l)}$ is the $i$'th sample in the mini-batch $\mathbf{x}_{t}^{(l)}$. 
 \\
 As shown in the previous section, inference learning changes the value nodes to minimize the total free energy by minimizing the error node local to the value node as well as the affected error nodes in the next layer. In layer $l$, just before a batch normalization layer, the value node will change according to:
 \begin{equation}
@@ -555,7 +565,7 @@ As shown in the previous section, inference learning changes the value nodes to 
     \dot{\mathbf{x}}_{i,t}^{(l)} &= -\epsilon_{i,t}^{(l)} - \frac{\partial \frac{1}{2}\lVert\epsilon_{i,t}^{(l+1)}\rVert^{2}}{ \partial \mathbf{x}_{i,t}^{(l)}}
   \end{split}
 \end{equation}
-By letting the loss function be equal to the squared error unit $\ell=\frac{1}{2}\lVert\epsilon_{i,t}^{(l+1)}\rVert^{2}$, we see from the batch norm derivatives in the appendix, that the last term in the equation above can be substituted for $\frac{\partial \ell}{\partial \mathbf{x}_{i,t}^{(l)}}$ where $\frac{\partial \ell}{\partial \mathbf{y}_{i,t}^{(l+1)}} = \frac{\partial F_t}{\partial \mathbf{u}_{i,t}^{(l+1)}} = - \epsilon_{i,t}^{(l+1)}$ giving us the update rule:
+By letting the loss function be equal to the squared error unit $\ell=\frac{1}{2}\lVert\epsilon_{i,t}^{(l+1)}\rVert^{2}$, we see from the batch norm derivatives in the appendix, that the last term in the equation above can be substituted for $\frac{\partial \ell}{\partial \mathbf{x}_{i,t}^{(l)}}$ where $\frac{\partial \ell}{\partial \mathbf{y}_{i,t}^{(l+1)}} = \frac{\partial \frac{1}{2}\lVert\epsilon_{i, t}^{(l+1)}\rVert^{2}}{\partial \mathbf{u}_{i,t}^{(l+1)}} = - \epsilon_{i,t}^{(l+1)}$ giving us the update rule:
 \begin{equation}
   \dot{\mathbf{x}}_{i,t}^{(l)} = -\epsilon_{i, t}^{(l)} - 
     \frac{\partial \ell}{\partial \widehat{\mathbf{x}}_{i,t}^{(l)}} \cdot \frac{1}{\sqrt{ {\sigma_{\mathcal{B}}^{2}}^{(l)} + \epsilon }} - \frac{\partial \ell}{\partial {\sigma_{\mathcal{B}}^{2}}^{(l)}} \cdot \frac{2\left(\mathbf{x}_{i,t}^{(l)}-\mu_{\mathcal{B}}^{(l)} \right)}{m}- \frac{\partial \ell}{\partial \mu_{\mathcal{B}}^{(l)}} \cdot \frac{1}{m}.
@@ -564,10 +574,7 @@ The parameters are in the same fashion learned by minimizing free energy:
 \begin{equation}
   \Delta \gamma^{(l)} = -\alpha \frac{\partial \ell}{\partial \gamma^{(l)}} \hspace{10pt} \Delta \beta^{(l)} -\alpha \frac{\partial \ell}{\partial \beta^{(l)}}
 \end{equation}
-%By considering the loss function $\ell = F_t$, 
-% \frac{1}{2}\left\|\epsilon_{t}^{(l+1)}\right\|^{2}
-%As the batch normalizing in the PCN aims to minimize its error unit,  
-
+Implementing the presented update and learning rules will make PCNs perform batch normalization for more stable and efficient training.
 
 \newpage
 
@@ -578,7 +585,7 @@ The parameters are in the same fashion learned by minimizing free energy:
   \caption{First 10 examples of the MNIST training dataset.}
   \label{fig:MNIST}
 \end{figure}
-For all experiments we train classification models in a supervised manner to predict digits in the permutation invariant MNIST task (P-MNIST). Each model consists of a two hidden layer fully connected feed-forward network with 300 neuron in each hidden layer. For shadow training SNNs the Adam optimizer is used with a learning rate of $0.0001$ while PCNs and its analogous FFNN use SGD with a learning rate of $0.01$. All models were trained to minimize the cross-entropy loss for 20 epochs with a batch size of 64. Training was done on a 2021 MacBook Air with 8GB of RAM as not much compute was needed, but all code was written in a manner for easily taking advantage of GPU acceleration using the PyTorch framework. 
+For all experiments we train classification models in a supervised manner to predict digits in the permutation invariant MNIST task (P-MNIST). Each model consists of a two hidden layer fully connected feed-forward network with 300 neuron in each hidden layer and 10 neurons for each class in the output layer. For shadow training SNNs the Adam optimizer is used with a learning rate of $0.0001$ while SPCNs use either SGD with a learning rate of $0.01$ or Adam with learning rate $0.001$. All models were trained to minimize the cross-entropy loss for 20 epochs with a batch size of 64. Training was done on a 2021 MacBook Air as not much compute was needed, but all code was written in a manner for easily taking advantage of GPU acceleration using the PyTorch framework. 
 \subsection{Experiment 1 - Z-IL vs. Backprop}
 \begin{figure}[ht]
   \begin{subfigure}[]{0.49\linewidth}
@@ -592,9 +599,9 @@ For all experiments we train classification models in a supervised manner to pre
   \caption{Test accuracy and cross-entropy loss as function of number of parameter update steps for backprop and Z-IL.}
   \label{fig:Z-IL-backprop-comparison}
 \end{figure} 
-We train a PCN and its corresponding FFNN, both employing our scaled soft rate activation function, to emperically validate the equivalence of the weight updates. From figure \ref{fig:Z-IL-backprop-comparison} we see that Z-IL performs very well and gives rise to the same accuracy and loss curves as backprop with only minor deviations that might be caused by numerical precision in the specific implementation. Although the final accuracy of our PCN trained with Z-IL of 97.31\% does not achieve state-of-the-art results, it might be possible to further improve the model with more recent methods such as convolutions, residual connections, batch normalization, etc. which can all be implemented in PCNs and trained with Z-IL as shown by Milladge et al. \cite{milladge2020predictive} and Salvatori et al. \cite{salvatori2021reverse}. 
+We train a SPCN with Z-IL and its corresponding SNN using backprop, to empirically validate the equivalence of the weight updates. Both networks use down-scaled soft rate activation functions. From figure \ref{fig:Z-IL-backprop-comparison} we see that Z-IL as expected gives rise to the same accuracy and loss profiles as backprop with only minor deviations that might be caused by numerical precision in the specific implementation. Although the final accuracy of our SPCN trained with Z-IL of 97.31\% does not achieve state-of-the-art results, it might be possible to further improve the model with more recent methods such as convolutions and residual connections that can both be implemented in PCNs and trained with Z-IL as shown by Millidge et al. \cite{milladge2020predictive} and Salvatori et al. \cite{salvatori2021reverse}. 
 
-\subsection{Experiment 2 - Shadow training spiking neural networks}
+\subsection{Experiment 2 - SPCN performance on MNIST digits}
 \begin{figure}[ht]
   \begin{subfigure}[t]{0.32\columnwidth}
     \includegraphics[width=\linewidth]{graphics/spikes_0.pdf}  
@@ -608,39 +615,42 @@ We train a PCN and its corresponding FFNN, both employing our scaled soft rate a
     \includegraphics[width=\linewidth]{graphics/spikes_2.pdf}  
   \end{subfigure}
   \caption{Neuron activity in each hidden and output layer of SNN presented with an image of the digit 7 for 200ms. For visualisation purposes each hidden layer only contains 32 neurons.}
-
 \end{figure}
-We shadow train a SNN using the soft rate function from equation \ref{eq:soft-rate}, scaled according to section \ref{sec:activation-scaling} with a factor of $0.05$, as activation function and compare it against a feed-forward baseline model using ReLU activation. To make the input image mimic it is spiking, we scale each pixel value to the full range of firing rates $[0; t_\text{ref}^{-1}]$. Batch normalization was applied after each linear transform for both SNN and baseline models to improve training stability. 
+We shadow train multiple SPCNs and SNNs using different combinations of optimizers, inclusion of batch normalizing layers and compare the test accuracies in both rate-coded and spiking simulation settings.
 \begin{table}[ht]
   \centering
   \begin{tabular}{|c | c | c | c | c | c | c |}
   \hline
-    \textbf{Algorithm}  & \textbf{Optimizer}  & \textbf{Activation} & \textbf{BN.}  & \textbf{Spiking}   & \textbf{Accuracy}      \\ \hline
-    Backprop            & ADAM                & ReLU                & Yes           & No                 & 97.68\%                \\
-    Backprop            & ADAM                & Soft-rate           & Yes           & No                 & 97.97\%                \\
-    Backprop            & ADAM                & Soft-rate           & Yes           & Yes                & 97.71\%                \\
-    Z-IL                & SGD                 & Soft-rate           & No            & No                 & 96.30\%                \\
-    Z-IL                & SGD                 & Soft-rate           & No            & Yes                & 95.21\%                \\
-    Z-IL                & ADAM                & Soft-rate           & No            & No                 & 96.94\%                \\ 
-    Z-IL                & ADAM                & Soft-rate           & No            & Yes                & 96.32\%                \\ 
-    Z-IL                & ADAM                & Soft-rate           & Yes           & No                 & 97.35\%                \\ \hline
-    Z-IL                & ADAM                & Soft-rate           & Yes           & Yes                & 96.29\%                \\ \hline
+  \textbf{Model}          & \textbf{Algorithm}        & \textbf{Optimizer}    & \textbf{Activation}         & \textbf{BN.}          & \textbf{Spiking}   & \textbf{Accuracy}      \\ \hline
+   FFNN                   & Backprop                  & Adam                  & ReLU                        & Yes                   & No                 & 97.68\%                \\
+   SNN                    & Backprop                  & Adam                  & Soft-rate                   & Yes                   & No                 & 97.97\%                \\
+   SNN                    & Backprop                  & Adam                  & Soft-rate                   & Yes                   & Yes                & 97.71\%                \\ 
+   SPCN                   & Z-IL                      & SGD                   & Soft-rate                   & No                    & No                 & 96.30\%                \\
+   SPCN                   & Z-IL                      & SGD                   & Soft-rate                   & No                    & Yes                & 95.21\%                \\
+   SPCN                   & Z-IL                      & Adam                  & Soft-rate                   & No                    & No                 & 96.94\%                \\ 
+   SPCN                   & Z-IL                      & Adam                  & Soft-rate                   & No                    & Yes                & 96.32\%                \\ 
+   SPCN                   & Z-IL                      & Adam                  & Soft-rate                   & Yes                   & No                 & 97.35\%                \\
+   SPCN                   & Z-IL                      & Adam                  & Soft-rate                   & Yes                   & Yes                & 96.29\%                \\ 
+    \hline
   \end{tabular}
   \caption{Test accuracies on the P-MNIST benchmark.}
   \label{fig:snn-accuracies}
 \end{table} \\
-From figure \ref{fig:snn-accuracies} we see that our rate-coded SNN performs on-par with our baseline model with a slightly higher accuracy. Whether this small improvement is caused by the statistical variation in the initialization of the weights or due to the smooth rate function, unlike ReLU, having non-zero gradient for values less than zero, requires more careful experimentation with precise weight initialization and larger sample sizes. Interestingly, only very little performance is lost when the learned weights in the rate-coded model is fused with batch normalization and used for simulation of the LIF dynamics. This might be due to the noise introduced in the Possion coding process along with a limited simulation time of 200ms before comparing the most spiking neuron with the correct label. Using batch normalization is known to also have a regularizing effect \cite{ioffe2015batch} which might explain this robustness, however further experimentation is needed to confirm this. 
+From table \ref{fig:snn-accuracies} we see that we are able to achieve relatively good performance when shadow training our SNNs and SPCNs with only a relatively small drop in accuracy when using spikes in simulation. This might be due to the noise introduced in the Possion coding process along with a limited simulation time of 200ms before comparing the most spiking neuron with the correct label. The drop in accuracy may be reduced by introducing noise in the training process or by using dropout, which are both likely biologically plausible methods of regularization. Using batch normalization is known to also have a regularizing effect \cite{ioffe2015batch}, however further experimentation is needed to confirm if this is also the case of shadow training. \\
+We observe from the results, that SPCNs trained with Z-IL in general achieve accuracies almost on-par with SNNs trained with backprop and that performance differences tend to diminish when using the Adam optimizer and batch normalization. The only exception is the SPCN trained with Adam and batch normalization when running spiking simulation. This could have been due to instabilities in the batch norm code that showed higher than usual volatility in the validation accuracies while training and can probably be fixed with more careful implementation. This result suggests that biological plausible methods such as SPCNs trained with Z-IL is competitative with existing deep learning methods. 
 
 \newpage
 
 \subsection{Evaluation of Biological Plausibility}
-We will now consider the biological plausability of the combination of predictive coding networks and spiking networks in relation to the problems of back-propagation and ANNs in section \ref{sec:biological-constraints}, beginning with the three constraints derived from the biological neuron. As all value nodes and weights are updated according to local learning rules, we consider the the first constraint of locality satisfied. The constraint of spikes requires that inter-neuron communication happens via spikes. As this is only the case after the shadow network is converted to its spiking form and not in the learning phase, we only consider this partially satisfied. At last, we do not consider the constraint of unidirectionality satisfied. Although the parameter updates of IL does not directly use symmetric weights, error and value nodes used for the update require the backwards flow of error information from higher-level layers. Predictive coding does therefore not solve the weight transport problem in its presented form. As PCNs are very closely related to ANNs, incorporating methods suchs as DFA/FA might be possible without limiting the learning capabilities of the network. Inference learning does also not seem to solve the derivative problem of back-propagation, as the derivative of the activation function is used to update the value nodes. However, by considering our spike rate as activation function, its derivative might be approximated as the change in duration between spikes. This interpretation also solves the spiking problem, as numerical values are communicated by the use of rate-coding. In their paper \cite{PredictiveCodingNetworks}, Song et al. introduces a further modification to the Z-IL algorithm, Full autonomy Z-IL, that detects when weight layers should be updated. Although this solves the problem of the network depending on external control a more biologically plausible method might be continually updating the weights as it is the case in Continual Equilibrium Propagation \cite{ContinualEqProp}.  Throughout this thesis, we have only considered the task of supervised leaning for simpliticy's sake. Although this provides a useful way to measure how well the networks perform, it is unlikely to be happening in the brain, as it would require the brain to have access to the exact labels it is trying to learn. A more likely scenario is probably that of self-supervised learning discussed in the introduction. The problem then becomes to define what objective function the network should minimize. In the case of predicting future stimuli from past experience, it might not be enough to simply minimize the prediction error. Doing this for video frames using a squared loss between pixels would lead to blurry predictions due to the uncertainty of the future. An alternative could be that the objective function is itself learned such as the discriminator in Generative Adverserial Networks \cite{goodfellow2014generative}. 
+We will now consider the biological plausability of SPCNs in relation to the problems of back-propagation and ANNs in section \ref{sec:biological-constraints}, beginning with the three constraints derived from the biological neuron. As all value nodes, weights and biases in SPCNs are updated according to local learning rules, we consider the first constraint of locality satisfied. The constraint of spikes requires that all inter-neuron communication happens via spikes. As this is only the case after the network is converted to its spiking form and not in the learning phase, we only consider this constraint partially satisfied. At last, we do not consider the constraint of unidirectionality satisfied. Although the parameter updates of IL does not directly use symmetric weights, error and value nodes used for the update require the backwards flow of error information from higher-level layers. Predictive coding does therefore not solve the weight transport problem in its presented form. As PCNs are very closely related to ANNs, incorporating methods suchs as DFA/FA might be possible without limiting the learning capabilities of the network. Inference learning does also not seem to solve the derivative problem of back-propagation, as the derivative of the activation function is used to update the value nodes. However, by considering our spike rate as activation function, its derivative might be approximated as the change in duration between spikes. This interpretation also solves the spiking problem, as numerical values are communicated by the use of rate-coding. In their paper \cite{PredictiveCodingNetworks}, Song et al. introduces a further modification to the Z-IL algorithm, Full autonomy Z-IL, that detects when weight layers should be updated. Although this solves the problem of the network depending on external control (the timing problem) a more biologically plausible method might be continually updating the weights as it is the case in Continual Equilibrium Propagation \cite{ContinualEqProp}.  Throughout this thesis, we have only considered the task of supervised leaning for simpliticy's sake. Although this provides a useful way to measure how well the networks perform, it is unlikely to be happening in the brain, as it would require the brain to have access to the exact labels it is trying to learn. A more likely scenario is probably that of self-supervised learning discussed in the introduction. The problem then becomes to define what objective function the network should minimize. In the case of predicting future stimuli from past experience, it might not be enough to simply minimize the prediction error. Doing this for video frames using a squared loss between pixels would lead to blurry predictions due to the uncertainty of the future. An alternative could be that the objective function is itself learned such as the discriminator in Generative Adverserial Networks \cite{goodfellow2014generative}. 
 
 
 \subsection{Benefits to biological plausible learning}
-% In the last 20 years, our mobile devices have become increasingly intelligent, detecting and auto-focusing on peoples faces when taking pictures and enabling us to search for objects and people in our picture libraries. 
-
-Today, it is often necessary to prune and quantize large deep learning models when deploying on low-powered mobile hardware. Special hardware such as as Apple's Neural Engine and Google's mobile TPUs have been designed to accelerate inference throughput while maintaining a low power usage. Although biological plausible deep learning as presented in this thesis does not give rise to more efficient learning algorithms for current available hardware, they might provide the foundational learning mechanisms for upcoming neuromorphic hardware. 
+Although biological plausible deep learning as presented in this thesis does not give rise to more efficient learning algorithms for current available hardware, they might provide the foundational learning and inference mechanisms for upcoming neuromorphic hardware such as the Intel Loihi and IBM TrueNorth chips with mucher lower power requirements. This is primarily due to the asynchronous nature of spiking networks that do not depend on a global clock signal, but process spikes in an event based manner as they are received. Having more efficient learning algorithms designed for custom hardware could provide both faster and more environmentally friendly training of deep networks than what is currently the case today.
+Running neural network models on current GPUs and CPUs require the weights first to be fetched from RAM before inputs can be multiplied and accumulated using slow and energy demanding floating point operations. Analog neuromorphic chips could result in speedups by storing connection weights in variable resistors distribued throughout the network and perform multiply and accumulate using Ohm's and Kirchoff's laws. 
+Another area which might benefit from biological plausible networks is mobile devices, where large deep learning models are often needed to be pruned and quantized before deployment to satisfy hardware and power constraints. Here, incorporating neuromorphic co-processors could enable more powerful and complex models than what is currently possible.\\
+\\*
+Besides having interest in the field of machine learning and hardware engineering, biological plausible models are also relevant in neuroscience studies as proposed theories on how the brain learns, that can be experimentally tested. It might be possible to get insights into learning difficulties such as dyslexia by having a high level model of learning.
 
 \newpage
 
@@ -648,15 +658,17 @@ Today, it is often necessary to prune and quantize large deep learning models wh
 We have in this thesis introduced, implemented and tested biological plausible alternatives to current deep learning methods. This concludes preditive coding networks as alternative to feed-forward neural networks trained with inference learning as alternative to the back-propagation algorithm. At last, we have introduced the concept of shadow training where the rate function of the Leaky-Integrate-and-Fire neuron model is used to learn the connectivity parameters of spiking neural networks. From our review of biological plausbility we found that although PCNs and shadow training SNNs both satisfy different biological constraints the intersection of the two does not yield a fully biological plausible model of learning. More work would have to be done to implement predictive coding with all communication encoded as spikes as well as getting a better understanding of what contributes to forming neural circuits. From our experiments, we found that Z-IL performed very similar to back-propagation and was able to shadow train SNNs with only minor drop in performance when simulating with spiking dynamics. We therefore conclude that the proposed alternative methods are competitative with deep learning methods in achieving good performance on the MNIST benchmark dataset. However, as vanialla inference learning requires several inner interation for the network to come to an equilibirum, computationally, back-propagation is far superior on current hardware. We argue that the introduction of neuromorphic hardware might change this fact and provide faster and more efficient learning. 
 
 \subsection{Further research}
-What should be done in the future?
+Although we conclude that the combination of PCNs and shadow training SNNs in combination does not give rise to more biological plausible models, it provides a platform for further research. As discussed, more work has to be done in exploring if asymmetric weights are able to back-propagate errors in predictive coding networks to satisfy the constraint of unidirectionality. It could also be interesting to look into continual predictive coding networks, which is currently mostly unexplored\footnote{
+  Beren Millidge (one of the authors of \cite{milladge2020predictive}) has been experimenting with this on his GitHub \href{https://github.com/BerenMillidge/DynamicalPredictiveCoding}{https://github.com/BerenMillidge/DynamicalPredictiveCoding}
+}, with spiking dynamics in the training phase, to more elegantly remove the need for external control as well as fully satisfying the constraint of spiking. 
 
 \newpage
-\bibliographystyle{plain}
+\bibliographystyle{plain}s
 \bibliography{refs}
 
 \newpage
 \section{Appendix}
-\subsection{Batch normalization gradients} \label{appendix:batch-norm-grad}
+\subsection{Batch normalization derivatives} \label{appendix:batch-norm-grad}
 Derivatives of the batch normalization operation as presented in the original paper \cite{ioffe2015batch}:
 \begin{equation}
   \begin{aligned}
@@ -668,5 +680,6 @@ Derivatives of the batch normalization operation as presented in the original pa
     \frac{\partial \ell}{\partial \beta} &=\sum_{i=1}^{m} \frac{\partial \ell}{\partial y_{i}}
   \end{aligned}
 \end{equation}
+where $m$ is the batch size. 
 
 \end{document}
