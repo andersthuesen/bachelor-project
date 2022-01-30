@@ -1,11 +1,22 @@
 {
   "cSpell.words": [
+    "argmax",
     "backprop",
+    "fulfilment",
+    "Hebbian",
+    "linearities",
+    "multinomial",
+    "neurocomputational",
     "neuromorphic",
     "perceptron",
+    "problematized",
     "problematizes",
     "softmax",
-    "unidirectionality"
+    "softplus",
+    "timestep",
+    "unidirectionality",
+    "unidirectionally",
+    "unitless"
   ],
   "cSpell.enableFiletypes": ["!python"]
 }
